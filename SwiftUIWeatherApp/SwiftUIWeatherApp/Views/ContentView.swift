@@ -9,6 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     
+    
+    @ObservedObject var forecast = WeatherViewModel()
+    
     var body: some View {
         
         ZStack {
@@ -18,7 +21,7 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .center, spacing: 10) {
-                Text("New York")
+                Text(forecast.weather?.city.name ?? "NULL")
                     .font(.system(size: 30, weight: .medium, design: .default))
                     .foregroundColor(.white)
                     .padding()
@@ -38,12 +41,10 @@ struct ContentView: View {
                 }
                 Spacer()
                 
-                HStack(alignment: .center, spacing: 30) {
-                    WeeklyWeatherView(weekday: "Tue", temperature: "70", imageName: "sunrise.fill")
-                    WeeklyWeatherView(weekday: "Tue", temperature: "70", imageName: "sunrise.fill")
-                    WeeklyWeatherView(weekday: "Tue", temperature: "70", imageName: "sunrise.fill")
-                    WeeklyWeatherView(weekday: "Tue", temperature: "70", imageName: "sunrise.fill")
-                    WeeklyWeatherView(weekday: "Tue", temperature: "70", imageName: "sunrise.fill")
+                HStack(alignment: .center, spacing: 20) {
+                        ForEach(forecast.weeklyWeather) { item in
+                            WeeklyWeatherView(weekday: item.date, temperature: item.currentTemp, imageName: item.icon)
+                        }
                 }
                 Spacer()
             }
