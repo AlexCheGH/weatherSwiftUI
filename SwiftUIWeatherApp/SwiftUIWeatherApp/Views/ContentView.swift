@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @ObservedObject var forecast = WeatherViewModel()
+    
     var body: some View {
         
         ZStack {
@@ -18,32 +20,28 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .center, spacing: 10) {
-                Text("New York")
+                Text(forecast.location)
                     .font(.system(size: 30, weight: .medium, design: .default))
                     .foregroundColor(.white)
                     .padding()
                 
                 VStack {
-                    Image(systemName: "sunrise.fill")
-                        .renderingMode(.original)
-                        .resizable()
+                    
+                    WeatherImage(imageName: forecast.currentWeather?.icon)
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 180, height: 180)
-                        .padding()
                     
-                    Text(" 72º")
+                    Text(" \(forecast.currentWeather?.currentTemp ?? "...")º")
                         .font(.system(size: 70, weight: .bold, design: .default))
                         .foregroundColor(.white)
                         .frame(width: 200, height: 100)
                 }
                 Spacer()
                 
-                HStack(alignment: .center, spacing: 30) {
-                    WeeklyWeatherView(weekday: "Tue", temperature: "70", imageName: "sunrise.fill")
-                    WeeklyWeatherView(weekday: "Tue", temperature: "70", imageName: "sunrise.fill")
-                    WeeklyWeatherView(weekday: "Tue", temperature: "70", imageName: "sunrise.fill")
-                    WeeklyWeatherView(weekday: "Tue", temperature: "70", imageName: "sunrise.fill")
-                    WeeklyWeatherView(weekday: "Tue", temperature: "70", imageName: "sunrise.fill")
+                HStack(alignment: .center, spacing: 20) {
+                        ForEach(forecast.weeklyWeather) { item in
+                            WeeklyWeatherView(weekday: item.date, temperature: item.currentTemp, imageName: item.icon)
+                        }
                 }
                 Spacer()
             }
