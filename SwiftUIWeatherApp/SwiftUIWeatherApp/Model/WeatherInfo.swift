@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Weather: Identifiable {
+struct WeatherInfo: Identifiable {
     
     var date: String?
     var currentTemp: String?

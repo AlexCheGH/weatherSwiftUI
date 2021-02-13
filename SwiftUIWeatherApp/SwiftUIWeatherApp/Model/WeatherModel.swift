@@ -10,13 +10,30 @@ import Foundation
 class WeatherModel {
     
     var location: String = "Minsk"
-    
-    var weeklyWeather: [Weather?] = [Weather?]()
-    
+    var weeklyWeather: [WeatherInfo?] = [WeatherInfo?]()
     var rawWeather: WeatherData? = nil
+    var currentWeather: WeatherInfo? = nil
+    
+    private let apiKey = "d993c7d8d3f4e8de63516cc737a6c16b"
+    
+    
+    
+    func makeCurrentForecastTask(completion: @escaping (Data) -> Void) {
+        let string = "https://api.openweathermap.org/data/2.5/weather?q=\(location)&appid=\(apiKey)"
+        let url = URL(string: string.encodeUrl)
+        
+        URLSession.shared.dataTask(with: url!) { data, _, _ in
+            DispatchQueue.main.async {
+                if let data = data {
+                    completion(data)
+                }
+            }
+        }.resume()
+        
+    }
     
     func weeklyWeatherCall(completion: @escaping(Data) -> Void) {
-        let apiKey = "d993c7d8d3f4e8de63516cc737a6c16b"
+        
         let string = "https://api.openweathermap.org/data/2.5/forecast?q=\(location)&appid=\(apiKey)"
         let stringURL = URL(string: string.encodeUrl)
         
@@ -30,6 +47,11 @@ class WeatherModel {
     }
     
     func loadData(completion: @escaping() -> Void) {
+        makeCurrentForecastTask { [self] (data) in
+            let weather = try? JSONDecoder().decode(CurrentWeather.self, from: data)
+            prepareCurrentWeather(data: weather)
+        }
+        
         weeklyWeatherCall { (data) in
             self.rawWeather = try? JSONDecoder().decode(WeatherData.self, from: data)
             self.prepareWeeklyWeather()
@@ -42,7 +64,20 @@ class WeatherModel {
     }
     
     
+    func prepareCurrentWeather(data: CurrentWeather?) {
+        if let weather = data {
+            var currentTemp = weather.main.temp
+            currentTemp = self.calculateTemperature(rawTemp: currentTemp, tempSettings: 2)
+            
+            let date = DateManager.makeFormatedString(date: weather.dt, format: "E")
+            let icon = weather.weather.first?.icon
+            
+            currentWeather = WeatherInfo(date: date, currentTemp: String(format: "%.0f", currentTemp), icon: icon, id: 99)
+        }
+    }
     
+    
+    //MARK:- Weekly Weather
     func prepareWeeklyWeather() {
         
         weeklyWeather.removeAll()
@@ -72,7 +107,7 @@ class WeatherModel {
                 let date = DateManager.makeFormatedString(date: container[midDayIndex].dt, format: "E")
                 let icon = $0.weather.first?.icon
                 
-                let weather = Weather(date: date, currentTemp: String(format: "%.0f", midTemp), icon: icon, id: numberOfElements)
+                let weather = WeatherInfo(date: date, currentTemp: String(format: "%.0f", midTemp), icon: icon, id: numberOfElements)
                 weeklyWeather.append(weather)
                 
                 container.removeAll()
@@ -94,7 +129,7 @@ class WeatherModel {
                 let date = DateManager.makeFormatedString(date: container[midDayIndex].dt, format: "E")
                 let icon = container[midDayIndex].weather.first?.icon
                 
-                let weather = Weather(date: date, currentTemp: String(format: "%.0f", midTemp), icon: icon, id: numberOfElements)
+                let weather = WeatherInfo(date: date, currentTemp: String(format: "%.0f", midTemp), icon: icon, id: numberOfElements)
                 weeklyWeather.append(weather)
             }
         }

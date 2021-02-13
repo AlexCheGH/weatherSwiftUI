@@ -27,14 +27,12 @@ struct ContentView: View {
                     .padding()
                 
                 VStack {
-                    Image(systemName: "sunrise.fill")
-                        .renderingMode(.original)
-                        .resizable()
+                    
+                    WeatherImage(imageName: forecast.currentWeather?.icon)
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 180, height: 180)
-                        .padding()
                     
-                    Text(" 72º")
+                    Text(" \(forecast.currentWeather?.currentTemp ?? "Nil")º")
                         .font(.system(size: 70, weight: .bold, design: .default))
                         .foregroundColor(.white)
                         .frame(width: 200, height: 100)

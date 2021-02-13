@@ -11,9 +11,14 @@ class WeatherViewModel: ObservableObject {
     @Published private var weatherModel = WeatherModel()
     
     @Published var weather: WeatherModel.WeatherData? = nil
-    var weeklyWeather: [Weather] {
+    
+    var currentWeather: WeatherInfo? {
+        weatherModel.currentWeather
+    }
+    
+    var weeklyWeather: [WeatherInfo] {
         
-        var container = [Weather]()
+        var container = [WeatherInfo]()
         weatherModel.weeklyWeather.forEach {
             if let item = $0 {
                 container.append(item)
