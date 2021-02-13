@@ -10,7 +10,11 @@ import Foundation
 class WeatherViewModel: ObservableObject {
     @Published private var weatherModel = WeatherModel()
     
-    @Published var weather: WeatherModel.WeatherData? = nil
+    @Published var weather: WeeklyWeatherData? = nil
+    
+    var location: String {
+        weatherModel.location
+    }
     
     var currentWeather: WeatherInfo? {
         weatherModel.currentWeather
@@ -33,14 +37,3 @@ class WeatherViewModel: ObservableObject {
         }
     }
 }
-    
-    
-    class DateManager {
-        static func makeFormatedString(date: Int?, format: String = "HH:mm") -> String {
-            let date = Date(timeIntervalSince1970: Double(date ?? 0))
-            let dateFormat = DateFormatter()
-            dateFormat.dateFormat = format
-            
-            return dateFormat.string(from: date)
-        }
-    }

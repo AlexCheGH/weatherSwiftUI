@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     
-    
     @ObservedObject var forecast = WeatherViewModel()
     
     var body: some View {
@@ -21,7 +20,7 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .center, spacing: 10) {
-                Text(forecast.weather?.city.name ?? "NULL")
+                Text(forecast.location)
                     .font(.system(size: 30, weight: .medium, design: .default))
                     .foregroundColor(.white)
                     .padding()
@@ -32,7 +31,7 @@ struct ContentView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 180, height: 180)
                     
-                    Text(" \(forecast.currentWeather?.currentTemp ?? "Nil")º")
+                    Text(" \(forecast.currentWeather?.currentTemp ?? "...")º")
                         .font(.system(size: 70, weight: .bold, design: .default))
                         .foregroundColor(.white)
                         .frame(width: 200, height: 100)

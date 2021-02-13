@@ -16,13 +16,13 @@ struct WeeklyWeatherView: View {
     var body: some View {
         HStack {
             VStack {
-                Text(weekday ?? "Nil")
+                Text(weekday ?? "...")
                     .font(.system(size: 15, weight: .medium, design: .default))
                     .foregroundColor(.white)
                 
                 WeatherImage(imageName: imageName)
                 
-                Text("\(temperature ?? "Nil")º")
+                Text("\(temperature ?? "...")º")
                     .font(.system(size: 15, weight: .semibold, design: .default))
                     .foregroundColor(.white)
             }
