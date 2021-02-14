@@ -9,7 +9,7 @@ import Foundation
 
 class WeatherModel {
     
-    var location: String = "Minsk"
+    var location: String
     var weeklyWeather: [WeatherInfo?] = [WeatherInfo?]()
     var rawWeather: WeeklyWeatherData? = nil
     var currentWeather: WeatherInfo? = nil
@@ -17,7 +17,8 @@ class WeatherModel {
     private let apiKey = "d993c7d8d3f4e8de63516cc737a6c16b"
     
     
-    init() {
+    init(location: String) {
+        self.location = location
         self.loadData { }
     }
     

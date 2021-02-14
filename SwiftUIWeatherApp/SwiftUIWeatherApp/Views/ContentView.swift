@@ -9,10 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @ObservedObject var forecast = WeatherViewModel()
+    @ObservedObject var forecast = WeatherViewModel(location: "")
+    
+    private let locationPlaceholderString = NSLocalizedString("location_placeholder", comment: "")
     
     var body: some View {
-        
+        makeBody()
+    }
+    
+   private func makeBody() -> some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.blue, .white]),
                            startPoint: .topLeading,
@@ -20,13 +25,17 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .center, spacing: 10) {
-                Text(forecast.location)
-                    .font(.system(size: 30, weight: .medium, design: .default))
-                    .foregroundColor(.white)
-                    .padding()
+                
+                TextField(locationPlaceholderString, text: $forecast.location, onCommit:  {
+                    print(forecast.location)
+                    forecast.loadData()
+                })
+                .multilineTextAlignment(.center)
+                .font(.system(size: 30, weight: .medium, design: .default))
+                .foregroundColor(.white)
+                .padding()
                 
                 VStack {
-                    
                     WeatherImage(imageName: forecast.currentWeather?.icon)
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 180, height: 180)
@@ -39,15 +48,14 @@ struct ContentView: View {
                 Spacer()
                 
                 HStack(alignment: .center, spacing: 20) {
-                        ForEach(forecast.weeklyWeather) { item in
-                            WeeklyWeatherView(weekday: item.date, temperature: item.currentTemp, imageName: item.icon)
-                        }
+                    ForEach(forecast.weeklyWeather) { item in
+                        WeeklyWeatherView(weekday: item.date, temperature: item.currentTemp, imageName: item.icon)
+                    }
                 }
                 Spacer()
             }
-        }
+        }.onAppear{ forecast.loadData() }
     }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
