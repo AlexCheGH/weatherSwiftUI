@@ -8,12 +8,15 @@
 import Foundation
 
 class WeatherViewModel: ObservableObject {
-    @Published private var weatherModel = WeatherModel()
+    @Published private var weatherModel: WeatherModel
     
     @Published var weather: WeeklyWeatherData? = nil
     
-    var location: String {
-        weatherModel.location
+    var location: String
+    
+    init(location: String) {
+        self.location = location
+        self.weatherModel = WeatherModel(location: self.location)
     }
     
     var currentWeather: WeatherInfo? {
@@ -31,7 +34,8 @@ class WeatherViewModel: ObservableObject {
         return container
     }
     
-    init() {
+    func loadData() {
+        weatherModel.location = location
         weatherModel.loadData { [self] in
             weather = weatherModel.rawWeather
         }
