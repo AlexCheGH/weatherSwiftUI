@@ -11,66 +11,34 @@ struct ContentView: View {
     
     @ObservedObject var forecast = WeatherViewModel(location: "Minsk")
     
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    
     private let locationPlaceholderString = NSLocalizedString("location_placeholder", comment: "")
     private let todayString = NSLocalizedString("today_weekdat", comment: "")
     
     var body: some View {
-        //        if horizontalSizeClass == .regular {
-        makeRegularBody()
-        //        } else {
-        //            makeCompactBody()
-        //        }
+        makeBody()
     }
     
-    private func makeCompactBody() -> some View {
-        ZStack {
-            gradient()
-            
-            GeometryReader { geo in
-                
-                VStack {
-                    
-                    VStack {
-                        textField(fontSize: 15)
-                        currentWeatherCard()
-                    }.padding()
-                    
-                    HStack(alignment: .center) {
-                        ForEach(forecast.weeklyWeather) { item in
-                            WeeklyWeatherView(weekday: item.date, temperature: item.currentTemp, imageName: item.icon)
-                        }
-                    }
-                }
-            }.onAppear{ forecast.loadData() }
-        }
-    }
-    
-    
-    
-    
-    private func makeRegularBody() -> some View {
+    private func makeBody() -> some View {
         ZStack()  {
             gradient()
             VStack(alignment: .center) {
-                
-                    GeometryReader { geo in
-                        VStack {
+                GeometryReader { geo in
+                    VStack {
                         textField(fontSize: size(geo.size))
-                    .multilineTextAlignment(.center)
-                
-                currentWeatherCard()
-                    .padding()
-                }
-                }
-                
-                Spacer()
-                
-                HStack {
-                    ForEach(forecast.weeklyWeather) { item in
-                        WeeklyWeatherView(weekday: item.date, temperature: item.currentTemp, imageName: item.icon)
+                            .multilineTextAlignment(.center)
+                        currentWeatherCard(size: sizeCard(geo.size))
+                            .padding()
                     }
+                }
+                HStack(alignment: .center) {
+                        ForEach(forecast.weeklyWeather) { item in
+                           
+                            WeeklyWeatherView(weekday: item.date,
+                                              temperature: item.currentTemp,
+                                              imageName: item.icon,
+                                              size: CGSize(width: 50, height: 50),
+                                              viewType: .weeklyWeather)
+                        }
                 }
                 .padding()
             }
@@ -96,11 +64,23 @@ struct ContentView: View {
             .foregroundColor(.black)
     }
     
-    private func currentWeatherCard() -> some View {
-        WeeklyWeatherView(weekday: todayString, temperature: forecast.currentWeather?.currentTemp, imageName: forecast.currentWeather?.icon)
+    private func currentWeatherCard(size: CGSize) -> some View {
+        WeeklyWeatherView(weekday: todayString,
+                          temperature: forecast.currentWeather?.currentTemp,
+                          imageName: forecast.currentWeather?.icon,
+                          size: size,
+                          viewType: .currentWeather)
     }
     
-    
+    private func sizeCard(_ size: CGSize) -> CGSize {
+        let multiplier: CGFloat = 0.4
+        
+            if size.width > size.height {
+               return CGSize(width: size.height * multiplier, height: size.height * multiplier)
+            } else {
+                return CGSize(width: size.width * multiplier, height: size.width * multiplier)
+            }
+    }
     
     private func size(_ size: CGSize) -> CGFloat {
         if size.width > size.height {

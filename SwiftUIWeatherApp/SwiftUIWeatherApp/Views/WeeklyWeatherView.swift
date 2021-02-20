@@ -12,29 +12,46 @@ struct WeeklyWeatherView: View {
     var weekday: String?
     var temperature: String?
     var imageName: String?
-    private let fontMultiplier: CGFloat = 0.15
+    var size: CGSize
+    var viewType: WeatherViewType
     
     var body: some View {
-                VStack {
-                    Text(weekday ?? "...")
-                        .font(.system(size: 15, weight: .medium, design: .default))
-                        .foregroundColor(.black)
-                    
-                    WeatherImage(imageName: imageName)
-                        .frame(width: 50, height: 50)
-                    
-                    Text("\(temperature ?? "...")º")
-                        .font(.system(size: 15, weight: .semibold, design: .default))
-                        .foregroundColor(.black)
-                }
+        VStack {
+            Text(weekday ?? "...")
+                .font(.system(size: fontSize(for: size),
+                              weight: .medium,
+                              design: .default))
+                .foregroundColor(.black)
+            
+            WeatherImage(imageName: imageName)
+                .frame(width: size.width,
+                       height: size.height)
+            
+            Text("\(temperature ?? "...")º")
+                .font(.system(size: fontSize(for: size),
+                              weight: .semibold,
+                              design: .default))
+                .foregroundColor(.black)
+        }
     }
     
-   private func fontSize(for size: CGSize) -> CGFloat {
-        min(size.width, size.height) * fontMultiplier
+    private func fontSize(for size: CGSize) -> CGFloat {
+        let currentFontMultiplier: CGFloat = 0.25
+        let weeklyFontMultiplier: CGFloat = 0.2
+        
+        if viewType == .currentWeather {
+            return min(size.width, size.height) * currentFontMultiplier
+        }
+        else {
+            return min(size.width, size.height) * weeklyFontMultiplier
+        }
     }
-    
 }
 
+enum WeatherViewType {
+    case currentWeather
+    case weeklyWeather
+}
 
 struct WeatherImage: View {
     var imageName: String?
@@ -43,37 +60,13 @@ struct WeatherImage: View {
         makeBody()
     }
     
-   private func makeBody() -> some View {
+    private func makeBody() -> some View {
         Unwrap(imageName) { imageName in
-            GeometryReader {geo in
             Image(uiImage: UIImage(named: "\(imageName).png")!)
                 .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
         }
     }
-   }
-    private func size(_ size: CGSize) -> CGFloat {
-        if size.width > size.height {
-            return size.height * 0.15
-        } else {
-            return size.width * 0.15
-        }
-    }
-    
 }
 
-struct Unwrap<Value, Content: View>: View {
-    private let value: Value?
-    private let contentProvider: (Value) -> Content
-    
-    init(_ value: Value?,
-         @ViewBuilder content: @escaping (Value) -> Content) {
-        self.value = value
-        self.contentProvider = content
-    }
-    
-    var body: some View {
-        value.map(contentProvider)
-    }
-}

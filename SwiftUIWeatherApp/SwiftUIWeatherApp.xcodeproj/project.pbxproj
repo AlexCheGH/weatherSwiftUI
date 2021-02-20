@@ -19,6 +19,7 @@
 		A595F6E725A1C68600E1A079 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A595F6E625A1C68600E1A079 /* Assets.xcassets */; };
 		A595F6EA25A1C68600E1A079 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A595F6E925A1C68600E1A079 /* Preview Assets.xcassets */; };
 		A595F6F325A1E83300E1A079 /* WeeklyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A595F6F225A1E83300E1A079 /* WeeklyWeatherView.swift */; };
+		A5AAC1B625E1411300096C7F /* Unwrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AAC1B525E1411300096C7F /* Unwrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		A595F6E925A1C68600E1A079 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A595F6EB25A1C68600E1A079 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A595F6F225A1E83300E1A079 /* WeeklyWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyWeatherView.swift; sourceTree = "<group>"; };
+		A5AAC1B525E1411300096C7F /* Unwrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unwrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +61,13 @@
 			path = WeatherData;
 			sourceTree = "<group>";
 		};
-		A594D6FA25CF11D90095412C /* Extensions */ = {
+		A594D6FA25CF11D90095412C /* Extensions, Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				A594D6F725CF11D50095412C /* String + Utilities.swift */,
+				A5AAC1B525E1411300096C7F /* Unwrapper.swift */,
 			);
-			path = Extensions;
+			path = "Extensions, Utilities";
 			sourceTree = "<group>";
 		};
 		A594D6FF25CFDC2C0095412C /* Model */ = {
@@ -109,7 +112,7 @@
 				A595F6E225A1C68300E1A079 /* SwiftUIWeatherAppApp.swift */,
 				A594D70025CFDC350095412C /* Views */,
 				A594D6FF25CFDC2C0095412C /* Model */,
-				A594D6FA25CF11D90095412C /* Extensions */,
+				A594D6FA25CF11D90095412C /* Extensions, Utilities */,
 				A595F6E625A1C68600E1A079 /* Assets.xcassets */,
 				A595F6EB25A1C68600E1A079 /* Info.plist */,
 				A585CBC925D9205900A121DF /* Localizable.strings */,
@@ -199,6 +202,7 @@
 			files = (
 				A594D6F825CF11D50095412C /* String + Utilities.swift in Sources */,
 				A594D6FD25CF17900095412C /* WeatherViewModel.swift in Sources */,
+				A5AAC1B625E1411300096C7F /* Unwrapper.swift in Sources */,
 				A554B70125D7E5990049AED3 /* CurrentWeather.swift in Sources */,
 				A554B70525D83D4B0049AED3 /* WeeklyWeather.swift in Sources */,
 				A595F6E525A1C68300E1A079 /* ContentView.swift in Sources */,
