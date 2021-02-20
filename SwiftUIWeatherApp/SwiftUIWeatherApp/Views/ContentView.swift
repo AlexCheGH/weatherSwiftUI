@@ -9,59 +9,105 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @ObservedObject var forecast = WeatherViewModel(location: "")
+    @ObservedObject var forecast = WeatherViewModel(location: "Minsk")
+    
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     private let locationPlaceholderString = NSLocalizedString("location_placeholder", comment: "")
+    private let todayString = NSLocalizedString("today_weekdat", comment: "")
     
     var body: some View {
-        makeBody()
+        //        if horizontalSizeClass == .regular {
+        makeRegularBody()
+        //        } else {
+        //            makeCompactBody()
+        //        }
     }
     
-   private func makeBody() -> some View {
+    private func makeCompactBody() -> some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.blue, .white]),
-                           startPoint: .topLeading,
-                           endPoint: .bottomTrailing)
-                .edgesIgnoringSafeArea(.all)
+            gradient()
             
-            VStack(alignment: .center, spacing: 10) {
-                
-                TextField(locationPlaceholderString, text: $forecast.location, onCommit:  {
-                    print(forecast.location)
-                    forecast.loadData()
-                })
-                .multilineTextAlignment(.center)
-                .font(.system(size: 30, weight: .medium, design: .default))
-                .foregroundColor(.white)
-                .padding()
+            GeometryReader { geo in
                 
                 VStack {
-                    WeatherImage(imageName: forecast.currentWeather?.icon)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 180, height: 180)
                     
-                    Text(" \(forecast.currentWeather?.currentTemp ?? "...")º")
-                        .font(.system(size: 70, weight: .bold, design: .default))
-                        .foregroundColor(.white)
-                        .frame(width: 200, height: 100)
+                    VStack {
+                        textField(fontSize: 15)
+                        currentWeatherCard()
+                    }.padding()
+                    
+                    HStack(alignment: .center) {
+                        ForEach(forecast.weeklyWeather) { item in
+                            WeeklyWeatherView(weekday: item.date, temperature: item.currentTemp, imageName: item.icon)
+                        }
+                    }
                 }
+            }.onAppear{ forecast.loadData() }
+        }
+    }
+    
+    
+    
+    
+    private func makeRegularBody() -> some View {
+        ZStack()  {
+            gradient()
+            VStack(alignment: .center) {
+                
+                    GeometryReader { geo in
+                        VStack {
+                        textField(fontSize: size(geo.size))
+                    .multilineTextAlignment(.center)
+                
+                currentWeatherCard()
+                    .padding()
+                }
+                }
+                
                 Spacer()
                 
-                HStack(alignment: .center, spacing: 20) {
+                HStack {
                     ForEach(forecast.weeklyWeather) { item in
                         WeeklyWeatherView(weekday: item.date, temperature: item.currentTemp, imageName: item.icon)
                     }
                 }
-                Spacer()
+                .padding()
             }
-        }.onAppear{ forecast.loadData() }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ContentView()
+            .onAppear{ forecast.loadData() }
         }
     }
+    
+    
+    
+    
+    private func gradient() -> some View {
+        LinearGradient(gradient: Gradient(colors: [.blue, .green]),
+                       startPoint: .topLeading,
+                       endPoint: .bottomTrailing)
+            .edgesIgnoringSafeArea(.all)
+    }
+    
+    private func textField(fontSize: CGFloat) -> some View {
+        TextField(locationPlaceholderString, text: $forecast.location, onCommit:  { forecast.loadData() })
+            .font(.system(size: fontSize,
+                          weight: .medium,
+                          design: .default))
+            .foregroundColor(.black)
+    }
+    
+    private func currentWeatherCard() -> some View {
+        WeeklyWeatherView(weekday: todayString, temperature: forecast.currentWeather?.currentTemp, imageName: forecast.currentWeather?.icon)
+    }
+    
+    
+    
+    private func size(_ size: CGSize) -> CGFloat {
+        if size.width > size.height {
+            return size.height * 0.15
+        } else {
+            return size.width * 0.15
+        }
+    }
+    
 }
