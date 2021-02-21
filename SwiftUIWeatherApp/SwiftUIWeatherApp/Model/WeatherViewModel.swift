@@ -15,7 +15,7 @@ class WeatherViewModel: ObservableObject {
     var location: String
     
     init(location: String) {
-        self.location = location
+        self.location = UserPreferences().defaultCity()
         self.weatherModel = WeatherModel(location: self.location)
     }
     
@@ -39,5 +39,9 @@ class WeatherViewModel: ObservableObject {
         weatherModel.loadData { [self] in
             weather = weatherModel.rawWeather
         }
+    }
+    
+    func saveLocation() {
+        UserPreferences().saveCity(named: location)
     }
 }
