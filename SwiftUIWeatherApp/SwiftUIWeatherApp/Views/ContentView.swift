@@ -31,14 +31,14 @@ struct ContentView: View {
                     }
                 }
                 HStack(alignment: .center) {
-                        ForEach(forecast.weeklyWeather) { item in
-                           
-                            WeeklyWeatherView(weekday: item.date,
-                                              temperature: item.currentTemp,
-                                              imageName: item.icon,
-                                              size: CGSize(width: 50, height: 50),
-                                              viewType: .weeklyWeather)
-                        }
+                    ForEach(forecast.weeklyWeather) { item in
+                        
+                        WeeklyWeatherView(weekday: item.date,
+                                          temperature: item.currentTemp,
+                                          imageName: item.icon,
+                                          size: CGSize(width: 50, height: 50),
+                                          viewType: .weeklyWeather)
+                    }
                 }
                 .padding()
             }
@@ -57,11 +57,14 @@ struct ContentView: View {
     }
     
     private func textField(fontSize: CGFloat) -> some View {
-        TextField(locationPlaceholderString, text: $forecast.location, onCommit:  { forecast.loadData() })
-            .font(.system(size: fontSize,
-                          weight: .medium,
-                          design: .default))
-            .foregroundColor(.black)
+        TextField(locationPlaceholderString, text: $forecast.location, onCommit:  {
+            forecast.loadData()
+            forecast.saveLocation()
+        })
+        .font(.system(size: fontSize,
+                      weight: .medium,
+                      design: .default))
+        .foregroundColor(.black)
     }
     
     private func currentWeatherCard(size: CGSize) -> some View {
@@ -75,11 +78,11 @@ struct ContentView: View {
     private func sizeCard(_ size: CGSize) -> CGSize {
         let multiplier: CGFloat = 0.4
         
-            if size.width > size.height {
-               return CGSize(width: size.height * multiplier, height: size.height * multiplier)
-            } else {
-                return CGSize(width: size.width * multiplier, height: size.width * multiplier)
-            }
+        if size.width > size.height {
+            return CGSize(width: size.height * multiplier, height: size.height * multiplier)
+        } else {
+            return CGSize(width: size.width * multiplier, height: size.width * multiplier)
+        }
     }
     
     private func size(_ size: CGSize) -> CGFloat {
