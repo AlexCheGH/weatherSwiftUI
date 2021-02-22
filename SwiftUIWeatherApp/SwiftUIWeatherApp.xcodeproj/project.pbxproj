@@ -21,7 +21,10 @@
 		A595F6F325A1E83300E1A079 /* WeeklyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A595F6F225A1E83300E1A079 /* WeeklyWeatherView.swift */; };
 		A59CF64125E254A700B7E9B7 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CF64025E254A700B7E9B7 /* DateManager.swift */; };
 		A59CF64425E254E800B7E9B7 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CF64325E254E800B7E9B7 /* UserPreferences.swift */; };
+		A59CF64925E25C2400B7E9B7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CF64825E25C2400B7E9B7 /* SettingsView.swift */; };
+		A59CF64C25E25C7A00B7E9B7 /* Navigation_Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CF64B25E25C7A00B7E9B7 /* Navigation_Modifier.swift */; };
 		A5AAC1B625E1411300096C7F /* Unwrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AAC1B525E1411300096C7F /* Unwrapper.swift */; };
+		A5DB3F8A25E4480300378FC5 /* UserPreferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DB3F8925E4480300378FC5 /* UserPreferenceViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +45,10 @@
 		A595F6F225A1E83300E1A079 /* WeeklyWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyWeatherView.swift; sourceTree = "<group>"; };
 		A59CF64025E254A700B7E9B7 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		A59CF64325E254E800B7E9B7 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		A59CF64825E25C2400B7E9B7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A59CF64B25E25C7A00B7E9B7 /* Navigation_Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation_Modifier.swift; sourceTree = "<group>"; };
 		A5AAC1B525E1411300096C7F /* Unwrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unwrapper.swift; sourceTree = "<group>"; };
+		A5DB3F8925E4480300378FC5 /* UserPreferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,21 +75,19 @@
 			isa = PBXGroup;
 			children = (
 				A594D6F725CF11D50095412C /* String + Utilities.swift */,
+				A59CF64B25E25C7A00B7E9B7 /* Navigation_Modifier.swift */,
 				A5AAC1B525E1411300096C7F /* Unwrapper.swift */,
 			);
 			path = "Extensions, Utilities";
 			sourceTree = "<group>";
 		};
-		A594D6FF25CFDC2C0095412C /* Model */ = {
+		A594D6FF25CFDC2C0095412C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A594D6FC25CF17900095412C /* WeatherViewModel.swift */,
-				A594D6F425CF0F9B0095412C /* WeatherModel.swift */,
-				A56BA5D325CFE00900A39F7A /* WeatherInfo.swift */,
-				A59CF63F25E2549A00B7E9B7 /* Managers */,
-				A554B70725D83D530049AED3 /* WeatherData */,
+				A5DB3F8825E447D800378FC5 /* UserPreferenceModel */,
+				A5DB3F8725E447B500378FC5 /* WeatherModel */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		A594D70025CFDC350095412C /* Views */ = {
@@ -91,6 +95,7 @@
 			children = (
 				A595F6E425A1C68300E1A079 /* ContentView.swift */,
 				A595F6F225A1E83300E1A079 /* WeeklyWeatherView.swift */,
+				A59CF64825E25C2400B7E9B7 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -116,7 +121,8 @@
 			children = (
 				A595F6E225A1C68300E1A079 /* SwiftUIWeatherAppApp.swift */,
 				A594D70025CFDC350095412C /* Views */,
-				A594D6FF25CFDC2C0095412C /* Model */,
+				A59CF63F25E2549A00B7E9B7 /* Managers */,
+				A594D6FF25CFDC2C0095412C /* Models */,
 				A594D6FA25CF11D90095412C /* Extensions, Utilities */,
 				A595F6E625A1C68600E1A079 /* Assets.xcassets */,
 				A595F6EB25A1C68600E1A079 /* Info.plist */,
@@ -138,9 +144,28 @@
 			isa = PBXGroup;
 			children = (
 				A59CF64025E254A700B7E9B7 /* DateManager.swift */,
-				A59CF64325E254E800B7E9B7 /* UserPreferences.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		A5DB3F8725E447B500378FC5 /* WeatherModel */ = {
+			isa = PBXGroup;
+			children = (
+				A594D6FC25CF17900095412C /* WeatherViewModel.swift */,
+				A594D6F425CF0F9B0095412C /* WeatherModel.swift */,
+				A56BA5D325CFE00900A39F7A /* WeatherInfo.swift */,
+				A554B70725D83D530049AED3 /* WeatherData */,
+			);
+			path = WeatherModel;
+			sourceTree = "<group>";
+		};
+		A5DB3F8825E447D800378FC5 /* UserPreferenceModel */ = {
+			isa = PBXGroup;
+			children = (
+				A59CF64325E254E800B7E9B7 /* UserPreferences.swift */,
+				A5DB3F8925E4480300378FC5 /* UserPreferenceViewModel.swift */,
+			);
+			path = UserPreferenceModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,16 +241,19 @@
 			files = (
 				A594D6F825CF11D50095412C /* String + Utilities.swift in Sources */,
 				A59CF64425E254E800B7E9B7 /* UserPreferences.swift in Sources */,
+				A5DB3F8A25E4480300378FC5 /* UserPreferenceViewModel.swift in Sources */,
 				A594D6FD25CF17900095412C /* WeatherViewModel.swift in Sources */,
 				A5AAC1B625E1411300096C7F /* Unwrapper.swift in Sources */,
 				A554B70125D7E5990049AED3 /* CurrentWeather.swift in Sources */,
 				A554B70525D83D4B0049AED3 /* WeeklyWeather.swift in Sources */,
 				A595F6E525A1C68300E1A079 /* ContentView.swift in Sources */,
 				A595F6F325A1E83300E1A079 /* WeeklyWeatherView.swift in Sources */,
+				A59CF64C25E25C7A00B7E9B7 /* Navigation_Modifier.swift in Sources */,
 				A59CF64125E254A700B7E9B7 /* DateManager.swift in Sources */,
 				A594D6F525CF0F9B0095412C /* WeatherModel.swift in Sources */,
 				A595F6E325A1C68300E1A079 /* SwiftUIWeatherAppApp.swift in Sources */,
 				A56BA5D425CFE00900A39F7A /* WeatherInfo.swift in Sources */,
+				A59CF64925E25C2400B7E9B7 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

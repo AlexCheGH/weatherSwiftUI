@@ -14,6 +14,8 @@ struct ContentView: View {
     private let locationPlaceholderString = NSLocalizedString("location_placeholder", comment: "")
     private let todayString = NSLocalizedString("today_weekdat", comment: "")
     
+    @State var isSettingsTapped = false
+    
     var body: some View {
         makeBody()
     }
@@ -24,8 +26,12 @@ struct ContentView: View {
             VStack(alignment: .center) {
                 GeometryReader { geo in
                     VStack {
-                        textField(fontSize: size(geo.size))
-                            .multilineTextAlignment(.center)
+                        HStack {
+                            textField(fontSize: size(geo.size))
+                                .multilineTextAlignment(.center)
+                        
+                            settingsButton()
+                        }
                         currentWeatherCard(size: sizeCard(geo.size))
                             .padding()
                     }
@@ -44,6 +50,7 @@ struct ContentView: View {
             }
             .onAppear{ forecast.loadData() }
         }
+        .navigate(to: SettingsView(), when: $isSettingsTapped)
     }
     
     
@@ -66,6 +73,18 @@ struct ContentView: View {
                       design: .default))
         .foregroundColor(.black)
     }
+    
+    private func settingsButton() -> some View {
+        Button(action: {
+            isSettingsTapped = true
+        }) {
+            Image(systemName: "gear")
+                .foregroundColor(.black)
+                .frame(width: 50, height: 50)
+        }
+        
+    }
+    
     
     private func currentWeatherCard(size: CGSize) -> some View {
         WeeklyWeatherView(weekday: todayString,
