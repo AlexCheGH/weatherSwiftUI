@@ -84,9 +84,8 @@ struct ContentView: View {
                 .frame(width: 50, height: 50)
         }
         .sheet(isPresented: $isSettingsTapped) {
-            SettingsView()
+            SettingsView().onDisappear{ forecast.loadData() }
         }
-        
     }
     
     
