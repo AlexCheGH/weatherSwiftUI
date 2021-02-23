@@ -13,7 +13,7 @@ class WeatherModel {
     var weeklyWeather: [WeatherInfo?] = [WeatherInfo?]()
     var rawWeather: WeeklyWeatherData? = nil
     var currentWeather: WeatherInfo? = nil
-    
+        
     private let apiKey = "d993c7d8d3f4e8de63516cc737a6c16b"
     
     
@@ -54,7 +54,9 @@ class WeatherModel {
    private func prepareCurrentWeather(data: CurrentWeather?) {
         if let weather = data {
             var currentTemp = weather.main.temp
-            currentTemp = self.calculateTemperature(rawTemp: currentTemp, tempSettings: 2)
+            let tempSetting = UserPreferences().getTempPreference()
+            
+            currentTemp = self.calculateTemperature(rawTemp: currentTemp, tempSettings: tempSetting)
             
             let date = DateManager.makeFormatedString(date: weather.dt, format: "E")
             let icon = weather.weather.first?.icon
@@ -87,7 +89,8 @@ class WeatherModel {
         let date = Date()
         let currentDate = Int(date.timeIntervalSince1970)
         let stringDate = DateManager.makeFormatedString(date: currentDate, format: "E")
-        
+        let tempSetting = UserPreferences().getTempPreference()
+    
         var midTemp: Double = 0
         
         var container = [WeeklyWeatherData.List]()
@@ -104,7 +107,7 @@ class WeatherModel {
             if container.count == 8 {
                 let midDayIndex = 8 / 2 - 1
                 midTemp = container[midDayIndex].main.temp
-                midTemp = calculateTemperature(rawTemp: midTemp, tempSettings: 2)
+                midTemp = calculateTemperature(rawTemp: midTemp, tempSettings: tempSetting)
                 
                 let date = DateManager.makeFormatedString(date: container[midDayIndex].dt, format: "E")
                 let icon = $0.weather.first?.icon
@@ -126,7 +129,7 @@ class WeatherModel {
                 let midDayIndex = container.count > 1 ? container.count / 2 - 1 : 0
                 
                 midTemp = container[midDayIndex].main.temp
-                midTemp = calculateTemperature(rawTemp: midTemp, tempSettings: 2)
+                midTemp = calculateTemperature(rawTemp: midTemp, tempSettings: tempSetting)
                 
                 let date = DateManager.makeFormatedString(date: container[midDayIndex].dt, format: "E")
                 let icon = container[midDayIndex].weather.first?.icon
@@ -137,15 +140,14 @@ class WeatherModel {
         }
     }
     
-    //temp setting  - future userpreferences choise
     func calculateTemperature(rawTemp: Double, tempSettings: Int) -> Double {
         let kelvin = 273.15
         
         switch tempSettings {
-        case 1:
+        case 0:
             let result = (rawTemp - kelvin) * 9/5 + 32
             return result
-        case 2:
+        case 1:
             let result = rawTemp - kelvin
             return result
         default:
