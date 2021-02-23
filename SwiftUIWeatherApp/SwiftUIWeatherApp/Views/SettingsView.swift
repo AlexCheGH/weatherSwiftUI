@@ -13,7 +13,7 @@ struct SettingsView: View {
     private let temperatureString = NSLocalizedString("temperature_key", comment: "")
     private let farenheitString = NSLocalizedString("farenheit_key", comment: "")
     private let celciousString = NSLocalizedString("celcious_key", comment: "")
-
+    
     private let pressureString = NSLocalizedString("pressure_key", comment: "")
     private let kpaString = NSLocalizedString("kpa_key", comment: "")
     private let mbarString = NSLocalizedString("mbar_key", comment: "")
@@ -32,18 +32,23 @@ struct SettingsView: View {
     
     var body: some View {
         VStack {
-        SegmentedControll(options: [farenheitString, celciousString],
-                          title: temperatureString,
-                          selection: $userPreference.tempPreference)
-        
-        SegmentedControll(options: [kpaString, mbarString, mmString, inchesString],
-                          title: pressureString,
-                          selection: $userPreference.pressurePreference)
+            Text(settingsString)
+                .font(.system(size: 25, weight: .medium, design: .default))
+                .padding()
             
-        SegmentedControll(options: [mphString, kmhString, msString, knotsString],
-                          title: windspeedString,
-                          selection: $userPreference.windSpeedPreference)
+            SegmentedControll(options: [farenheitString, celciousString],
+                              title: temperatureString,
+                              selection: $userPreference.tempPreference)
+            
+            SegmentedControll(options: [kpaString, mbarString, mmString, inchesString],
+                              title: pressureString,
+                              selection: $userPreference.pressurePreference)
+            
+            SegmentedControll(options: [mphString, kmhString, msString, knotsString],
+                              title: windspeedString,
+                              selection: $userPreference.windSpeedPreference)
         }
+        .padding(.top, 10)
         Spacer()
     } 
 }
@@ -52,7 +57,7 @@ struct SegmentedControll: View {
     @Binding var selection: Int
     var options: [String]
     var title: String
-        
+    
     init(options: [String], title: String, selection: Binding<Int>) {
         self.options = options
         self.title = title

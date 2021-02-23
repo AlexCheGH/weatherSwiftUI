@@ -14,6 +14,8 @@ struct ContentView: View {
     private let locationPlaceholderString = NSLocalizedString("location_placeholder", comment: "")
     private let todayString = NSLocalizedString("today_weekdat", comment: "")
     
+    private let gearIcon = "gear"
+    
     @State var isSettingsTapped = false
     
     var body: some View {
@@ -50,7 +52,6 @@ struct ContentView: View {
             }
             .onAppear{ forecast.loadData() }
         }
-        .navigate(to: SettingsView(), when: $isSettingsTapped)
     }
     
     
@@ -76,11 +77,14 @@ struct ContentView: View {
     
     private func settingsButton() -> some View {
         Button(action: {
-            isSettingsTapped = true
+            isSettingsTapped.toggle()
         }) {
-            Image(systemName: "gear")
+            Image(systemName: gearIcon)
                 .foregroundColor(.black)
                 .frame(width: 50, height: 50)
+        }
+        .sheet(isPresented: $isSettingsTapped) {
+            SettingsView()
         }
         
     }
