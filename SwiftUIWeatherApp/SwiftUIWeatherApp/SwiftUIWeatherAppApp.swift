@@ -6,12 +6,21 @@
 //
 
 import SwiftUI
+import MapKit
 
 @main
 struct SwiftUIWeatherAppApp: App {
+    
+    @State var selectedLocation = CGPoint(x: 5, y: 5)
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            MapView().ignoresSafeArea()
         }
     }
+    
+    
+    
+    
 }

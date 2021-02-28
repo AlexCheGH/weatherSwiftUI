@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A54BD62125EAACF7003A061B /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BD62025EAACF7003A061B /* MapView.swift */; };
 		A554B70125D7E5990049AED3 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554B70025D7E5990049AED3 /* CurrentWeather.swift */; };
 		A554B70525D83D4B0049AED3 /* WeeklyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554B70425D83D4B0049AED3 /* WeeklyWeather.swift */; };
 		A56BA5D425CFE00900A39F7A /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BA5D325CFE00900A39F7A /* WeatherInfo.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A54BD62025EAACF7003A061B /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A554B70025D7E5990049AED3 /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		A554B70425D83D4B0049AED3 /* WeeklyWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyWeather.swift; sourceTree = "<group>"; };
 		A56BA5D325CFE00900A39F7A /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				A595F6E425A1C68300E1A079 /* ContentView.swift */,
 				A595F6F225A1E83300E1A079 /* WeeklyWeatherView.swift */,
 				A59CF64825E25C2400B7E9B7 /* SettingsView.swift */,
+				A54BD62025EAACF7003A061B /* MapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -184,6 +187,8 @@
 			dependencies = (
 			);
 			name = SwiftUIWeatherApp;
+			packageProductDependencies = (
+			);
 			productName = SwiftUIWeatherApp;
 			productReference = A595F6DF25A1C68300E1A079 /* SwiftUIWeatherApp.app */;
 			productType = "com.apple.product-type.application";
@@ -212,6 +217,8 @@
 				ru,
 			);
 			mainGroup = A595F6D625A1C68300E1A079;
+			packageReferences = (
+			);
 			productRefGroup = A595F6E025A1C68300E1A079 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -240,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A594D6F825CF11D50095412C /* String + Utilities.swift in Sources */,
+				A54BD62125EAACF7003A061B /* MapView.swift in Sources */,
 				A59CF64425E254E800B7E9B7 /* UserPreferences.swift in Sources */,
 				A5DB3F8A25E4480300378FC5 /* UserPreferenceViewModel.swift in Sources */,
 				A594D6FD25CF17900095412C /* WeatherViewModel.swift in Sources */,

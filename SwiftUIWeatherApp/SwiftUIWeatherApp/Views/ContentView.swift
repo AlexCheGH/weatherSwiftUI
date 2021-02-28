@@ -17,6 +17,7 @@ struct ContentView: View {
     private let gearIcon = "gear"
     
     @State var isSettingsTapped = false
+    @State var isMapTapped = false
     
     var body: some View {
         makeBody()
@@ -29,6 +30,9 @@ struct ContentView: View {
                 GeometryReader { geo in
                     VStack {
                         HStack {
+                            
+                            mapButton()
+                            
                             textField(fontSize: size(geo.size))
                                 .multilineTextAlignment(.center)
                         
@@ -52,6 +56,7 @@ struct ContentView: View {
             }
             .onAppear{ forecast.loadData() }
         }
+//        .navigate(to: MapView(), when: $isSettingsTapped)
     }
     
     
@@ -73,6 +78,17 @@ struct ContentView: View {
                       weight: .medium,
                       design: .default))
         .foregroundColor(.black)
+    }
+    
+    private func mapButton() -> some View {
+        Button(action: {
+            isMapTapped.toggle()
+        })
+        {
+            Image(systemName: "gear")
+                .foregroundColor(.black)
+                .frame(width: 50, height: 50)
+        }
     }
     
     private func settingsButton() -> some View {
