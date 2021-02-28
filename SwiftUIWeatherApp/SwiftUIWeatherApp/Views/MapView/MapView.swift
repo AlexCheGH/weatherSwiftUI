@@ -16,8 +16,5 @@ struct MapView: View {
             Map(coordinate: $coordinates)
                 .ignoresSafeArea()
         }
-        
-        
-        
     }
 }

@@ -13,21 +13,23 @@ class WeatherModel {
     var weeklyWeather: [WeatherInfo?] = [WeatherInfo?]()
     var rawWeather: WeeklyWeatherData? = nil
     var currentWeather: WeatherInfo? = nil
-        
-    private let apiKey = "d993c7d8d3f4e8de63516cc737a6c16b"
     
+    var coordinates: Coord?
+    
+    private let apiKey = "d993c7d8d3f4e8de63516cc737a6c16b"
     
     init(location: String) {
         self.location = location
         self.loadData { }
     }
     
+    
     //MARK:- Current weather Data calls
-   private func makeCurrentForecastTask(completion: @escaping (Data) -> Void) {
-        let string = "https://api.openweathermap.org/data/2.5/weather?q=\(location)&appid=\(apiKey)"
-        let url = URL(string: string.encodeUrl)
+    private func makeCurrentForecastTask(completion: @escaping (Data) -> Void) {
         
-        URLSession.shared.dataTask(with: url!) { data, _, _ in
+        let url = prepareURL(location: location, coordinates: coordinates, weatherType: .current)
+        
+        URLSession.shared.dataTask(with: url) { data, _, _ in
             DispatchQueue.main.async {
                 if let data = data {
                     completion(data)
@@ -38,20 +40,20 @@ class WeatherModel {
     }
     
     func loadData(completion: @escaping() -> Void) {
-         makeCurrentForecastTask { [self] (data) in
-             let weather = try? JSONDecoder().decode(CurrentWeather.self, from: data)
-             prepareCurrentWeather(data: weather)
-         }
-         
-         weeklyWeatherCall { [self] (data) in
-             rawWeather = try? JSONDecoder().decode(WeeklyWeatherData.self, from: data)
-             prepareWeeklyWeather()
-             completion()
-         }
-     }
+        makeCurrentForecastTask { [self] (data) in
+            let weather = try? JSONDecoder().decode(CurrentWeather.self, from: data)
+            prepareCurrentWeather(data: weather)
+        }
+        
+        weeklyWeatherCall { [self] (data) in
+            rawWeather = try? JSONDecoder().decode(WeeklyWeatherData.self, from: data)
+            prepareWeeklyWeather()
+            completion()
+        }
+    }
     
     
-   private func prepareCurrentWeather(data: CurrentWeather?) {
+    private func prepareCurrentWeather(data: CurrentWeather?) {
         if let weather = data {
             var currentTemp = weather.main.temp
             let tempSetting = UserPreferences().getTempPreference()
@@ -68,12 +70,11 @@ class WeatherModel {
     
     //MARK:- Weekly Weather
     
-   private func weeklyWeatherCall(completion: @escaping(Data) -> Void) {
+    private func weeklyWeatherCall(completion: @escaping(Data) -> Void) {
         
-        let string = "https://api.openweathermap.org/data/2.5/forecast?q=\(location)&appid=\(apiKey)"
-        let stringURL = URL(string: string.encodeUrl)
+        let url = prepareURL(location: location, coordinates: coordinates, weatherType: .weekly)
         
-        URLSession.shared.dataTask(with: stringURL!) { data, _, _ in
+        URLSession.shared.dataTask(with: url) { data, _, _ in
             DispatchQueue.main.async {
                 if let data = data {
                     completion(data)
@@ -82,7 +83,7 @@ class WeatherModel {
         }.resume()
     }
     
-   private func prepareWeeklyWeather() {
+    private func prepareWeeklyWeather() {
         
         weeklyWeather.removeAll()
         
@@ -90,7 +91,7 @@ class WeatherModel {
         let currentDate = Int(date.timeIntervalSince1970)
         let stringDate = DateManager.makeFormatedString(date: currentDate, format: "E")
         let tempSetting = UserPreferences().getTempPreference()
-    
+        
         var midTemp: Double = 0
         
         var container = [WeeklyWeatherData.List]()
@@ -154,4 +155,26 @@ class WeatherModel {
             return 0.0
         }
     }
+    
+    
+    
+    private func prepareURL(location: String, coordinates: Coord?, weatherType: WeatherForecastType) -> URL {
+        var weatherString: String {
+            weatherType == .current ? "weather" : "forecast"
+        }
+        
+        if let coordinates = coordinates {
+            let link = "https://api.openweathermap.org/data/2.5/\(weatherString)?lat=\(coordinates.lat)&lon=\(coordinates.lon)&appid=\(apiKey)"
+            return URL(string: link)!
+        } else {
+            let link = "https://api.openweathermap.org/data/2.5/\(weatherString)?q=\(location)&appid=\(apiKey)"
+            return URL(string: link)!
+        }
+    }
+    
+    enum WeatherForecastType {
+        case current
+        case weekly
+    }
+    
 }

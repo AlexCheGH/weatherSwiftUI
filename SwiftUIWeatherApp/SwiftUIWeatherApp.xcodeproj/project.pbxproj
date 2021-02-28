@@ -75,6 +75,22 @@
 			path = MapView;
 			sourceTree = "<group>";
 		};
+		A554596E25EC3D1300E58863 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A594D6F725CF11D50095412C /* String + Utilities.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A554596F25EC3D2600E58863 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				A59CF64B25E25C7A00B7E9B7 /* Navigation_Modifier.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
 		A554B70725D83D530049AED3 /* WeatherData */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,14 +100,14 @@
 			path = WeatherData;
 			sourceTree = "<group>";
 		};
-		A594D6FA25CF11D90095412C /* Extensions, Utilities */ = {
+		A594D6FA25CF11D90095412C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				A594D6F725CF11D50095412C /* String + Utilities.swift */,
-				A59CF64B25E25C7A00B7E9B7 /* Navigation_Modifier.swift */,
+				A554596F25EC3D2600E58863 /* ViewModifiers */,
+				A554596E25EC3D1300E58863 /* Extensions */,
 				A5AAC1B525E1411300096C7F /* Unwrapper.swift */,
 			);
-			path = "Extensions, Utilities";
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		A594D6FF25CFDC2C0095412C /* Models */ = {
@@ -137,7 +153,7 @@
 				A594D70025CFDC350095412C /* Views */,
 				A59CF63F25E2549A00B7E9B7 /* Managers */,
 				A594D6FF25CFDC2C0095412C /* Models */,
-				A594D6FA25CF11D90095412C /* Extensions, Utilities */,
+				A594D6FA25CF11D90095412C /* Utilities */,
 				A595F6E625A1C68600E1A079 /* Assets.xcassets */,
 				A595F6EB25A1C68600E1A079 /* Info.plist */,
 				A585CBC925D9205900A121DF /* Localizable.strings */,
