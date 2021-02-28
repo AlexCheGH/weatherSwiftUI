@@ -10,13 +10,24 @@ import SwiftUI
 import UIKit
 
 
-struct MapView: UIViewRepresentable {
+struct Map: UIViewRepresentable {
     @State private var annotation = MKPointAnnotation()
+    
+    @Binding var coordinate: CGPoint
+    
     func makeUIView(context: Context) -> MKMapView {
         let mapView = WrappedMap()
         mapView.delegate = context.coordinator
         mapView.onLongPress = addAnnotation(for:)
+        
+        
+        
         return mapView
+    }
+    
+    
+    func getCoordinate(from coordinate: CLLocationCoordinate2D) {
+        print(coordinate)
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
@@ -28,13 +39,14 @@ struct MapView: UIViewRepresentable {
         let newAnnotation = MKPointAnnotation()
         newAnnotation.coordinate = coordinate
         annotation = newAnnotation
+        self.coordinate = CGPoint(x: coordinate.latitude, y: coordinate.longitude)
     }
     
     
     //MARK:- Coordinator
     class Coordinator: NSObject, MKMapViewDelegate {
-        var parent: MapView
-        init(_ parent: MapView) {
+        var parent: Map
+        init(_ parent: Map) {
             self.parent = parent
         }
     }
@@ -48,16 +60,19 @@ struct MapView: UIViewRepresentable {
 
 final class WrappedMap: MKMapView {
     var onLongPress: (CLLocationCoordinate2D) -> Void = { _ in }
+    
     init() {
         super.init(frame: .zero)
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         gestureRecognizer.minimumPressDuration = 0.1
         addGestureRecognizer(gestureRecognizer)
     }
+    
     @objc func handleTap(sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
             let location = sender.location(in: self)
             let coordinate = convert(location, toCoordinateFrom: self)
+                        
             onLongPress(coordinate)
         }
     }

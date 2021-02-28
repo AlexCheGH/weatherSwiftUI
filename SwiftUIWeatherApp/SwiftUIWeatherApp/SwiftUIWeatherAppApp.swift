@@ -11,12 +11,14 @@ import MapKit
 @main
 struct SwiftUIWeatherAppApp: App {
     
-    @State var selectedLocation = CGPoint(x: 5, y: 5)
+    @State var coordinate: CGPoint = CGPoint()
     
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-            MapView().ignoresSafeArea()
+            ContentView()
+//            MapView(coordinates: $coordinate)
+//                .onChange(of: coordinate) { _ in
+//                }
         }
     }
     

@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A54BD62125EAACF7003A061B /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BD62025EAACF7003A061B /* MapView.swift */; };
+		A54BD62125EAACF7003A061B /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BD62025EAACF7003A061B /* Map.swift */; };
+		A554596B25EBE5E000E58863 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554596A25EBE5E000E58863 /* MapView.swift */; };
 		A554B70125D7E5990049AED3 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554B70025D7E5990049AED3 /* CurrentWeather.swift */; };
 		A554B70525D83D4B0049AED3 /* WeeklyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554B70425D83D4B0049AED3 /* WeeklyWeather.swift */; };
 		A56BA5D425CFE00900A39F7A /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BA5D325CFE00900A39F7A /* WeatherInfo.swift */; };
@@ -29,7 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A54BD62025EAACF7003A061B /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		A54BD62025EAACF7003A061B /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		A554596A25EBE5E000E58863 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A554B70025D7E5990049AED3 /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		A554B70425D83D4B0049AED3 /* WeeklyWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyWeather.swift; sourceTree = "<group>"; };
 		A56BA5D325CFE00900A39F7A /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
@@ -64,6 +66,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A554596825EBE5BC00E58863 /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				A54BD62025EAACF7003A061B /* Map.swift */,
+				A554596A25EBE5E000E58863 /* MapView.swift */,
+			);
+			path = MapView;
+			sourceTree = "<group>";
+		};
 		A554B70725D83D530049AED3 /* WeatherData */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,7 +109,7 @@
 				A595F6E425A1C68300E1A079 /* ContentView.swift */,
 				A595F6F225A1E83300E1A079 /* WeeklyWeatherView.swift */,
 				A59CF64825E25C2400B7E9B7 /* SettingsView.swift */,
-				A54BD62025EAACF7003A061B /* MapView.swift */,
+				A554596825EBE5BC00E58863 /* MapView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -247,7 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A594D6F825CF11D50095412C /* String + Utilities.swift in Sources */,
-				A54BD62125EAACF7003A061B /* MapView.swift in Sources */,
+				A54BD62125EAACF7003A061B /* Map.swift in Sources */,
 				A59CF64425E254E800B7E9B7 /* UserPreferences.swift in Sources */,
 				A5DB3F8A25E4480300378FC5 /* UserPreferenceViewModel.swift in Sources */,
 				A594D6FD25CF17900095412C /* WeatherViewModel.swift in Sources */,
@@ -255,6 +266,7 @@
 				A554B70125D7E5990049AED3 /* CurrentWeather.swift in Sources */,
 				A554B70525D83D4B0049AED3 /* WeeklyWeather.swift in Sources */,
 				A595F6E525A1C68300E1A079 /* ContentView.swift in Sources */,
+				A554596B25EBE5E000E58863 /* MapView.swift in Sources */,
 				A595F6F325A1E83300E1A079 /* WeeklyWeatherView.swift in Sources */,
 				A59CF64C25E25C7A00B7E9B7 /* Navigation_Modifier.swift in Sources */,
 				A59CF64125E254A700B7E9B7 /* DateManager.swift in Sources */,

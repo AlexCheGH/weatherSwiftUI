@@ -19,6 +19,8 @@ struct ContentView: View {
     @State var isSettingsTapped = false
     @State var isMapTapped = false
     
+    @State var selectedLocation = CGPoint()
+    
     var body: some View {
         makeBody()
     }
@@ -56,7 +58,7 @@ struct ContentView: View {
             }
             .onAppear{ forecast.loadData() }
         }
-//        .navigate(to: MapView(), when: $isSettingsTapped)
+        .navigate(to: MapView(coordinates: $selectedLocation), when: $isMapTapped)
     }
     
     
@@ -82,13 +84,31 @@ struct ContentView: View {
     
     private func mapButton() -> some View {
         Button(action: {
-            isMapTapped.toggle()
+            isMapTapped = true
         })
         {
-            Image(systemName: "gear")
+            Image(systemName: "globe")
                 .foregroundColor(.black)
                 .frame(width: 50, height: 50)
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
     
     private func settingsButton() -> some View {
