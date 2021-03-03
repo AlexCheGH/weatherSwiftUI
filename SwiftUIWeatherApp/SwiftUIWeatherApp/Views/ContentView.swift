@@ -15,7 +15,7 @@ struct ContentView: View {
         UINavigationBar.appearance().tintColor = .black
     }
     
-    @ObservedObject var forecast = WeatherViewModel(location: "Minsk")
+    @ObservedObject var forecast = WeatherViewModel(location: "")
     
     private let locationPlaceholderString = NSLocalizedString("location_placeholder", comment: "")
     private let todayString = NSLocalizedString("today_weekdat", comment: "")
@@ -48,20 +48,15 @@ struct ContentView: View {
                     }
                 }
                 HStack(alignment: .center) {
-                    ForEach(forecast.weeklyWeather) { item in
-                        
-                        WeeklyWeatherView(weekday: item.date,
-                                          temperature: item.currentTemp,
-                                          imageName: item.icon,
-                                          size: CGSize(width: 50, height: 50),
-                                          viewType: .weeklyWeather)
-                    }
+                    weeklyWeatherCards()
                 }
                 .padding()
             }
             .onAppear{ forecast.loadData() }
         }
-        .navigate(to: MapView(coordinates: $selectedLocation, isMapTapped: $isMapTapped), when: $isMapTapped).onChange(of: selectedLocation, perform: { value in
+        .navigate(to: MapView(coordinates: $selectedLocation, isMapTapped: $isMapTapped),
+                  when: $isMapTapped)
+        .onChange(of: selectedLocation, perform: { value in
             let lat = Double(selectedLocation.x)
             let long = Double(selectedLocation.y)
             forecast.updateCoordinates(coordinates: Coord(lon: long, lat: lat))
@@ -69,9 +64,7 @@ struct ContentView: View {
         })
     }
     
-    
-    
-    
+    //MARK:- UI Elements
     private func gradient() -> some View {
         LinearGradient(gradient: Gradient(colors: [.blue, .green]),
                        startPoint: .topLeading,
@@ -96,9 +89,7 @@ struct ContentView: View {
             isMapTapped = true
         })
         {
-            Image(systemName: globeIcon)
-                .foregroundColor(.black)
-                .frame(width: 50, height: 50)
+            makeImage(named: globeIcon, padding: .leading)
         }
     }
     
@@ -106,15 +97,19 @@ struct ContentView: View {
         Button(action: {
             isSettingsTapped.toggle()
         }) {
-            Image(systemName: gearIcon)
-                .foregroundColor(.black)
-                .frame(width: 50, height: 50)
+            makeImage(named: gearIcon, padding: .trailing)
         }
         .sheet(isPresented: $isSettingsTapped) {
             SettingsView().onDisappear{ forecast.loadData() }
         }
     }
     
+    private func makeImage(named name: String, padding: Edge.Set) -> some View {
+        Image(systemName: name)
+            .foregroundColor(.black)
+            .font(.system(size: 30))
+            .padding(padding)
+    }
     
     private func currentWeatherCard(size: CGSize) -> some View {
         WeeklyWeatherView(weekday: todayString,
@@ -124,6 +119,19 @@ struct ContentView: View {
                           viewType: .currentWeather)
     }
     
+    private func weeklyWeatherCards() -> some View {
+        ForEach(forecast.weeklyWeather) { item in
+            WeeklyWeatherView(weekday: item.date,
+                              temperature: item.currentTemp,
+                              imageName: item.icon,
+                              size: CGSize(width: 50, height: 50),
+                              viewType: .weeklyWeather)
+        }
+    }
+    
+    
+    
+    //MARK:- Dynamic size functions
     private func sizeCard(_ size: CGSize) -> CGSize {
         let multiplier: CGFloat = 0.4
         
