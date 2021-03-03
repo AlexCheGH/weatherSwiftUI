@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-
-//fix bar item in landscape: https://www.hackingwithswift.com/articles/216/complete-guide-to-navigationview-in-swiftui
-//clean code
-//change annotation style
-
-
 struct ContentView: View {
     
     init() {
@@ -67,7 +61,7 @@ struct ContentView: View {
             }
             .onAppear{ forecast.loadData() }
         }
-        .navigate(to: MapView(coordinates: $selectedLocation), when: $isMapTapped).onChange(of: selectedLocation, perform: { value in
+        .navigate(to: MapView(coordinates: $selectedLocation, isMapTapped: $isMapTapped), when: $isMapTapped).onChange(of: selectedLocation, perform: { value in
             let lat = Double(selectedLocation.x)
             let long = Double(selectedLocation.y)
             forecast.updateCoordinates(coordinates: Coord(lon: long, lat: lat))
