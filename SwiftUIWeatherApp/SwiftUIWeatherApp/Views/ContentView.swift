@@ -8,25 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @ObservedObject var forecast = WeatherViewModel(location: "")
+    @State var isSettingsTapped = false
+    @State var isMapTapped = false
+    @State var selectedLocation = CGPoint()
+    
+    private let locationPlaceholderString = NSLocalizedString("location_placeholder", comment: "")
+    private let todayString = NSLocalizedString("today_weekdat", comment: "")
+    private let gearIcon = "gear"
+    private let globeIcon = "globe"
+    private let buttonsSize: CGFloat = 30
+    private let textFieldTextSize: CGFloat = 35
+    private let weeklyWeatherSize: CGSize = CGSize(width: 50, height: 50)
     
     init() {
         UINavigationBar.appearance().isUserInteractionEnabled = false
         UINavigationBar.appearance().backgroundColor = .clear
         UINavigationBar.appearance().tintColor = .black
     }
-    
-    @ObservedObject var forecast = WeatherViewModel(location: "")
-    
-    private let locationPlaceholderString = NSLocalizedString("location_placeholder", comment: "")
-    private let todayString = NSLocalizedString("today_weekdat", comment: "")
-    
-    private let gearIcon = "gear"
-    private let globeIcon = "globe"
-    
-    @State var isSettingsTapped = false
-    @State var isMapTapped = false
-    
-    @State var selectedLocation = CGPoint()
     
     var body: some View {
         makeBody()
@@ -77,7 +77,7 @@ struct ContentView: View {
             forecast.loadData()
             forecast.saveLocation()
         })
-        .font(.system(size: 35,
+        .font(.system(size: textFieldTextSize,
                       weight: .medium,
                       design: .default))
         .foregroundColor(.black)
@@ -107,7 +107,7 @@ struct ContentView: View {
     private func makeImage(named name: String, padding: Edge.Set) -> some View {
         Image(systemName: name)
             .foregroundColor(.black)
-            .font(.system(size: 30))
+            .font(.system(size: buttonsSize))
             .padding(padding)
     }
     
@@ -124,12 +124,10 @@ struct ContentView: View {
             WeeklyWeatherView(weekday: item.date,
                               temperature: item.currentTemp,
                               imageName: item.icon,
-                              size: CGSize(width: 50, height: 50),
+                              size: weeklyWeatherSize,
                               viewType: .weeklyWeather)
         }
     }
-    
-    
     
     //MARK:- Dynamic size functions
     private func sizeCard(_ size: CGSize) -> CGSize {
