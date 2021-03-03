@@ -14,6 +14,8 @@ class WeatherViewModel: ObservableObject {
     
     var location: String
     
+    var coordinates: Coord?
+    
     init(location: String) {
         self.location = UserPreferences().defaultCity()
         self.weatherModel = WeatherModel(location: self.location)
@@ -38,10 +40,16 @@ class WeatherViewModel: ObservableObject {
         weatherModel.location = location
         weatherModel.loadData { [self] in
             weather = weatherModel.rawWeather
+            location = weather?.city.name ?? "..."
         }
     }
     
     func saveLocation() {
         UserPreferences().saveCity(named: location)
+    }
+    
+    func updateCoordinates(coordinates: Coord) {
+        self.coordinates = coordinates
+        weatherModel.coordinates = coordinates
     }
 }
