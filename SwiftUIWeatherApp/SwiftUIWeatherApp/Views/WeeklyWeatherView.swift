@@ -37,7 +37,7 @@ struct WeeklyWeatherView: View {
     
     private func fontSize(for size: CGSize) -> CGFloat {
         let currentFontMultiplier: CGFloat = 0.25
-        let weeklyFontMultiplier: CGFloat = 0.2
+        let weeklyFontMultiplier: CGFloat = 0.25
         
         if viewType == .currentWeather {
             return min(size.width, size.height) * currentFontMultiplier
