@@ -40,7 +40,7 @@ struct ContentView: View {
                     VStack {
                         HStack {
                             mapButton()
-                            textField(fontSize: size(geo.size))
+                            textField()
                             settingsButton()
                         }
                         currentWeatherCard(size: sizeCard(geo.size))
@@ -79,12 +79,12 @@ struct ContentView: View {
             .edgesIgnoringSafeArea(.all)
     }
     
-    private func textField(fontSize: CGFloat) -> some View {
+    private func textField() -> some View {
         TextField(locationPlaceholderString, text: $forecast.location, onCommit:  {
             forecast.loadData()
             forecast.saveLocation()
         })
-        .font(.system(size: fontSize,
+        .font(.system(size: 35,
                       weight: .medium,
                       design: .default))
         .foregroundColor(.black)
@@ -133,13 +133,4 @@ struct ContentView: View {
             return CGSize(width: size.width * multiplier, height: size.width * multiplier)
         }
     }
-    
-    private func size(_ size: CGSize) -> CGFloat {
-        if size.width > size.height {
-            return size.height * 0.15
-        } else {
-            return size.width * 0.15
-        }
-    }
-    
 }
