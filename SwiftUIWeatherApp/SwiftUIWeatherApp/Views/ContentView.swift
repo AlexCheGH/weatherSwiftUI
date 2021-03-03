@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @ObservedObject var forecast = WeatherViewModel(location: "")
+    @ObservedObject var forecast = WeatherViewModel(location: String())
     @State var isSettingsTapped = false
     @State var isMapTapped = false
     @State var selectedLocation = CGPoint()

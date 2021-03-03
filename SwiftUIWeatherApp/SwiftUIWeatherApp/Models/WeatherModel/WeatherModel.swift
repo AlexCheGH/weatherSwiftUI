@@ -16,7 +16,7 @@ class WeatherModel {
     
     var coordinates: Coord?
     
-    private let apiKey = "d993c7d8d3f4e8de63516cc737a6c16b"
+    private let apiKey = "d993c7d8d3f4e8de63516cc737a6c16b"  //need to setup config-file
     
     init(location: String) {
         self.location = location
@@ -24,19 +24,24 @@ class WeatherModel {
     }
     
     
-    //MARK:- Current weather Data calls
-    private func makeCurrentForecastTask(completion: @escaping (Data) -> Void) {
-        
-        let url = prepareURL(location: location, coordinates: coordinates, weatherType: .current)
-        
+    private func makeURLSession(with url: URL, completion: @escaping (Data) -> Void) -> URLSessionDataTask {
         URLSession.shared.dataTask(with: url) { data, _, _ in
             DispatchQueue.main.async {
                 if let data = data {
                     completion(data)
                 }
             }
-        }.resume()
+        }
+    }
+    
+    //MARK:- Current weather Data calls
+    private func makeCurrentForecastTask(completion: @escaping (Data) -> Void) {
         
+        let url = prepareURL(location: location, coordinates: coordinates, weatherType: .current)
+        
+        makeURLSession(with: url) { (data) in
+            completion(data)
+        }.resume()
     }
     
     func loadData(completion: @escaping() -> Void) {
@@ -71,18 +76,14 @@ class WeatherModel {
     //MARK:- Weekly Weather
     
     private func weeklyWeatherCall(completion: @escaping(Data) -> Void) {
-        
         let url = prepareURL(location: location, coordinates: coordinates, weatherType: .weekly)
         
-        URLSession.shared.dataTask(with: url) { data, _, _ in
-            DispatchQueue.main.async {
-                if let data = data {
-                    completion(data)
-                }
-            }
+        makeURLSession(with: url) { (data) in
+            completion(data)
         }.resume()
     }
     
+    //need to run tests. problems with getting mid of the day probly
     private func prepareWeeklyWeather() {
         
         weeklyWeather.removeAll()

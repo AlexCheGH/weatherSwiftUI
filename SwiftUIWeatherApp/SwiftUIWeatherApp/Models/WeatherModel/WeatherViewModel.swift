@@ -9,11 +9,9 @@ import Foundation
 
 class WeatherViewModel: ObservableObject {
     @Published private var weatherModel: WeatherModel
-    
     @Published var weather: WeeklyWeatherData? = nil
     
     var location: String
-    
     var coordinates: Coord?
     
     init(location: String) {
@@ -26,7 +24,6 @@ class WeatherViewModel: ObservableObject {
     }
     
     var weeklyWeather: [WeatherInfo] {
-        
         var container = [WeatherInfo]()
         weatherModel.weeklyWeather.forEach {
             if let item = $0 {
@@ -40,7 +37,7 @@ class WeatherViewModel: ObservableObject {
         weatherModel.location = location
         weatherModel.loadData { [self] in
             weather = weatherModel.rawWeather
-            location = weather?.city.name ?? "..."
+            location = weather?.city.name ?? ""
         }
     }
     
