@@ -163,11 +163,13 @@ class WeatherModel {
             weatherType == .current ? "weather" : "forecast"
         }
         
+        let encodedLocation = location.encodeUrl
+        
         if let coordinates = coordinates {
             let link = "https://api.openweathermap.org/data/2.5/\(weatherString)?lat=\(coordinates.lat)&lon=\(coordinates.lon)&appid=\(apiKey)"
             return URL(string: link)!
         } else {
-            let link = "https://api.openweathermap.org/data/2.5/\(weatherString)?q=\(location)&appid=\(apiKey)"
+            let link = "https://api.openweathermap.org/data/2.5/\(weatherString)?q=\(encodedLocation)&appid=\(apiKey)"
             return URL(string: link)!
         }
     }

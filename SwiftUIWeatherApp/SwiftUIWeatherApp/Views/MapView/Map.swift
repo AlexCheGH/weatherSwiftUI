@@ -13,6 +13,8 @@ import UIKit
 struct Map: UIViewRepresentable {
     @State private var annotation = MKPointAnnotation()
     
+    @State private var location: String? = nil
+    
     @Binding var coordinate: CGPoint
     
     func makeUIView(context: Context) -> MKMapView {
@@ -20,20 +22,15 @@ struct Map: UIViewRepresentable {
         mapView.delegate = context.coordinator
         mapView.onLongPress = addAnnotation(for:)
         
-        
-        
         return mapView
     }
     
-    
-    func getCoordinate(from coordinate: CLLocationCoordinate2D) {
-        print(coordinate)
-    }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
         uiView.removeAnnotations(uiView.annotations)
         uiView.addAnnotation(annotation)
     }
+    
     
     func addAnnotation(for coordinate: CLLocationCoordinate2D) {
         let newAnnotation = MKPointAnnotation()
@@ -49,12 +46,12 @@ struct Map: UIViewRepresentable {
         init(_ parent: Map) {
             self.parent = parent
         }
+
     }
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
-    
 }
 
 
@@ -72,7 +69,7 @@ final class WrappedMap: MKMapView {
         if sender.state == .began {
             let location = sender.location(in: self)
             let coordinate = convert(location, toCoordinateFrom: self)
-                        
+            
             onLongPress(coordinate)
         }
     }
@@ -80,3 +77,4 @@ final class WrappedMap: MKMapView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+

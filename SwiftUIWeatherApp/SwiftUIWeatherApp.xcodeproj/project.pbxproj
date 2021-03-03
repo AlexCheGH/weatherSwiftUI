@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A54AF79C25EED7EB006A81D4 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54AF79B25EED7EB006A81D4 /* CustomAnnotation.swift */; };
 		A54BD62125EAACF7003A061B /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BD62025EAACF7003A061B /* Map.swift */; };
 		A554596B25EBE5E000E58863 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554596A25EBE5E000E58863 /* MapView.swift */; };
 		A554B70125D7E5990049AED3 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554B70025D7E5990049AED3 /* CurrentWeather.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A54AF79B25EED7EB006A81D4 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		A54BD62025EAACF7003A061B /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		A554596A25EBE5E000E58863 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A554B70025D7E5990049AED3 /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				A54BD62025EAACF7003A061B /* Map.swift */,
+				A54AF79B25EED7EB006A81D4 /* CustomAnnotation.swift */,
 				A554596A25EBE5E000E58863 /* MapView.swift */,
 			);
 			path = MapView;
@@ -284,6 +287,7 @@
 				A595F6E525A1C68300E1A079 /* ContentView.swift in Sources */,
 				A554596B25EBE5E000E58863 /* MapView.swift in Sources */,
 				A595F6F325A1E83300E1A079 /* WeeklyWeatherView.swift in Sources */,
+				A54AF79C25EED7EB006A81D4 /* CustomAnnotation.swift in Sources */,
 				A59CF64C25E25C7A00B7E9B7 /* Navigation_Modifier.swift in Sources */,
 				A59CF64125E254A700B7E9B7 /* DateManager.swift in Sources */,
 				A594D6F525CF0F9B0095412C /* WeatherModel.swift in Sources */,

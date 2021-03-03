@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+
+//fix bar item in landscape: https://www.hackingwithswift.com/articles/216/complete-guide-to-navigationview-in-swiftui
+//clean code
+//change annotation style
+
+
 struct ContentView: View {
     
     init() {

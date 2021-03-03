@@ -32,6 +32,6 @@ extension View {
                     EmptyView()
                 }
             }
-        }
+        } .navigationViewStyle(StackNavigationViewStyle())  //occasionally crashes the app. search for a solution
     }
 }
