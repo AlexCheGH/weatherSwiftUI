@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
-import MapKit
+import PartialSheet
 
 @main
 struct SwiftUIWeatherAppApp: App {
+   private let sheetManager: PartialSheetManager = PartialSheetManager()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(sheetManager)
         }
-    } 
+    }
 }

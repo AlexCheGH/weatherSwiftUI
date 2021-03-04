@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A54301DA25F17CE600519273 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = A54301D925F17CE600519273 /* PartialSheet */; };
 		A54AF79C25EED7EB006A81D4 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54AF79B25EED7EB006A81D4 /* CustomAnnotation.swift */; };
 		A54BD62125EAACF7003A061B /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BD62025EAACF7003A061B /* Map.swift */; };
 		A554596B25EBE5E000E58863 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554596A25EBE5E000E58863 /* MapView.swift */; };
@@ -62,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A54301DA25F17CE600519273 /* PartialSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +220,7 @@
 			);
 			name = SwiftUIWeatherApp;
 			packageProductDependencies = (
+				A54301D925F17CE600519273 /* PartialSheet */,
 			);
 			productName = SwiftUIWeatherApp;
 			productReference = A595F6DF25A1C68300E1A079 /* SwiftUIWeatherApp.app */;
@@ -248,6 +251,7 @@
 			);
 			mainGroup = A595F6D625A1C68300E1A079;
 			packageReferences = (
+				A54301D825F17CE600519273 /* XCRemoteSwiftPackageReference "PartialSheet" */,
 			);
 			productRefGroup = A595F6E025A1C68300E1A079 /* Products */;
 			projectDirPath = "";
@@ -496,6 +500,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A54301D825F17CE600519273 /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.11;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A54301D925F17CE600519273 /* PartialSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A54301D825F17CE600519273 /* XCRemoteSwiftPackageReference "PartialSheet" */;
+			productName = PartialSheet;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A595F6D725A1C68300E1A079 /* Project object */;
 }
