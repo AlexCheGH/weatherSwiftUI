@@ -31,7 +31,8 @@ struct MapView: View {
                     
                 }
             }
-        }.onChange(of: coordinates, perform: { value in
+        }
+        .onChange(of: coordinates, perform: { value in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                 isMapTapped = false
             })
@@ -42,65 +43,69 @@ struct MapView: View {
 
 struct PlayerView: View {
     @EnvironmentObject var partialSheetManager: PartialSheetManager
+    @State var start: Double = 1
     
     var body: some View {
         makeBody()
     }
     
-    
-    
-    
-    
-    
     private func makeBody() -> some View {
         
         ZStack {
-            
-            RoundedRectangle(cornerRadius: 10).foregroundColor(.green)
-            
-            HStack {
-                
-                //play button
-                playButton().padding(.leading)
-                
-                //Vstack = timeFrames + stepper
-                VStack {
-                    dateText()
-                    slider()
+            GeometryReader { geo in
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(.green)
+                HStack {
+                    
+                    //play button
+                    playButton()
+                        .frame(width: geo.size.width * 0.15,
+                               height: geo.size.height)
+                    //Vstack = timeFrames + stepper
+                    VStack {
+                        dateText()
+                        slider()
+                    }
+                    settingsButton()
+                        .frame(width: geo.size.width * 0.2,
+                               height: geo.size.height)
                 }
-                
-                settingsButton()
             }
         }
     }
     
     
-    
     private func playButton() -> some View {
-        Button(action: {
+        let buttonIcon = "play.fill"
+        
+        return Button(action: {
         }, label: {
-            Image(systemName: "play.fill").foregroundColor(.black)
+            Image(systemName: buttonIcon)
+                .resizable()
+                .font(.system(size: 10))
+                .aspectRatio(contentMode: .fit)
+                .foregroundColor(.black)
+                .padding()
         })
     }
     
     
-    @State var start: Double = 1
+    
     private func slider() -> some View {
-    
-    
-        
         Slider(value: $start, in: 1...100) {
-            
+    
         }
     }
     
     private func dateText() -> some View {
-        Text("dummy")
+        let text = String(format: "%.0f", start)
+        return Text("\(text)")
     }
     
-    
     private func settingsButton() -> some View {
-        Button(action: {
+        let gearIcon = "gear"
+        
+        return Button(action: {
             self.partialSheetManager.showPartialSheet({
                 
             }) {
@@ -109,13 +114,12 @@ struct PlayerView: View {
                 }
             }
         }, label: {
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(.blue)
-                Image(systemName: "gear")
-                    .font(.system(size: 15))
-                    .foregroundColor(.black)
-            }
+            Image(systemName: gearIcon)
+                .resizable()
+                .font(.system(size: 10))
+                .aspectRatio(contentMode: .fit)
+                .foregroundColor(.black)
+                .padding()
         })
     }
     
