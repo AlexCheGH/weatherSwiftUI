@@ -54,7 +54,8 @@ struct PlayerView: View {
         ZStack {
             GeometryReader { geo in
                 RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(.green)
+                    .foregroundColor(.white)
+                    .opacity(0.8)
                 HStack {
                     
                     //play button
