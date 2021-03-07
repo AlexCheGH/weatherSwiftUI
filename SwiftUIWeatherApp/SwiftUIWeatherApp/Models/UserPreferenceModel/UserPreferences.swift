@@ -50,6 +50,59 @@ class UserPreferences {
     func getPressurePreference() -> Int {
         return UserDefaults.standard.integer(forKey: pressureKey)
     }
+    
+    //MARK:- WeatherTiles
+    private let colorSchemeKey = UserDefaultsKeysTiles.tilesColorScheme.rawValue
+    private let smoothedKey = UserDefaultsKeysTiles.smoothed.rawValue
+    private let snowKey = UserDefaultsKeysTiles.snow.rawValue
+    
+    func checkTilesSettings () {
+        self.checkTilesColorScheme()
+        self.checkTilesSmootheness()
+        self.checkSnow()
+    }
+    
+    private func checkTilesColorScheme() {
+        let colorScheme = UserDefaults.standard.integer(forKey: colorSchemeKey)
+        
+        if colorScheme == 0 {
+            UserDefaults.standard.set(1, forKey: colorSchemeKey)
+        }
+    }
+    
+    private func checkTilesSmootheness() {
+        let smoothedTiles = UserDefaults.standard.string(forKey: smoothedKey)
+        
+        if smoothedTiles == nil {
+            UserDefaults.standard.set("0", forKey: smoothedKey)
+        }
+    }
+    
+    private func checkSnow() {
+        let snowTiles = UserDefaults.standard.string(forKey: snowKey)
+        
+        if snowTiles == nil {
+            UserDefaults.standard.set("0", forKey: snowKey)
+        }
+    }
+    
+    private func isSnowActive() -> Bool {
+        
+        if UserDefaults.standard.value(forKey: snowKey) as! String == "1" {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func isSmoothActive() -> Bool {
+        if UserDefaults.standard.value(forKey: smoothedKey) as! String == "1" {
+            return true
+        } else {
+            return false
+        }
+    }
+    
 }
 
 enum UserDefaultsKeysSettings: String {
@@ -81,4 +134,19 @@ enum Pressure: Int, SettingsField {
 
 protocol SettingsField {
     
+}
+
+enum WeatherColorScheme: Int {
+    case blackWhite = 1, original, universalBlue, titan, weatherChannel, meteored, nexradLevel3, ranbowSelexIS, darkSky
+}
+
+enum WeatherOptions {
+    case smoothed
+    case snow
+}
+
+enum UserDefaultsKeysTiles: String {
+    case tilesColorScheme = "tilesColorScheme"
+    case smoothed = "smoothed"
+    case snow = "snow"
 }

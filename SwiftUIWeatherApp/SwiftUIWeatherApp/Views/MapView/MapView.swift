@@ -7,43 +7,47 @@
 
 import SwiftUI
 import PartialSheet
+import MapKit
 
 struct MapView: View {
     @Binding var coordinates: CGPoint
     @Binding var isMapTapped: Bool
     
+    @ObservedObject var tiles = TilesViewModel()
+    @State private var sliderValue = 0.0
+    
     var body: some View {
-        makeBody()
+        makeBody() //add tile on appear
     }
     
     func makeBody() -> some View {
         ZStack {
             GeometryReader { geo in
-                Map(coordinate: $coordinates)
+                Map(overlay: tiles.getTile(Int(sliderValue)),
+                    coordinate: $coordinates)
                     .ignoresSafeArea()
                 
                 VStack(alignment: .center) {
                     Spacer()
-                    
-                    PlayerView()
+                    PlayerView(currentValue: $sliderValue,
+                               endPoint: tiles.timestamps.count)
                         .frame(width: geo.size.width * 0.8, height: 70)
                         .padding(.leading, geo.size.width * 0.1)
-                    
                 }
             }
         }
-        .onChange(of: coordinates, perform: { value in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                isMapTapped = false
-            })
-        })
+        //        .onChange(of: coordinates, perform: { value in
+        //            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+        //                isMapTapped = false
+        //            })
+        //        })
     }
-    
 }
 
 struct PlayerView: View {
     @EnvironmentObject var partialSheetManager: PartialSheetManager
-    @State var start: Double = 1
+    @Binding var currentValue: Double
+    @State var endPoint: Int
     
     var body: some View {
         makeBody()
@@ -93,13 +97,11 @@ struct PlayerView: View {
     
     
     private func slider() -> some View {
-        Slider(value: $start, in: 1...100) {
-    
-        }
+        Slider(value: $currentValue, in: 0...Double(endPoint - 1), step: 1)
     }
     
     private func dateText() -> some View {
-        let text = String(format: "%.0f", start)
+        let text = String(format: "%.0f", currentValue)
         return Text("\(text)")
     }
     
@@ -123,7 +125,5 @@ struct PlayerView: View {
                 .padding()
         })
     }
-    
-    
 }
 

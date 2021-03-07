@@ -12,25 +12,32 @@ import UIKit
 
 struct Map: UIViewRepresentable {
     @State private var annotation = MKPointAnnotation()
-    
     @State private var location: String? = nil
-    
+    @State var overlay: MKTileOverlay
     @Binding var coordinate: CGPoint
+        
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = WrappedMap()
         mapView.delegate = context.coordinator
         mapView.onLongPress = addAnnotation(for:)
-        
+                
         return mapView
     }
     
+    func updateUIView(_ mapView: MKMapView, context: Context) {
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.addAnnotation(annotation)
+        
+        let overlays = mapView.overlays
+        mapView.addOverlay(overlay)
     
-    func updateUIView(_ uiView: MKMapView, context: Context) {
-        uiView.removeAnnotations(uiView.annotations)
-        uiView.addAnnotation(annotation)
+        for overlay in overlays {
+            if overlay is MKTileOverlay {
+                mapView.removeOverlay(overlay)
+            }
+        }
     }
-    
     
     func addAnnotation(for coordinate: CLLocationCoordinate2D) {
         let newAnnotation = MKPointAnnotation()
@@ -43,10 +50,15 @@ struct Map: UIViewRepresentable {
     //MARK:- Coordinator
     class Coordinator: NSObject, MKMapViewDelegate {
         var parent: Map
+        
         init(_ parent: Map) {
             self.parent = parent
         }
-
+        
+        func mapView( _ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            let renderer = MKTileOverlayRenderer(overlay: parent.overlay)
+            return renderer
+        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -61,7 +73,7 @@ final class WrappedMap: MKMapView {
     init() {
         super.init(frame: .zero)
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        gestureRecognizer.minimumPressDuration = 0.1
+        gestureRecognizer.minimumPressDuration = 0.8
         addGestureRecognizer(gestureRecognizer)
     }
     
