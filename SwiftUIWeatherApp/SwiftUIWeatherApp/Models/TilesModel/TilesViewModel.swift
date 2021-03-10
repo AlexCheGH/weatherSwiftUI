@@ -9,7 +9,6 @@ import Foundation
 import MapKit
 
 class TilesViewModel: ObservableObject {
-    
     @Published private var tilesModel = TilesModel()
     
     var timestamps: [Int] {
@@ -24,7 +23,4 @@ class TilesViewModel: ObservableObject {
         tilesModel.overlays
     }
     
-    func getTile(_ step: Int) -> MKTileOverlay {
-        tilesModel.getTileStampPair(timeStamp: timestamps[step])
-    }
 }

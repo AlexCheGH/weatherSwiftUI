@@ -13,11 +13,12 @@ class TilesModel {
     var tilesCollection: [Int: MKTileOverlay]
     
     var dates: [String]
+    var overlays: [MKTileOverlay]
 
     init() {
         timestamps = []
         dates = []
-        
+        overlays = []
         tilesCollection = [Int():MKTileOverlay()]
         
         self.getTimestamps { (timestamps) in
@@ -30,21 +31,11 @@ class TilesModel {
             
             let stringDate = DateManager.makeFormatedString(date: $0, format: "MM-dd-yyyy HH:mm")
             dates.append(stringDate)
+            
+            let tile = getTileOverlay(timestamp: $0)
+            overlays.append(tile)
         }
     }
-
-    
-    var overlays: [MKTileOverlay] {
-            var overlays: [MKTileOverlay] = []
-            for time in timestamps {
-                let template = "https://tilecache.rainviewer.com/v2/radar/\(time)/256/{z}/{x}/{y}/7/1_1.png"
-                
-                let overlay = MKTileOverlay(urlTemplate:template)
-                overlays.append(overlay)
-            }
-
-            return overlays
-    }    
     
     func getTileStampPair(timeStamp: Int) -> MKTileOverlay {
         let value = tilesCollection[timeStamp]
@@ -80,7 +71,7 @@ class TilesModel {
         let snow = UserDefaults.standard.value(forKey: UserDefaultsKeysTiles.snow.rawValue)
         let smootheness = UserDefaults.standard.value(forKey: UserDefaultsKeysTiles.smoothed.rawValue)
         
-        let template = "https://tilecache.rainviewer.com/v2/radar/\(timestamp)/512/{z}/{x}/{y}/\(colorScheme!)/\(smootheness!)_\(snow!).png"
+        let template = "https://tilecache.rainviewer.com/v2/radar/\(timestamp)/256/{z}/{x}/{y}/\(colorScheme!)/\(smootheness!)_\(snow!).png"
         
         let tempOverlay = MKTileOverlay(urlTemplate: template)
         tempOverlay.canReplaceMapContent = false
