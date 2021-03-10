@@ -17,37 +17,41 @@ struct MapView: View {
     @State private var sliderValue = 0.0
     
     var body: some View {
-        makeBody() //add tile on appear
+        makeBody()
     }
     
     func makeBody() -> some View {
         ZStack {
             GeometryReader { geo in
-                Map(overlay: tiles.getTile(Int(sliderValue)),
+                Map(overlay: tiles.overlays[Int(sliderValue)],
                     coordinate: $coordinates)
                     .ignoresSafeArea()
                 
                 VStack(alignment: .center) {
                     Spacer()
                     PlayerView(currentValue: $sliderValue,
-                               endPoint: tiles.timestamps.count)
+                               endPoint: tiles.timestamps.count,
+                               text: tiles.dates[Int(sliderValue)])
                         .frame(width: geo.size.width * 0.8, height: 70)
                         .padding(.leading, geo.size.width * 0.1)
                 }
             }
         }
-        //        .onChange(of: coordinates, perform: { value in
-        //            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-        //                isMapTapped = false
-        //            })
-        //        })
+                .onChange(of: coordinates, perform: { value in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        isMapTapped = false
+                    })
+                })
     }
 }
 
 struct PlayerView: View {
     @EnvironmentObject var partialSheetManager: PartialSheetManager
     @Binding var currentValue: Double
-    @State var endPoint: Int
+    
+    var endPoint: Int
+    var text: String
+    @State private var isPlaying = false
     
     var body: some View {
         makeBody()
@@ -61,12 +65,9 @@ struct PlayerView: View {
                     .foregroundColor(.white)
                     .opacity(0.8)
                 HStack {
-                    
-                    //play button
                     playButton()
                         .frame(width: geo.size.width * 0.15,
                                height: geo.size.height)
-                    //Vstack = timeFrames + stepper
                     VStack {
                         dateText()
                         slider()
@@ -81,11 +82,13 @@ struct PlayerView: View {
     
     
     private func playButton() -> some View {
-        let buttonIcon = "play.fill"
+        let playIcon = "play.fill"
+        let pauseIcon = "pause.fill"
         
         return Button(action: {
+            isPlaying.toggle()
         }, label: {
-            Image(systemName: buttonIcon)
+            Image(systemName: isPlaying ? playIcon : pauseIcon)
                 .resizable()
                 .font(.system(size: 10))
                 .aspectRatio(contentMode: .fit)
@@ -101,8 +104,7 @@ struct PlayerView: View {
     }
     
     private func dateText() -> some View {
-        let text = String(format: "%.0f", currentValue)
-        return Text("\(text)")
+        Text(text)
     }
     
     private func settingsButton() -> some View {

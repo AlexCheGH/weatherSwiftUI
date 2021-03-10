@@ -10,41 +10,41 @@ import MapKit
 
 class TilesModel {
     var timestamps: [Int]
-    
     var tilesCollection: [Int: MKTileOverlay]
     
-    //get timestamps
-    //make network call with a timestap
-    //add tile to an array(dictionary?) [timeStamp: tile]
-    
-    
+    var dates: [String]
+
     init() {
         timestamps = []
+        dates = []
         
         tilesCollection = [Int():MKTileOverlay()]
         
         self.getTimestamps { (timestamps) in
             self.timestamps = timestamps
-        }
-        
-        timestamps.forEach{ tilesCollection[$0] = nil }
-    }
-    
-    
-    
-    func getOverlays(timestamps: [Int]) -> [MKTileOverlay] {
-        var overlays: [MKTileOverlay] = []
-        for time in timestamps {
-            let template = "https://tilecache.rainviewer.com/v2/radar/\(time)/256/{z}/{x}/{y}/7/1_1.png"
             
-            let overlay = MKTileOverlay(urlTemplate:template)
-            overlays.append(overlay)
         }
-
-        return overlays
         
+        timestamps.forEach{
+            tilesCollection[$0] = nil
+            
+            let stringDate = DateManager.makeFormatedString(date: $0, format: "MM-dd-yyyy HH:mm")
+            dates.append(stringDate)
+        }
     }
+
     
+    var overlays: [MKTileOverlay] {
+            var overlays: [MKTileOverlay] = []
+            for time in timestamps {
+                let template = "https://tilecache.rainviewer.com/v2/radar/\(time)/256/{z}/{x}/{y}/7/1_1.png"
+                
+                let overlay = MKTileOverlay(urlTemplate:template)
+                overlays.append(overlay)
+            }
+
+            return overlays
+    }    
     
     func getTileStampPair(timeStamp: Int) -> MKTileOverlay {
         let value = tilesCollection[timeStamp]

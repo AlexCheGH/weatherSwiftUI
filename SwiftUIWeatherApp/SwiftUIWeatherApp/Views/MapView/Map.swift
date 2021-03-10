@@ -11,27 +11,26 @@ import UIKit
 
 
 struct Map: UIViewRepresentable {
-    @State private var annotation = MKPointAnnotation()
-    @State private var location: String? = nil
-    @State var overlay: MKTileOverlay
+    @State var annotation = MKPointAnnotation()
+    var location: String? = nil
+    var overlay: MKTileOverlay = MKTileOverlay()
     @Binding var coordinate: CGPoint
         
-    
     func makeUIView(context: Context) -> MKMapView {
         let mapView = WrappedMap()
         mapView.delegate = context.coordinator
         mapView.onLongPress = addAnnotation(for:)
-                
+
         return mapView
     }
     
     func updateUIView(_ mapView: MKMapView, context: Context) {
         mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotation(annotation)
-        
+
         let overlays = mapView.overlays
         mapView.addOverlay(overlay)
-    
+        
         for overlay in overlays {
             if overlay is MKTileOverlay {
                 mapView.removeOverlay(overlay)
@@ -39,13 +38,12 @@ struct Map: UIViewRepresentable {
         }
     }
     
-    func addAnnotation(for coordinate: CLLocationCoordinate2D) {
+     func addAnnotation(for coordinate: CLLocationCoordinate2D) {
         let newAnnotation = MKPointAnnotation()
         newAnnotation.coordinate = coordinate
         annotation = newAnnotation
         self.coordinate = CGPoint(x: coordinate.latitude, y: coordinate.longitude)
     }
-    
     
     //MARK:- Coordinator
     class Coordinator: NSObject, MKMapViewDelegate {
@@ -56,7 +54,7 @@ struct Map: UIViewRepresentable {
         }
         
         func mapView( _ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            let renderer = MKTileOverlayRenderer(overlay: parent.overlay)
+            let renderer = MKTileOverlayRenderer(overlay: overlay)
             return renderer
         }
     }
@@ -89,4 +87,3 @@ final class WrappedMap: MKMapView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-

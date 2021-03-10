@@ -16,6 +16,14 @@ class TilesViewModel: ObservableObject {
         tilesModel.timestamps
     }
     
+    var dates: [String] {
+        tilesModel.dates
+    }
+    
+    var overlays: [MKTileOverlay] {
+        tilesModel.overlays
+    }
+    
     func getTile(_ step: Int) -> MKTileOverlay {
         tilesModel.getTileStampPair(timeStamp: timestamps[step])
     }
