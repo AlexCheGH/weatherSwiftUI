@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A524389C25FD22000010B2F6 /* Array + Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A524389B25FD22000010B2F6 /* Array + Utilities.swift */; };
 		A524389F25FD227A0010B2F6 /* CheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A524389E25FD227A0010B2F6 /* CheckListView.swift */; };
+		A52438A225FD3F7B0010B2F6 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52438A125FD3F7B0010B2F6 /* PlayerView.swift */; };
 		A54301DA25F17CE600519273 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = A54301D925F17CE600519273 /* PartialSheet */; };
 		A54BD62125EAACF7003A061B /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BD62025EAACF7003A061B /* Map.swift */; };
 		A554596B25EBE5E000E58863 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554596A25EBE5E000E58863 /* MapView.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		A524389B25FD22000010B2F6 /* Array + Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Utilities.swift"; sourceTree = "<group>"; };
 		A524389E25FD227A0010B2F6 /* CheckListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListView.swift; sourceTree = "<group>"; };
+		A52438A125FD3F7B0010B2F6 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		A54BD62025EAACF7003A061B /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		A554596A25EBE5E000E58863 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A554B70025D7E5990049AED3 /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				A54BD62025EAACF7003A061B /* Map.swift */,
 				A554596A25EBE5E000E58863 /* MapView.swift */,
 				A524389E25FD227A0010B2F6 /* CheckListView.swift */,
+				A52438A125FD3F7B0010B2F6 /* PlayerView.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				A594D6F825CF11D50095412C /* String + Utilities.swift in Sources */,
 				A54BD62125EAACF7003A061B /* Map.swift in Sources */,
 				A59CF64425E254E800B7E9B7 /* UserPreferences.swift in Sources */,
+				A52438A225FD3F7B0010B2F6 /* PlayerView.swift in Sources */,
 				A5DB3F8A25E4480300378FC5 /* UserPreferenceViewModel.swift in Sources */,
 				A594D6FD25CF17900095412C /* WeatherViewModel.swift in Sources */,
 				A5AAC1B625E1411300096C7F /* Unwrapper.swift in Sources */,
