@@ -19,6 +19,7 @@ struct MapView: View {
     @State var isPlaying = false
     @State private var sliderValue = 0.0
     @State var timer: Timer?
+    @State var isNewScheme = false
     
     var body: some View {
         makeBody()
@@ -33,10 +34,11 @@ struct MapView: View {
                 
                 VStack(alignment: .center) {
                     Spacer()
-                    PlayerView(currentValue: $sliderValue,
+                    PlayerView(isPlaying: $isPlaying,
+                               currentValue: $sliderValue,
+                               isChanged: $isNewScheme,
                                endPoint: tiles.timestamps.count,
-                               text: tiles.dates[Int(sliderValue)],
-                               isPlaying: $isPlaying)
+                               text: tiles.dates[Int(sliderValue)])
                         .frame(width: geo.size.width * 0.8, height: 70)
                         .padding(.leading, geo.size.width * 0.1)
                 }
@@ -50,6 +52,11 @@ struct MapView: View {
         .onChange(of: isPlaying) { (_) in
             isPlaying ? fireAnimation() : invalidateAnimation()
         }
+        .onChange(of: isNewScheme, perform: { value in
+            isPlaying = false
+            sliderValue = 0.0
+            tiles.refreshOverlays()
+        })
     }
     
     private func fireAnimation() {
@@ -72,15 +79,18 @@ struct MapView: View {
 }
 
 struct PlayerView: View {
+    
     @EnvironmentObject var partialSheetManager: PartialSheetManager
-    @Binding var currentValue: Double
     @ObservedObject private var userPreference = UserPreferencesViewModel()
     
     @State var chosenScheme = 0
     
+    @Binding var isPlaying: Bool
+    @Binding var currentValue: Double
+    @Binding var isChanged: Bool
+    
     var endPoint: Int
     var text: String
-    @Binding var isPlaying: Bool
     
     var body: some View {
         makeBody()
@@ -109,6 +119,7 @@ struct PlayerView: View {
         }
         .onChange(of: chosenScheme, perform: { value in
             userPreference.changeColorScheme(schemeNumber: chosenScheme + 1) //list items start with 0, json with 1
+            isChanged.toggle()
         })
     }
     

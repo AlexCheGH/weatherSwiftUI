@@ -23,4 +23,8 @@ class TilesViewModel: ObservableObject {
         tilesModel.overlays
     }
     
+    func refreshOverlays() {
+        tilesModel.refreshTiles()
+    }
+    
 }

@@ -37,6 +37,14 @@ class TilesModel {
         }
     }
     
+    func refreshTiles() {
+        overlays.removeAll()
+        timestamps.forEach{
+            let tile = getTileOverlay(timestamp: $0)
+            overlays.append(tile)
+        }
+    }
+    
     func getTileStampPair(timeStamp: Int) -> MKTileOverlay {
         let value = tilesCollection[timeStamp]
             if let tile = value {
