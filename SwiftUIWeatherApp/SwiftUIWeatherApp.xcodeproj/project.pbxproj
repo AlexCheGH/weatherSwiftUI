@@ -15,8 +15,8 @@
 		A554596B25EBE5E000E58863 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554596A25EBE5E000E58863 /* MapView.swift */; };
 		A554B70125D7E5990049AED3 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554B70025D7E5990049AED3 /* CurrentWeather.swift */; };
 		A554B70525D83D4B0049AED3 /* WeeklyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554B70425D83D4B0049AED3 /* WeeklyWeather.swift */; };
-		A55A765B25F3B60900501EA4 /* TilesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55A765A25F3B60900501EA4 /* TilesModel.swift */; };
-		A55A766025F4E63C00501EA4 /* TilesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55A765F25F4E63C00501EA4 /* TilesViewModel.swift */; };
+		A55A765B25F3B60900501EA4 /* OverlayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55A765A25F3B60900501EA4 /* OverlayModel.swift */; };
+		A55A766025F4E63C00501EA4 /* OverlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55A765F25F4E63C00501EA4 /* OverlayViewModel.swift */; };
 		A56BA5D425CFE00900A39F7A /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BA5D325CFE00900A39F7A /* WeatherInfo.swift */; };
 		A585CBC725D9205900A121DF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A585CBC925D9205900A121DF /* Localizable.strings */; };
 		A594D6F525CF0F9B0095412C /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A594D6F425CF0F9B0095412C /* WeatherModel.swift */; };
@@ -43,8 +43,8 @@
 		A554596A25EBE5E000E58863 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A554B70025D7E5990049AED3 /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		A554B70425D83D4B0049AED3 /* WeeklyWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyWeather.swift; sourceTree = "<group>"; };
-		A55A765A25F3B60900501EA4 /* TilesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TilesModel.swift; sourceTree = "<group>"; };
-		A55A765F25F4E63C00501EA4 /* TilesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TilesViewModel.swift; sourceTree = "<group>"; };
+		A55A765A25F3B60900501EA4 /* OverlayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayModel.swift; sourceTree = "<group>"; };
+		A55A765F25F4E63C00501EA4 /* OverlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayViewModel.swift; sourceTree = "<group>"; };
 		A56BA5D325CFE00900A39F7A /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
 		A585CBC825D9205900A121DF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A585CBCB25D9207F00A121DF /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -118,8 +118,8 @@
 		A55A765925F3B5F400501EA4 /* TilesModel */ = {
 			isa = PBXGroup;
 			children = (
-				A55A765A25F3B60900501EA4 /* TilesModel.swift */,
-				A55A765F25F4E63C00501EA4 /* TilesViewModel.swift */,
+				A55A765A25F3B60900501EA4 /* OverlayModel.swift */,
+				A55A765F25F4E63C00501EA4 /* OverlayViewModel.swift */,
 			);
 			path = TilesModel;
 			sourceTree = "<group>";
@@ -319,8 +319,8 @@
 				A56BA5D425CFE00900A39F7A /* WeatherInfo.swift in Sources */,
 				A524389C25FD22000010B2F6 /* Array + Utilities.swift in Sources */,
 				A524389F25FD227A0010B2F6 /* CheckListView.swift in Sources */,
-				A55A765B25F3B60900501EA4 /* TilesModel.swift in Sources */,
-				A55A766025F4E63C00501EA4 /* TilesViewModel.swift in Sources */,
+				A55A765B25F3B60900501EA4 /* OverlayModel.swift in Sources */,
+				A55A766025F4E63C00501EA4 /* OverlayViewModel.swift in Sources */,
 				A59CF64925E25C2400B7E9B7 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

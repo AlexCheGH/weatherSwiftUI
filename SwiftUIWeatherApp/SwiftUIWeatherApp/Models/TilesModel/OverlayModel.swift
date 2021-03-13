@@ -8,9 +8,9 @@
 import Foundation
 import MapKit
 
-class TilesModel {
+class OverlayModel {
     var timestamps: [Int]
-    var tilesCollection: [Int: MKTileOverlay]
+    var overlayCollection: [Int: MKTileOverlay]
     
     var dates: [String]
     var overlays: [MKTileOverlay]
@@ -19,43 +19,38 @@ class TilesModel {
         timestamps = []
         dates = []
         overlays = []
-        tilesCollection = [Int():MKTileOverlay()]
+        overlayCollection = [Int():MKTileOverlay()]
         
         self.getTimestamps { (timestamps) in
             self.timestamps = timestamps
-            
         }
         
         timestamps.forEach{
-            tilesCollection[$0] = nil
+            overlayCollection[$0] = nil
             
             let stringDate = DateManager.makeFormatedString(date: $0, format: "MM-dd-yyyy HH:mm")
             dates.append(stringDate)
-            
-            let tile = getTileOverlay(timestamp: $0)
-            overlays.append(tile)
         }
+        refreshOverlays()
     }
     
-    func refreshTiles() {
+    func refreshOverlays() {
         overlays.removeAll()
         timestamps.forEach{
-            let tile = getTileOverlay(timestamp: $0)
-            overlays.append(tile)
+            let overlay = getTileOverlay(timestamp: $0)
+            overlays.append(overlay)
         }
     }
     
     func getTileStampPair(timeStamp: Int) -> MKTileOverlay {
-        let value = tilesCollection[timeStamp]
-            if let tile = value {
-                return tile
+        let value = overlayCollection[timeStamp]
+            if let overlay = value {
+                return overlay
             }
-        
-        
-        let tile = getTileOverlay(timestamp: timeStamp)
-        tilesCollection[timeStamp] = tile
+        let overlay = getTileOverlay(timestamp: timeStamp)
+        overlayCollection[timeStamp] = overlay
                 
-        return tile
+        return overlay
     }
     
     private func getTimestamps(completion: ([Int]) -> Void) {
@@ -86,7 +81,6 @@ class TilesModel {
         
         return tempOverlay
     }
-    
 }
 
 

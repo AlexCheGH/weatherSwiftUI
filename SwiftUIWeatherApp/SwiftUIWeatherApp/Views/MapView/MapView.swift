@@ -10,7 +10,7 @@ import MapKit
 
 struct MapView: View {
     
-    @ObservedObject var tiles = TilesViewModel()
+    @ObservedObject var tiles = OverlayViewModel()
     
     @Binding var coordinates: CGPoint
     @Binding var isMapTapped: Bool

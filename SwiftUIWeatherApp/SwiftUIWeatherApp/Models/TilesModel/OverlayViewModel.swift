@@ -8,23 +8,23 @@
 import Foundation
 import MapKit
 
-class TilesViewModel: ObservableObject {
-    @Published private var tilesModel = TilesModel()
+class OverlayViewModel: ObservableObject {
+    @Published private var overlayModel = OverlayModel()
     
     var timestamps: [Int] {
-        tilesModel.timestamps
+        overlayModel.timestamps
     }
     
     var dates: [String] {
-        tilesModel.dates
+        overlayModel.dates
     }
     
     var overlays: [MKTileOverlay] {
-        tilesModel.overlays
+        overlayModel.overlays
     }
     
     func refreshOverlays() {
-        tilesModel.refreshTiles()
+        overlayModel.refreshOverlays()
     }
     
 }
