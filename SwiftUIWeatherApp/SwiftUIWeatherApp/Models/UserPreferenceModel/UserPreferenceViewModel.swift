@@ -25,4 +25,23 @@ class UserPreferencesViewModel: ObservableObject {
         get { userPreferenceModel.getPressurePreference() }
         set { userPreferenceModel.savePreference(section: Pressure.self, chosenIndex: newValue) }
     }
+    
+    var checkListItems: [ChecklistItem] {
+        userPreferenceModel.checklistItems
+    }
+    
+    var isSnowActive: Bool {
+        get { userPreferenceModel.isSnowActive() }
+        set { userPreferenceModel.changeSnow(isActive: newValue) }
+    }
+    
+    var isSmoothActive: Bool {
+        get { userPreferenceModel.isSmoothActive() }
+        set { userPreferenceModel.changeSmooth(isActive: newValue) }
+    }
+    
+    func changeColorScheme(schemeNumber: Int) {
+        userPreferenceModel.changeColorScheme(schemeNumber: schemeNumber)
+    }
+    
 }

@@ -25,7 +25,20 @@
 "settings_key" = "Settings";
 "done_key" = "Done";
 
-
+"snow_key" = "Snow";
+"smooth_key" = "Smooth radar";
+"color_scheme_key" = "Radar color scheme";
+"on_key" = "On";
+"off_key" = "Off";
+"black_white" = "Black & white";
+"original" = "Original";
+"universal_blue" = "Universal Blue";
+"titan" = "Tita";
+"the_weather_channel" = "The Weather Channel";
+"meteored" = "Meteored";
+"nexrad_level_3" = "Nexrad Level-3";
+"rainbow_selex_is" = "Rainbow Selex IS";
+"dark_sky" = "Dark Sky";
 
 
 

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PartialSheet
 
 struct ContentView: View {
 
@@ -62,6 +63,7 @@ struct ContentView: View {
             forecast.updateCoordinates(coordinates: Coord(lon: long, lat: lat))
             forecast.loadData()
         })
+        .addPartialSheet()
     }
     
     //MARK:- UI Elements

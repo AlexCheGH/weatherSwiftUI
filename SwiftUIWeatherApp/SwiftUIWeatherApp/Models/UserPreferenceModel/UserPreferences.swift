@@ -50,6 +50,102 @@ class UserPreferences {
     func getPressurePreference() -> Int {
         return UserDefaults.standard.integer(forKey: pressureKey)
     }
+    
+    //MARK:- WeatherTiles
+    
+   private let blackWhite = NSLocalizedString("black_white", comment: "")
+   private let original = NSLocalizedString("original", comment: "")
+   private let universalBlue = NSLocalizedString("universal_blue", comment: "")
+   private let titan = NSLocalizedString("titan", comment: "")
+   private let weather_channel = NSLocalizedString("the_weather_channel", comment: "")
+   private let meteored = NSLocalizedString("meteored", comment: "")
+   private let nexradLevel3 = NSLocalizedString("nexrad_level_3", comment: "")
+   private let rainbowSelex = NSLocalizedString("rainbow_selex_is", comment: "")
+   private let darkSky = NSLocalizedString("dark_sky", comment: "")
+    
+    var checklistItems: [ChecklistItem] {
+        let colorSchemes = [blackWhite, original, universalBlue, titan, weather_channel, meteored, nexradLevel3, rainbowSelex, darkSky]
+        
+        var container = [ChecklistItem]()
+        
+        colorSchemes.forEach {
+            let item = ChecklistItem(name: $0, isChecked: false)
+            container.append(item)
+        }
+        
+        let colorSchemeIndex = UserDefaults.standard.integer(forKey: colorSchemeKey)
+        container[colorSchemeIndex].isChecked = true
+        
+        return container
+    }
+    
+    func changeColorScheme(schemeNumber: Int) {
+        //data comes from List, prevents crash if a user chosen the last option
+        let value = schemeNumber > 0 ? schemeNumber - 1 : 0
+        UserDefaults.standard.set(value, forKey: colorSchemeKey)
+    }
+    
+    private let colorSchemeKey = UserDefaultsKeysTiles.tilesColorScheme.rawValue
+    private let smoothedKey = UserDefaultsKeysTiles.smoothed.rawValue
+    private let snowKey = UserDefaultsKeysTiles.snow.rawValue
+    
+    func checkTilesSettings () {
+        self.checkTilesColorScheme()
+        self.checkTilesSmootheness()
+        self.checkSnow()
+    }
+    
+    private func checkTilesColorScheme() {
+        let colorScheme = UserDefaults.standard.integer(forKey: colorSchemeKey)
+        
+        if colorScheme == 0 {
+            UserDefaults.standard.set(1, forKey: colorSchemeKey)
+        }
+    }
+    
+    private func checkTilesSmootheness() {
+        let smoothedTiles = UserDefaults.standard.string(forKey: smoothedKey)
+        
+        if smoothedTiles == nil {
+            UserDefaults.standard.set("0", forKey: smoothedKey)
+        }
+    }
+    
+    private func checkSnow() {
+        let snowTiles = UserDefaults.standard.string(forKey: snowKey)
+        
+        if snowTiles == nil {
+            UserDefaults.standard.set("0", forKey: snowKey)
+        }
+    }
+    
+    func changeSnow(isActive: Bool) {
+        let value = isActive ? "1" : "0"
+        UserDefaults.standard.set(value, forKey: snowKey)
+    }
+    
+    func isSnowActive() -> Bool {
+        
+        if UserDefaults.standard.value(forKey: snowKey) as! String == "1" {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func isSmoothActive() -> Bool {
+        if UserDefaults.standard.value(forKey: smoothedKey) as! String == "1" {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func changeSmooth(isActive: Bool) {
+        let value = isActive ? "1" : "0"
+        UserDefaults.standard.set(value, forKey: smoothedKey)
+    }
+    
 }
 
 enum UserDefaultsKeysSettings: String {
@@ -81,4 +177,19 @@ enum Pressure: Int, SettingsField {
 
 protocol SettingsField {
     
+}
+
+enum WeatherColorScheme: Int {
+    case blackWhite = 1, original, universalBlue, titan, weatherChannel, meteored, nexradLevel3, ranbowSelexIS, darkSky
+}
+
+enum WeatherOptions {
+    case smoothed
+    case snow
+}
+
+enum UserDefaultsKeysTiles: String {
+    case tilesColorScheme = "tilesColorScheme"
+    case smoothed = "smoothed"
+    case snow = "snow"
 }
