@@ -10,11 +10,15 @@ import PartialSheet
 import MapKit
 
 struct MapView: View {
+    
+    @ObservedObject var tiles = TilesViewModel()
+    
     @Binding var coordinates: CGPoint
     @Binding var isMapTapped: Bool
     
-    @ObservedObject var tiles = TilesViewModel()
+    @State var isPlaying = false
     @State private var sliderValue = 0.0
+    @State var timer: Timer?
     
     var body: some View {
         makeBody()
@@ -31,7 +35,8 @@ struct MapView: View {
                     Spacer()
                     PlayerView(currentValue: $sliderValue,
                                endPoint: tiles.timestamps.count,
-                               text: tiles.dates[Int(sliderValue)])
+                               text: tiles.dates[Int(sliderValue)],
+                               isPlaying: $isPlaying)
                         .frame(width: geo.size.width * 0.8, height: 70)
                         .padding(.leading, geo.size.width * 0.1)
                 }
@@ -42,7 +47,28 @@ struct MapView: View {
                 isMapTapped = false
             })
         })
+        .onChange(of: isPlaying) { (_) in
+            isPlaying ? fireAnimation() : invalidateAnimation()
+        }
     }
+    
+    private func fireAnimation() {
+        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { _ in
+            
+           if Int(sliderValue) >= tiles.timestamps.count - 1 {
+            sliderValue = 0.0 }
+           else {
+            sliderValue += 1
+           }
+        }
+        timer?.fire()
+    }
+    
+    private func invalidateAnimation() {
+        timer?.invalidate()
+        sliderValue += 0.01 // tiles won't dissapear from map, as it forces to re-render the view
+    }
+    
 }
 
 struct PlayerView: View {
@@ -50,12 +76,11 @@ struct PlayerView: View {
     @Binding var currentValue: Double
     @ObservedObject private var userPreference = UserPreferencesViewModel()
     
-    @State var testSelector = 1
     @State var chosenScheme = 0
     
     var endPoint: Int
     var text: String
-    @State private var isPlaying = false
+    @Binding var isPlaying: Bool
     
     var body: some View {
         makeBody()
@@ -95,7 +120,7 @@ struct PlayerView: View {
         return Button(action: {
             isPlaying.toggle()
         }, label: {
-            Image(systemName: isPlaying ? playIcon : pauseIcon)
+            Image(systemName: !isPlaying ? playIcon : pauseIcon)
                 .resizable()
                 .font(.system(size: 10))
                 .aspectRatio(contentMode: .fit)
