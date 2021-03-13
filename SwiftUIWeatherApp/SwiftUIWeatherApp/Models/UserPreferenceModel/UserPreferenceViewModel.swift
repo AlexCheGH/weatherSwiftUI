@@ -25,4 +25,13 @@ class UserPreferencesViewModel: ObservableObject {
         get { userPreferenceModel.getPressurePreference() }
         set { userPreferenceModel.savePreference(section: Pressure.self, chosenIndex: newValue) }
     }
+    
+    var checkListItems: [ChecklistItem] {
+        userPreferenceModel.checklistItems
+    }
+    
+    func changeColorScheme(schemeNumber: Int) {
+        userPreferenceModel.changeColorScheme(schemeNumber: schemeNumber)
+    }
+    
 }

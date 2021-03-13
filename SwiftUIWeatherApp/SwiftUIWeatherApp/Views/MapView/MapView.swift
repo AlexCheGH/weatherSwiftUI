@@ -37,17 +37,22 @@ struct MapView: View {
                 }
             }
         }
-                .onChange(of: coordinates, perform: { value in
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                        isMapTapped = false
-                    })
-                })
+        .onChange(of: coordinates, perform: { value in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                isMapTapped = false
+            })
+        })
     }
 }
 
 struct PlayerView: View {
     @EnvironmentObject var partialSheetManager: PartialSheetManager
     @Binding var currentValue: Double
+    @ObservedObject private var userPreference = UserPreferencesViewModel()
+    
+    @State var testSelector = 1
+    @State var someBool = true
+    @State var chosenScheme = 0
     
     var endPoint: Int
     var text: String
@@ -78,6 +83,9 @@ struct PlayerView: View {
                 }
             }
         }
+        .onChange(of: chosenScheme, perform: { value in
+            userPreference.changeColorScheme(schemeNumber: chosenScheme + 1) //list items start with 0, json with 1
+        })
     }
     
     
@@ -98,7 +106,6 @@ struct PlayerView: View {
     }
     
     
-    
     private func slider() -> some View {
         Slider(value: $currentValue, in: 0...Double(endPoint - 1), step: 1)
     }
@@ -112,11 +119,9 @@ struct PlayerView: View {
         
         return Button(action: {
             self.partialSheetManager.showPartialSheet({
-                
+    
             }) {
-                VStack {
-                    Text("This is a Partial Sheet")
-                }
+                settingsOptions()
             }
         }, label: {
             Image(systemName: gearIcon)
@@ -127,5 +132,21 @@ struct PlayerView: View {
                 .padding()
         })
     }
+    private func settingsOptions() -> some View {
+        let snowString = NSLocalizedString("snow_key", comment: "")
+        let smoothString = NSLocalizedString("smooth_key", comment: "")
+        let colorSchemeString = NSLocalizedString("color_scheme_key", comment: "")
+        
+        return VStack {
+            Toggle(snowString, isOn: $someBool)
+            Toggle(smoothString, isOn: $someBool)
+            VStack {
+                Text(colorSchemeString)
+                    .font(.system(.headline))
+                CheckList(checklistItems: userPreference.checkListItems, chosenOption: $chosenScheme)
+                    .frame(height: 250)
+            }.padding(.top)
+        }
+        .padding([.leading, .trailing])
+    }
 }
-

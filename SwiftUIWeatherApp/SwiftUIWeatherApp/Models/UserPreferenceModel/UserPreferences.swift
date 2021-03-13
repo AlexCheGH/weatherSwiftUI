@@ -52,6 +52,41 @@ class UserPreferences {
     }
     
     //MARK:- WeatherTiles
+    
+   private let blackWhite = NSLocalizedString("black_white", comment: "")
+   private let original = NSLocalizedString("original", comment: "")
+   private let universalBlue = NSLocalizedString("universal_blue", comment: "")
+   private let titan = NSLocalizedString("titan", comment: "")
+   private let weather_channel = NSLocalizedString("the_weather_channel", comment: "")
+   private let meteored = NSLocalizedString("meteored", comment: "")
+   private let nexradLevel3 = NSLocalizedString("nexrad_level_3", comment: "")
+   private let rainbowSelex = NSLocalizedString("rainbow_selex_is", comment: "")
+   private let darkSky = NSLocalizedString("dark_sky", comment: "")
+    
+    var checklistItems: [ChecklistItem] {
+        let colorSchemes = [blackWhite, original, universalBlue, titan, weather_channel, meteored, nexradLevel3, rainbowSelex, darkSky]
+        
+        var container = [ChecklistItem]()
+        
+        colorSchemes.forEach {
+            let item = ChecklistItem(name: $0, isChecked: false)
+            container.append(item)
+        }
+        
+        let colorSchemeIndex = UserDefaults.standard.integer(forKey: colorSchemeKey)
+        container[colorSchemeIndex].isChecked = true
+        
+        return container
+    }
+    
+    func changeColorScheme(schemeNumber: Int) {
+        //data comes from List, prevents crash if a user chosen the last option
+        let value = schemeNumber > 0 ? schemeNumber - 1 : 0
+        UserDefaults.standard.set(value, forKey: colorSchemeKey)
+    }
+    
+    
+    
     private let colorSchemeKey = UserDefaultsKeysTiles.tilesColorScheme.rawValue
     private let smoothedKey = UserDefaultsKeysTiles.smoothed.rawValue
     private let snowKey = UserDefaultsKeysTiles.snow.rawValue

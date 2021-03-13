@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A524389C25FD22000010B2F6 /* Array + Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A524389B25FD22000010B2F6 /* Array + Utilities.swift */; };
+		A524389F25FD227A0010B2F6 /* CheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A524389E25FD227A0010B2F6 /* CheckListView.swift */; };
 		A54301DA25F17CE600519273 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = A54301D925F17CE600519273 /* PartialSheet */; };
 		A54BD62125EAACF7003A061B /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BD62025EAACF7003A061B /* Map.swift */; };
 		A554596B25EBE5E000E58863 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554596A25EBE5E000E58863 /* MapView.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A524389B25FD22000010B2F6 /* Array + Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Utilities.swift"; sourceTree = "<group>"; };
+		A524389E25FD227A0010B2F6 /* CheckListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListView.swift; sourceTree = "<group>"; };
 		A54BD62025EAACF7003A061B /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		A554596A25EBE5E000E58863 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A554B70025D7E5990049AED3 /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
@@ -77,6 +81,7 @@
 			children = (
 				A54BD62025EAACF7003A061B /* Map.swift */,
 				A554596A25EBE5E000E58863 /* MapView.swift */,
+				A524389E25FD227A0010B2F6 /* CheckListView.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -85,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				A594D6F725CF11D50095412C /* String + Utilities.swift */,
+				A524389B25FD22000010B2F6 /* Array + Utilities.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -307,6 +313,8 @@
 				A594D6F525CF0F9B0095412C /* WeatherModel.swift in Sources */,
 				A595F6E325A1C68300E1A079 /* SwiftUIWeatherAppApp.swift in Sources */,
 				A56BA5D425CFE00900A39F7A /* WeatherInfo.swift in Sources */,
+				A524389C25FD22000010B2F6 /* Array + Utilities.swift in Sources */,
+				A524389F25FD227A0010B2F6 /* CheckListView.swift in Sources */,
 				A55A765B25F3B60900501EA4 /* TilesModel.swift in Sources */,
 				A55A766025F4E63C00501EA4 /* TilesViewModel.swift in Sources */,
 				A59CF64925E25C2400B7E9B7 /* SettingsView.swift in Sources */,
