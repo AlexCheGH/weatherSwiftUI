@@ -51,7 +51,6 @@ struct PlayerView: View {
     @ObservedObject private var userPreference = UserPreferencesViewModel()
     
     @State var testSelector = 1
-    @State var someBool = true
     @State var chosenScheme = 0
     
     var endPoint: Int
@@ -138,8 +137,8 @@ struct PlayerView: View {
         let colorSchemeString = NSLocalizedString("color_scheme_key", comment: "")
         
         return VStack {
-            Toggle(snowString, isOn: $someBool)
-            Toggle(smoothString, isOn: $someBool)
+            Toggle(snowString, isOn: $userPreference.isSnowActive)
+            Toggle(smoothString, isOn: $userPreference.isSmoothActive)
             VStack {
                 Text(colorSchemeString)
                     .font(.system(.headline))

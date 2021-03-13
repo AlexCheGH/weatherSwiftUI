@@ -30,6 +30,16 @@ class UserPreferencesViewModel: ObservableObject {
         userPreferenceModel.checklistItems
     }
     
+    var isSnowActive: Bool {
+        get { userPreferenceModel.isSnowActive() }
+        set { userPreferenceModel.changeSnow(isActive: newValue) }
+    }
+    
+    var isSmoothActive: Bool {
+        get { userPreferenceModel.isSmoothActive() }
+        set { userPreferenceModel.changeSmooth(isActive: newValue) }
+    }
+    
     func changeColorScheme(schemeNumber: Int) {
         userPreferenceModel.changeColorScheme(schemeNumber: schemeNumber)
     }

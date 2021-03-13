@@ -85,8 +85,6 @@ class UserPreferences {
         UserDefaults.standard.set(value, forKey: colorSchemeKey)
     }
     
-    
-    
     private let colorSchemeKey = UserDefaultsKeysTiles.tilesColorScheme.rawValue
     private let smoothedKey = UserDefaultsKeysTiles.smoothed.rawValue
     private let snowKey = UserDefaultsKeysTiles.snow.rawValue
@@ -121,7 +119,12 @@ class UserPreferences {
         }
     }
     
-    private func isSnowActive() -> Bool {
+    func changeSnow(isActive: Bool) {
+        let value = isActive ? "1" : "0"
+        UserDefaults.standard.set(value, forKey: snowKey)
+    }
+    
+    func isSnowActive() -> Bool {
         
         if UserDefaults.standard.value(forKey: snowKey) as! String == "1" {
             return true
@@ -130,12 +133,17 @@ class UserPreferences {
         }
     }
     
-    private func isSmoothActive() -> Bool {
+    func isSmoothActive() -> Bool {
         if UserDefaults.standard.value(forKey: smoothedKey) as! String == "1" {
             return true
         } else {
             return false
         }
+    }
+    
+    func changeSmooth(isActive: Bool) {
+        let value = isActive ? "1" : "0"
+        UserDefaults.standard.set(value, forKey: smoothedKey)
     }
     
 }
