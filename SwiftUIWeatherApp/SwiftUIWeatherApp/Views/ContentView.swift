@@ -97,7 +97,8 @@ struct ContentView: View {
     
     private func settingsButton() -> some View {
         Button(action: {
-            isSettingsTapped.toggle()
+//            isSettingsTapped.toggle()
+            fatalError()
         }) {
             makeImage(named: gearIcon, padding: .trailing)
         }
