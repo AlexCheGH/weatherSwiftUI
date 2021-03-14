@@ -7,10 +7,15 @@
 
 import SwiftUI
 import PartialSheet
+import Firebase
 
 @main
 struct SwiftUIWeatherAppApp: App {
    private let sheetManager: PartialSheetManager = PartialSheetManager()
+    
+    init() {
+        FirebaseApp.configure()
+    }
     
     var body: some Scene {
         WindowGroup {
