@@ -56,16 +56,19 @@ struct MapView: View {
             sliderValue = 0.0
             tiles.refreshOverlays()
         })
+        .onAppear(perform: {
+            sliderValue = 0.01 // re-renders view on appear, adds tiles on screen
+        })
     }
     
     private func fireAnimation() {
         timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { _ in
             
-           if Int(sliderValue) >= tiles.timestamps.count - 1 {
-            sliderValue = 0.0 }
-           else {
-            sliderValue += 1
-           }
+            if Int(sliderValue) >= tiles.timestamps.count - 1 {
+                sliderValue = 0.0 }
+            else {
+                sliderValue += 1
+            }
         }
         timer?.fire()
     }
