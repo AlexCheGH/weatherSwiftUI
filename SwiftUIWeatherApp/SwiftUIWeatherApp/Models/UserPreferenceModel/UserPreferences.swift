@@ -92,11 +92,27 @@ class UserPreferences {
     private let smoothedKey = UserDefaultsKeysTiles.smoothed.rawValue
     private let snowKey = UserDefaultsKeysTiles.snow.rawValue
     
-    func checkTilesSettings () {
+    func checkTilesSettings() {
         self.checkTilesColorScheme()
         self.checkTilesSmootheness()
         self.checkSnow()
     }
+    
+    /*****************************************************************/
+    //Use only after running "CheckTilesSettings()"
+    func getColorSchemePreference() -> Int {
+        userDefault.integer(forKey: colorSchemeKey)
+    }
+    
+    func getSnowPreference() -> String {
+        userDefault.string(forKey: snowKey)!
+    }
+    
+    func getSmoothPreference() -> String {
+        userDefault.string(forKey: smoothedKey)!
+    }
+   /*****************************************************************/
+    
     
     private func checkTilesColorScheme() {
         let colorScheme = userDefault.integer(forKey: colorSchemeKey)
@@ -128,7 +144,6 @@ class UserPreferences {
     }
     
     func isSnowActive() -> Bool {
-        
         if userDefault.value(forKey: snowKey) as! String == "1" {
             return true
         } else {
