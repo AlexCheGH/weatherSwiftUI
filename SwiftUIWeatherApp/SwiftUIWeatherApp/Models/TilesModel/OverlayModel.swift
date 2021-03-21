@@ -66,15 +66,13 @@ class OverlayModel {
         completion(tempValue)
     }
     
-    
-    //FIX, wrong userdefaults group
     func getTileOverlay(timestamp: Int) -> MKTileOverlay {
         let userPreference = UserPreferences()
         userPreference.checkTilesSettings()
         
-        let colorScheme = UserDefaults.standard.value(forKey: UserDefaultsKeysTiles.tilesColorScheme.rawValue) ?? 1
-        let snow = UserDefaults.standard.value(forKey: UserDefaultsKeysTiles.snow.rawValue) ?? 0
-        let smootheness = UserDefaults.standard.value(forKey: UserDefaultsKeysTiles.smoothed.rawValue) ?? 0
+        let colorScheme = userPreference.getColorSchemePreference()
+        let snow = userPreference.getSnowPreference()
+        let smootheness = userPreference.getSmoothPreference()
         
         let template = "https://tilecache.rainviewer.com/v2/radar/\(timestamp)/256/{z}/{x}/{y}/\(colorScheme)/\(smootheness)_\(snow).png"
         
