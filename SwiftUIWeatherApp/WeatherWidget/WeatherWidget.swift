@@ -73,7 +73,7 @@ func getData(completion: @escaping (Model) -> ()) {
 
 func makeModelEntry(data: CurrentWeather) -> Model {
     let preference = UserPreferences().getTempPreference()
-    let rawTemperature = calculateTemperature(rawTemp: data.main.temp, tempSettings: preference)
+    let rawTemperature = ValueConverter().calculateTemperature(rawTemp: data.main.temp, tempSettings: preference)
     let icon = data.weather.first?.icon ?? ""
     let stringTemp = String(format: "%.0f", rawTemperature)
     
@@ -112,21 +112,5 @@ struct MainWidget: Widget {
             WidgetView(data: entry)
         }.description("some description")
         .configurationDisplayName("some name to siplay")
-    }
-}
-
-
-func calculateTemperature(rawTemp: Double, tempSettings: Int) -> Double {
-    let kelvin = 273.15
-    
-    switch tempSettings {
-    case 0:
-        let result = (rawTemp - kelvin) * 9/5 + 32
-        return result
-    case 1:
-        let result = rawTemp - kelvin
-        return result
-    default:
-        return 0.0
     }
 }
