@@ -15,40 +15,43 @@ class UserPreferences {
     private let windKey = UserDefaultsKeysSettings.windSpeedSettings.rawValue
     private let pressureKey = UserDefaultsKeysSettings.pressure.rawValue
     
+    
+    private let userDefault = UserDefaults(suiteName: "group.com.weather.app.swiftui")!
+    
     func defaultCity() -> String {
-        let defaultCity = UserDefaults.standard.string(forKey: cityKey)
+        let defaultCity = userDefault.string(forKey: cityKey)
         
         if let city = defaultCity { return city }
         else { return "" }
     }
     
     func saveCity(named city: String) {
-        UserDefaults.standard.set(city, forKey: UserDefaultsKeysSettings.city.rawValue)
+        userDefault.set(city, forKey: UserDefaultsKeysSettings.city.rawValue)
     }
     
     func savePreference(section: SettingsField.Type, chosenIndex: Int) {
         switch section {
         case is Temperature.Type:
-            UserDefaults.standard.set(chosenIndex, forKey: tempKey)
+            userDefault.set(chosenIndex, forKey: tempKey)
         case is WindSpeed.Type:
-            UserDefaults.standard.set(chosenIndex, forKey: windKey)
+            userDefault.set(chosenIndex, forKey: windKey)
         case is Pressure.Type:
-            UserDefaults.standard.set(chosenIndex, forKey: pressureKey)
+            userDefault.set(chosenIndex, forKey: pressureKey)
         default:
             print("Something went wrong.")
         }
     }
     
     func getTempPreference() -> Int {
-        return UserDefaults.standard.integer(forKey: tempKey)
+        return userDefault.integer(forKey: tempKey)
     }
     
     func getWindPreference() -> Int {
-        return UserDefaults.standard.integer(forKey: windKey)
+        return userDefault.integer(forKey: windKey)
     }
     
     func getPressurePreference() -> Int {
-        return UserDefaults.standard.integer(forKey: pressureKey)
+        return userDefault.integer(forKey: pressureKey)
     }
     
     //MARK:- WeatherTiles
@@ -82,7 +85,7 @@ class UserPreferences {
     func changeColorScheme(schemeNumber: Int) {
         //data comes from List, prevents crash if a user chosen the last option
         let value = schemeNumber > 0 ? schemeNumber - 1 : 0
-        UserDefaults.standard.set(value, forKey: colorSchemeKey)
+        userDefault.set(value, forKey: colorSchemeKey)
     }
     
     private let colorSchemeKey = UserDefaultsKeysTiles.tilesColorScheme.rawValue
@@ -96,37 +99,37 @@ class UserPreferences {
     }
     
     private func checkTilesColorScheme() {
-        let colorScheme = UserDefaults.standard.integer(forKey: colorSchemeKey)
+        let colorScheme = userDefault.integer(forKey: colorSchemeKey)
         
         if colorScheme == 0 {
-            UserDefaults.standard.set(1, forKey: colorSchemeKey)
+            userDefault.set(1, forKey: colorSchemeKey)
         }
     }
     
     private func checkTilesSmootheness() {
-        let smoothedTiles = UserDefaults.standard.string(forKey: smoothedKey)
+        let smoothedTiles = userDefault.string(forKey: smoothedKey)
         
         if smoothedTiles == nil {
-            UserDefaults.standard.set("0", forKey: smoothedKey)
+            userDefault.set("0", forKey: smoothedKey)
         }
     }
     
     private func checkSnow() {
-        let snowTiles = UserDefaults.standard.string(forKey: snowKey)
+        let snowTiles = userDefault.string(forKey: snowKey)
         
         if snowTiles == nil {
-            UserDefaults.standard.set("0", forKey: snowKey)
+            userDefault.set("0", forKey: snowKey)
         }
     }
     
     func changeSnow(isActive: Bool) {
         let value = isActive ? "1" : "0"
-        UserDefaults.standard.set(value, forKey: snowKey)
+        userDefault.set(value, forKey: snowKey)
     }
     
     func isSnowActive() -> Bool {
         
-        if UserDefaults.standard.value(forKey: snowKey) as! String == "1" {
+        if userDefault.value(forKey: snowKey) as! String == "1" {
             return true
         } else {
             return false
@@ -134,7 +137,7 @@ class UserPreferences {
     }
     
     func isSmoothActive() -> Bool {
-        if UserDefaults.standard.value(forKey: smoothedKey) as! String == "1" {
+        if userDefault.value(forKey: smoothedKey) as! String == "1" {
             return true
         } else {
             return false
@@ -143,7 +146,7 @@ class UserPreferences {
     
     func changeSmooth(isActive: Bool) {
         let value = isActive ? "1" : "0"
-        UserDefaults.standard.set(value, forKey: smoothedKey)
+        userDefault.set(value, forKey: smoothedKey)
     }
     
 }
