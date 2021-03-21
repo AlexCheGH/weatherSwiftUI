@@ -12,6 +12,7 @@ struct Model: TimelineEntry {
     var currentWeather: String
     var icon: String
     var city: String
+    var decription: String?
 }
 
 struct JSONModel: Decodable, Hashable {

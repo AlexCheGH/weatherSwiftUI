@@ -40,8 +40,9 @@ struct WeatherManager {
         let icon = data.weather.first?.icon ?? ""
         let stringTemp = String(format: "%.0f", rawTemperature)
         let city = data.name
+        let description = data.weather.first?.weatherDescription.firstUppercased
         
-        return Model(date: Date(), currentWeather: stringTemp, icon: icon, city: city)
+        return Model(date: Date(), currentWeather: stringTemp, icon: icon, city: city, decription: description)
     }
     
 }

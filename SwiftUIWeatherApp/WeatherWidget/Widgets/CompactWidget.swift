@@ -8,22 +8,23 @@
 import WidgetKit
 import SwiftUI
 
-@main
-struct MainWidget: Widget {
+struct CompactWidget: Widget {
     
     private let widgetName = NSLocalizedString("widget_compact_name_key", comment: "")
     private let widgetDescription = NSLocalizedString("widget_description_key", comment: "")
     
-    
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "Widget", provider: Provider()) { entry in
-            WidgetView(data: entry)
-        }.description(widgetDescription)
+        StaticConfiguration(kind: WidgetKind.smallDefault.rawValue,
+                            provider: Provider()) { entry in
+            CompactWidgetView(data: entry)
+        }
+        .description(widgetDescription)
         .configurationDisplayName(widgetName)
+        .supportedFamilies([.systemSmall])
     }
 }
 
-struct WidgetView: View {
+struct CompactWidgetView: View {
     var data: Model
     
     var body: some View {
@@ -33,13 +34,9 @@ struct WidgetView: View {
                            endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                Text(data.city)
-                    .font(.system(size: 20))
-                Image(data.icon)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                Text(data.currentWeather + "º")
-                    .font(.system(size: 25))
+                WeatherWidgetView(city: data.city,
+                                  icon: data.icon,
+                                  currentWeather: data.currentWeather)
             }
             .padding()
         }

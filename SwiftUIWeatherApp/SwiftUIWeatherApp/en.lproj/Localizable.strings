@@ -43,9 +43,8 @@
 "city_dummy_key" = "New York";
 "widget_description_key" = "Current weather for chosen location";
 "widget_compact_name_key" = "Compact widget";
-
-
-
+"widget_medium_name_key" = "Medium widget";
+"widget_large_name_key" = "Large widget";
 
 
 
