@@ -10,7 +10,7 @@ import PartialSheet
 import Firebase
 
 @main
-struct SwiftUIWeatherAppApp: App {
+struct SwiftUIWeatherApp: App {
    private let sheetManager: PartialSheetManager = PartialSheetManager()
     
     init() {

@@ -12,5 +12,11 @@ extension String{
     var encodeUrl : String {
         return self.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
     }
-    var decodeUrl : String { return self.removingPercentEncoding! } 
+    var decodeUrl : String { return self.removingPercentEncoding! }
+    
+}
+
+extension StringProtocol {
+    var firstUppercased: String { prefix(1).uppercased() + dropFirst() }
+    var firstCapitalized: String { prefix(1).capitalized + dropFirst() }
 }

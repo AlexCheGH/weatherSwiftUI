@@ -63,7 +63,7 @@ class WeatherModel {
             var currentTemp = weather.main.temp
             let tempSetting = UserPreferences().getTempPreference()
             
-            currentTemp = self.calculateTemperature(rawTemp: currentTemp, tempSettings: tempSetting)
+            currentTemp = ValueConverter().calculateTemperature(rawTemp: currentTemp, tempSettings: tempSetting)
             
             let date = DateManager.makeFormatedString(date: weather.dt, format: "E")
             let icon = weather.weather.first?.icon
@@ -109,7 +109,7 @@ class WeatherModel {
             if container.count == 8 {
                 let midDayIndex = 8 / 2 - 1
                 midTemp = container[midDayIndex].main.temp
-                midTemp = calculateTemperature(rawTemp: midTemp, tempSettings: tempSetting)
+                midTemp = ValueConverter().calculateTemperature(rawTemp: midTemp, tempSettings: tempSetting)
                 
                 let date = DateManager.makeFormatedString(date: container[midDayIndex].dt, format: "E")
                 let icon = $0.weather.first?.icon
@@ -131,7 +131,7 @@ class WeatherModel {
                 let midDayIndex = container.count > 1 ? container.count / 2 - 1 : 0
                 
                 midTemp = container[midDayIndex].main.temp
-                midTemp = calculateTemperature(rawTemp: midTemp, tempSettings: tempSetting)
+                midTemp = ValueConverter().calculateTemperature(rawTemp: midTemp, tempSettings: tempSetting)
                 
                 let date = DateManager.makeFormatedString(date: container[midDayIndex].dt, format: "E")
                 let icon = container[midDayIndex].weather.first?.icon
@@ -141,23 +141,6 @@ class WeatherModel {
             }
         }
     }
-    
-    func calculateTemperature(rawTemp: Double, tempSettings: Int) -> Double {
-        let kelvin = 273.15
-        
-        switch tempSettings {
-        case 0:
-            let result = (rawTemp - kelvin) * 9/5 + 32
-            return result
-        case 1:
-            let result = rawTemp - kelvin
-            return result
-        default:
-            return 0.0
-        }
-    }
-    
-    
     
     private func prepareURL(location: String, coordinates: Coord?, weatherType: WeatherForecastType) -> URL {
         var weatherString: String {
