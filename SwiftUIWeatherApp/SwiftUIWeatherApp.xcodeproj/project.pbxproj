@@ -48,6 +48,10 @@
 		A5A745882607900700380889 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A595F6E625A1C68600E1A079 /* Assets.xcassets */; };
 		A5A7458C2607971D00380889 /* ValueConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A7458B2607971D00380889 /* ValueConverter.swift */; };
 		A5A7458D2607971D00380889 /* ValueConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A7458B2607971D00380889 /* ValueConverter.swift */; };
+		A5A745902607AA5000380889 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A585CBC925D9205900A121DF /* Localizable.strings */; };
+		A5A745952607AC7D00380889 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A745932607AC7D00380889 /* NetworkManager.swift */; };
+		A5A7459B2607AFC400380889 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A7459A2607AFC400380889 /* Provider.swift */; };
+		A5A7459F2607AFF700380889 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A7459E2607AFF700380889 /* Model.swift */; };
 		A5AAC1B625E1411300096C7F /* Unwrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AAC1B525E1411300096C7F /* Unwrapper.swift */; };
 		A5DB3F8A25E4480300378FC5 /* UserPreferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DB3F8925E4480300378FC5 /* UserPreferenceViewModel.swift */; };
 		F6A7C8977B98B4D8AD56AB00 /* Pods_SwiftUIWeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 379599241C1EA20814989450 /* Pods_SwiftUIWeatherApp.framework */; };
@@ -118,6 +122,9 @@
 		A5A7457726073F0400380889 /* WeatherWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherWidgetExtension.entitlements; sourceTree = "<group>"; };
 		A5A7457A2607441400380889 /* SwiftUIWeatherApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftUIWeatherApp.entitlements; sourceTree = "<group>"; };
 		A5A7458B2607971D00380889 /* ValueConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueConverter.swift; sourceTree = "<group>"; };
+		A5A745932607AC7D00380889 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A5A7459A2607AFC400380889 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		A5A7459E2607AFF700380889 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		A5AAC1B525E1411300096C7F /* Unwrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unwrapper.swift; sourceTree = "<group>"; };
 		A5DB3F8925E4480300378FC5 /* UserPreferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -161,6 +168,9 @@
 				A52D7E8D2603C1FF007E6E91 /* WeatherWidget.intentdefinition */,
 				A52D7E8E2603C201007E6E91 /* Assets.xcassets */,
 				A52D7E902603C201007E6E91 /* Info.plist */,
+				A5A745932607AC7D00380889 /* NetworkManager.swift */,
+				A5A7459E2607AFF700380889 /* Model.swift */,
+				A5A7459A2607AFC400380889 /* Provider.swift */,
 			);
 			path = WeatherWidget;
 			sourceTree = "<group>";
@@ -418,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5A745882607900700380889 /* Assets.xcassets in Resources */,
+				A5A745902607AA5000380889 /* Localizable.strings in Resources */,
 				A52D7E8F2603C201007E6E91 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,10 +514,13 @@
 			files = (
 				A52D7E8C2603C1FF007E6E91 /* WeatherWidget.swift in Sources */,
 				A52D7EA22603C283007E6E91 /* Array + Utilities.swift in Sources */,
+				A5A745952607AC7D00380889 /* NetworkManager.swift in Sources */,
+				A5A7459F2607AFF700380889 /* Model.swift in Sources */,
 				A52D7E9F2603C281007E6E91 /* String + Utilities.swift in Sources */,
 				A5A7458D2607971D00380889 /* ValueConverter.swift in Sources */,
 				A52D7EAB2603C2B8007E6E91 /* CheckListView.swift in Sources */,
 				A52D7E9C2603C271007E6E91 /* UserPreferences.swift in Sources */,
+				A5A7459B2607AFC400380889 /* Provider.swift in Sources */,
 				A52D7EA82603C295007E6E91 /* WeeklyWeather.swift in Sources */,
 				A52D7EA52603C293007E6E91 /* CurrentWeather.swift in Sources */,
 				A52D7E912603C201007E6E91 /* WeatherWidget.intentdefinition in Sources */,
