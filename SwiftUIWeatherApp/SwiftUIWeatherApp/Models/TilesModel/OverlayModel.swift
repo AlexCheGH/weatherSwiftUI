@@ -12,6 +12,8 @@ class OverlayModel {
     var timestamps: [Int]
     var overlayCollection: [Int: MKTileOverlay]
     
+    private let networkManager = NetworkManager()
+    
     var dates: [String]
     var overlays: [MKTileOverlay]
 
@@ -54,16 +56,10 @@ class OverlayModel {
     }
     
     private func getTimestamps(completion: ([Int]) -> Void) {
-        let decoder = JSONDecoder()
-        
-        let stringURL = "https://api.rainviewer.com/public/maps.json"
-        let url = URL(string: stringURL)
-        
-        guard let data = try? Data(contentsOf: url!) else { return }
-        guard let tempValue = try? decoder.decode([Int].self, from: data) else { return }
-        
-        timestamps = tempValue
-        completion(tempValue)
+        networkManager.getTileTimestams { (timestamps) in
+            self.timestamps = timestamps
+            completion(timestamps)
+        }
     }
     
     func getTileOverlay(timestamp: Int) -> MKTileOverlay {
