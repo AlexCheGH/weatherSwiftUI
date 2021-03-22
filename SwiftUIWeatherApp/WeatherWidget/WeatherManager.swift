@@ -8,30 +8,13 @@
 import Foundation
 
 struct WeatherManager {
+    private let networkManager = NetworkManager()
     
     func getData(completion: @escaping (Model) -> ()) {
-        let city = UserPreferences().defaultCity()
-        
-        let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=d993c7d8d3f4e8de63516cc737a6c16b"
-        
-        let session = URLSession(configuration: .default)
-        session.dataTask(with: URL(string: url)!) {(data, _, err) in
-            if err != nil {
-                print(err!.localizedDescription)
-                
-                return
-            }
-            do {
-                let jsonData = try JSONDecoder().decode(CurrentWeather.self, from: data!)
-                
-                let model = makeModelEntry(data: jsonData)
-                
-                completion(model)
-            }
-            catch {
-                print(error.localizedDescription)
-            }
-        }.resume()
+        networkManager.getWidgetData { (data) in
+            let model = makeModelEntry(data: data)
+            completion(model)
+        }
     }
     
     private func makeModelEntry(data: CurrentWeather) -> Model {
@@ -44,5 +27,4 @@ struct WeatherManager {
         
         return Model(date: Date(), currentWeather: stringTemp, icon: icon, city: city, decription: description)
     }
-    
 }

@@ -13,78 +13,47 @@ class WeatherModel {
     var weeklyWeather: [WeatherInfo?] = [WeatherInfo?]()
     var rawWeather: WeeklyWeatherData? = nil
     var currentWeather: WeatherInfo? = nil
-    
     var coordinates: Coord?
     
-    private let apiKey = "d993c7d8d3f4e8de63516cc737a6c16b"  //need to setup config-file
+    let networkManager = NetworkManager()
     
     init(location: String) {
         self.location = location
         self.loadData { }
     }
     
-    
-    private func makeURLSession(with url: URL, completion: @escaping (Data) -> Void) -> URLSessionDataTask {
-        URLSession.shared.dataTask(with: url) { data, _, _ in
-            DispatchQueue.main.async {
-                if let data = data {
-                    completion(data)
-                }
-            }
-        }
+    func loadData(completion: @escaping() -> Void) {
+        prepareCurrentWeather()
+        prepareWeeklyWeather { completion() } //completion makes sure location loaded correctly
     }
     
     //MARK:- Current weather Data calls
-    private func makeCurrentForecastTask(completion: @escaping (Data) -> Void) {
-        
-        let url = prepareURL(location: location, coordinates: coordinates, weatherType: .current)
-        
-        makeURLSession(with: url) { (data) in
-            completion(data)
-        }.resume()
-    }
-    
-    func loadData(completion: @escaping() -> Void) {
-        makeCurrentForecastTask { [self] (data) in
-            let weather = try? JSONDecoder().decode(CurrentWeather.self, from: data)
-            prepareCurrentWeather(data: weather)
-        }
-        
-        weeklyWeatherCall { [self] (data) in
-            rawWeather = try? JSONDecoder().decode(WeeklyWeatherData.self, from: data)
-            prepareWeeklyWeather()
-            completion()
-        }
-    }
-    
-    
-    private func prepareCurrentWeather(data: CurrentWeather?) {
-        if let weather = data {
-            var currentTemp = weather.main.temp
+    private func prepareCurrentWeather() {
+        networkManager.requestWeather(location: location, coordinates: coordinates, weatherType: .current) { (currentWeather: CurrentWeather) in
+            var currentTemp = currentWeather.main.temp
             let tempSetting = UserPreferences().getTempPreference()
             
             currentTemp = ValueConverter().calculateTemperature(rawTemp: currentTemp, tempSettings: tempSetting)
             
-            let date = DateManager.makeFormatedString(date: weather.dt, format: "E")
-            let icon = weather.weather.first?.icon
+            let date = DateManager.makeFormatedString(date: currentWeather.dt, format: "E")
+            let icon = currentWeather.weather.first?.icon
             
-            currentWeather = WeatherInfo(date: date, currentTemp: String(format: "%.0f", currentTemp), icon: icon, id: 99)
+            self.currentWeather = WeatherInfo(date: date, currentTemp: String(format: "%.0f", currentTemp), icon: icon, id: 99)
         }
     }
     
     
     //MARK:- Weekly Weather
-    
-    private func weeklyWeatherCall(completion: @escaping(Data) -> Void) {
-        let url = prepareURL(location: location, coordinates: coordinates, weatherType: .weekly)
-        
-        makeURLSession(with: url) { (data) in
-            completion(data)
-        }.resume()
+    //need to run tests. problems with getting mid of the day probly
+    private func prepareWeeklyWeather(completion: @escaping() -> Void) {
+        networkManager.requestWeather(location: location, coordinates: coordinates, weatherType: .weekly) { (weeklyWeather: WeeklyWeatherData) in
+            self.rawWeather = weeklyWeather
+            self.processWeeklyWeather()
+            completion()
+        }
     }
     
-    //need to run tests. problems with getting mid of the day probly
-    private func prepareWeeklyWeather() {
+    private func processWeeklyWeather() {
         
         weeklyWeather.removeAll()
         
@@ -141,26 +110,4 @@ class WeatherModel {
             }
         }
     }
-    
-    private func prepareURL(location: String, coordinates: Coord?, weatherType: WeatherForecastType) -> URL {
-        var weatherString: String {
-            weatherType == .current ? "weather" : "forecast"
-        }
-        
-        let encodedLocation = location.encodeUrl
-        
-        if let coordinates = coordinates {
-            let link = "https://api.openweathermap.org/data/2.5/\(weatherString)?lat=\(coordinates.lat)&lon=\(coordinates.lon)&appid=\(apiKey)"
-            return URL(string: link)!
-        } else {
-            let link = "https://api.openweathermap.org/data/2.5/\(weatherString)?q=\(encodedLocation)&appid=\(apiKey)"
-            return URL(string: link)!
-        }
-    }
-    
-    enum WeatherForecastType {
-        case current
-        case weekly
-    }
-    
 }
