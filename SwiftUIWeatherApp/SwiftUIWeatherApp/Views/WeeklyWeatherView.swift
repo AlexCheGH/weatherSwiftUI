@@ -14,6 +14,7 @@ struct WeeklyWeatherView: View {
     var imageName: String?
     var size: CGSize
     var viewType: WeatherViewType
+    var fontColor: UIColor = UIColor.black
     
     var body: some View {
         VStack {
@@ -21,7 +22,7 @@ struct WeeklyWeatherView: View {
                 .font(.system(size: fontSize(for: size),
                               weight: .medium,
                               design: .default))
-                .foregroundColor(.black)
+                .foregroundColor(Color(fontColor))
             
             WeatherImage(imageName: imageName)
                 .frame(width: size.width,
@@ -31,7 +32,7 @@ struct WeeklyWeatherView: View {
                 .font(.system(size: fontSize(for: size),
                               weight: .semibold,
                               design: .default))
-                .foregroundColor(.black)
+                .foregroundColor(Color(fontColor))
         }
     }
     

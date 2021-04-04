@@ -19,7 +19,6 @@ class WeatherModel {
     
     init(location: String) {
         self.location = location
-        self.loadData { }
     }
     
     func loadData(completion: @escaping() -> Void) {
