@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct WeatherView: View {
-    
-    @State var selector = 1
-    
     var sessionModel = WatchConnectivity()
     @ObservedObject var viewModel = WeatherViewModel()
     

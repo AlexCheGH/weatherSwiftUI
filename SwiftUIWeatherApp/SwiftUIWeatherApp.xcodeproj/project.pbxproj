@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A5023FF9261A317C000B780E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A585CBC925D9205900A121DF /* Localizable.strings */; };
 		A524389C25FD22000010B2F6 /* Array + Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A524389B25FD22000010B2F6 /* Array + Utilities.swift */; };
 		A524389F25FD227A0010B2F6 /* CheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A524389E25FD227A0010B2F6 /* CheckListView.swift */; };
 		A52438A225FD3F7B0010B2F6 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52438A125FD3F7B0010B2F6 /* PlayerView.swift */; };
@@ -262,6 +263,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A5023FFE261A328B000B780E /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				A5BA08B0260BB6DB00B4B438 /* PushNotificationPayload.apns */,
+				A5BA08A4260BB6D900B4B438 /* NotificationController.swift */,
+				A5BA08A6260BB6D900B4B438 /* NotificationView.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		A52D7E8A2603C1FF007E6E91 /* WeatherWidget */ = {
 			isa = PBXGroup;
 			children = (
@@ -459,13 +470,11 @@
 			children = (
 				A5C61DFD260D201100195158 /* WeatherAppSwiftUIWatch Extension.entitlements */,
 				A5BA08A0260BB6D900B4B438 /* SwiftUIWeatherAppApp.swift */,
-				A5BA08A4260BB6D900B4B438 /* NotificationController.swift */,
+				A5023FFE261A328B000B780E /* Notification */,
 				A59334A9260BC1E300D3AAC3 /* Views */,
-				A5BA08A6260BB6D900B4B438 /* NotificationView.swift */,
 				A5BA08A8260BB6D900B4B438 /* ComplicationController.swift */,
 				A5BA08AA260BB6DB00B4B438 /* Assets.xcassets */,
 				A5BA08AF260BB6DB00B4B438 /* Info.plist */,
-				A5BA08B0260BB6DB00B4B438 /* PushNotificationPayload.apns */,
 				A5BA08AC260BB6DB00B4B438 /* Preview Content */,
 			);
 			path = "WeatherAppSwiftUIWatch Extension";
@@ -674,6 +683,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5BA08AE260BB6DB00B4B438 /* Preview Assets.xcassets in Resources */,
+				A5023FF9261A317C000B780E /* Localizable.strings in Resources */,
 				A5E761EA2618D3C8007B3B0C /* Assets.xcassets in Resources */,
 				A5BA08AB260BB6DB00B4B438 /* Assets.xcassets in Resources */,
 			);

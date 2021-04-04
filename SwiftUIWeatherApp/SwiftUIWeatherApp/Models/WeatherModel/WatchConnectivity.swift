@@ -32,12 +32,9 @@ class WatchConnectivity : NSObject,  WCSessionDelegate {
     
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
         self.receivedMessage = applicationContext[WatchKeyPath.city.rawValue] as? String ?? "Error"
-        saveCity(city: receivedMessage)
+        saveCity(city: self.receivedMessage)
   
     }
-    
-    
-    
     
     
     #if os(iOS)
@@ -46,10 +43,6 @@ class WatchConnectivity : NSObject,  WCSessionDelegate {
     func sessionDidDeactivate(_ session: WCSession) {
     }
     #endif
-    
-    
-    
-    
     
     func saveCity(city: String) {
         userPrefernces.saveCity(named: city)

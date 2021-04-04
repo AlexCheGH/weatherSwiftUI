@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct SettingsView: View {
+    private let settingsString = NSLocalizedString("settings_key", comment: "")
+    private let celciousString = NSLocalizedString("celcious_key", comment: "")
+    private let farenheighString = NSLocalizedString("farenheit_key", comment: "")
     
     @State var isOn = UserPreferences().getTempPreference() == 1 ? true : false
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Settings")
+            Text(settingsString)
             Spacer()
-            Toggle(isOn ? "Celcious" : "Farenheight", isOn: $isOn)
+            Toggle(isOn ? celciousString : farenheighString, isOn: $isOn)
         }
         .padding()
         .onChange(of: isOn, perform: { value in
             UserPreferences().savePreference(section: Temperature.self, chosenIndex: isOn ? 1 : 0)
-            print(UserPreferences().defaultCity())
-            print(UserPreferences().getTempPreference())
         })
-        .onAppear { print(UserPreferences().getTempPreference()) }
     }
 }
 
