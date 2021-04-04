@@ -19,7 +19,6 @@ struct WeatherView: View {
         makeBody()
     }
     
-    
     private func makeBody() -> some View {
         VStack(alignment: .center){
             GeometryReader { geo in

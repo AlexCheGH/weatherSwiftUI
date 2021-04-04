@@ -13,6 +13,7 @@ struct SwiftUIWeatherAppApp: App {
         WindowGroup {
             TabView {
                 WeatherView()
+                SettingsView()
             }
         }
         

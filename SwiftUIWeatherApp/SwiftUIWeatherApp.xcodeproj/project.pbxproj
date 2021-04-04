@@ -86,6 +86,7 @@
 		A5DB3F8A25E4480300378FC5 /* UserPreferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DB3F8925E4480300378FC5 /* UserPreferenceViewModel.swift */; };
 		A5E761E02618D229007B3B0C /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A594D6FC25CF17900095412C /* WeatherViewModel.swift */; };
 		A5E761EA2618D3C8007B3B0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A595F6E625A1C68600E1A079 /* Assets.xcassets */; };
+		A5E762012619DF3D007B3B0C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E762002619DF3D007B3B0C /* SettingsView.swift */; };
 		A5FCCA6A26173806006EB8FD /* WeeklyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A595F6F225A1E83300E1A079 /* WeeklyWeatherView.swift */; };
 		A5FCCA6F26173814006EB8FD /* Unwrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AAC1B525E1411300096C7F /* Unwrapper.swift */; };
 		F6A7C8977B98B4D8AD56AB00 /* Pods_SwiftUIWeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 379599241C1EA20814989450 /* Pods_SwiftUIWeatherApp.framework */; };
@@ -219,6 +220,7 @@
 		A5C61DFC260D200300195158 /* WeatherAppSwiftUIWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherAppSwiftUIWatch.entitlements; sourceTree = "<group>"; };
 		A5C61DFD260D201100195158 /* WeatherAppSwiftUIWatch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WeatherAppSwiftUIWatch Extension.entitlements"; sourceTree = "<group>"; };
 		A5DB3F8925E4480300378FC5 /* UserPreferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceViewModel.swift; sourceTree = "<group>"; };
+		A5E762002619DF3D007B3B0C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -325,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				A5BA08A2260BB6D900B4B438 /* ContentView.swift */,
+				A5E762002619DF3D007B3B0C /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -802,6 +805,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5E762012619DF3D007B3B0C /* SettingsView.swift in Sources */,
 				A59334D8260BC30600D3AAC3 /* String + Utilities.swift in Sources */,
 				A5FCCA6F26173814006EB8FD /* Unwrapper.swift in Sources */,
 				A54BA8172614AA2700D848CC /* WatchConnectivity.swift in Sources */,
