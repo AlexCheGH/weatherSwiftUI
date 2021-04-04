@@ -8,16 +8,13 @@
 import Foundation
 
 class WeatherViewModel: ObservableObject {
-    @Published private var weatherModel: WeatherModel
+    
+    @Published private var weatherModel: WeatherModel = WeatherModel(location: UserPreferences().defaultCity())
     @Published var weather: WeeklyWeatherData? = nil
     
-    var location: String
+    var location: String = UserPreferences().defaultCity()
     var coordinates: Coord?
     
-    init(location: String) {
-        self.location = UserPreferences().defaultCity()
-        self.weatherModel = WeatherModel(location: self.location)
-    }
     
     var currentWeather: WeatherInfo? {
         weatherModel.currentWeather

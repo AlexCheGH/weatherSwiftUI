@@ -7,13 +7,16 @@
 
 import SwiftUI
 import PartialSheet
+import WatchConnectivity
 
 struct ContentView: View {
-
-    @ObservedObject var forecast = WeatherViewModel(location: String())
+    
+    @ObservedObject var forecast = WeatherViewModel()
     @State var isSettingsTapped = false
     @State var isMapTapped = false
     @State var selectedLocation = CGPoint()
+    
+    private let watchConnectivity = WatchConnectivity()
     
     private let locationPlaceholderString = NSLocalizedString("location_placeholder", comment: "")
     private let todayString = NSLocalizedString("today_weekdat", comment: "")
@@ -78,6 +81,7 @@ struct ContentView: View {
         TextField(locationPlaceholderString, text: $forecast.location, onCommit:  {
             forecast.loadData()
             forecast.saveLocation()
+            try? self.watchConnectivity.session.updateApplicationContext([WatchKeyPath.city.rawValue : forecast.location])
         })
         .font(.system(size: textFieldTextSize,
                       weight: .medium,
