@@ -6,6 +6,8 @@
   
 */
 
+"WeatherApp" = "WeatherApp";
+
 "location_placeholder" = "Enter location";
 "today_weekdat" = "Today";
 "temperature_key" = "Temperature";
