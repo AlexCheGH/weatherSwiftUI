@@ -9,9 +9,8 @@ import SwiftUI
 
 struct WeatherView: View {
     var sessionModel = WatchConnectivity()
-    @ObservedObject var viewModel = WeatherViewModel()
-    
-    
+    var viewModel: WeatherViewModel
+
     var body: some View {
         makeBody()
     }
@@ -27,8 +26,6 @@ struct WeatherView: View {
                                   viewType: .currentWeather,
                                   fontColor: .white)
             }
-        }.onAppear {
-            viewModel.loadData()
         }
     }
 }
