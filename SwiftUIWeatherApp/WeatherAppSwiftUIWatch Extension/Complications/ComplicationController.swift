@@ -37,7 +37,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
         // Call the handler with the last entry date you can currently provide or nil if you can't support future timelines
         // Indicate that the app can provide timeline entries for the next 24 hours.
-        handler(Date().addingTimeInterval(24.0 * 60.0 * 60.0))
+        handler(Date().addingTimeInterval(60.0 * 60.0))
     }
     
     func getPrivacyBehavior(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationPrivacyBehavior) -> Void) {
@@ -62,36 +62,41 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         // Call the handler with the timeline entries after the given date
-        let oneHour = 60.0 * 60.0
-        let twentyFourHours = 24.0 * 60.0 * 60.0
+//        let oneHour = 60.0 * 60.0
+//        let twentyFourHours = 24.0 * 60.0 * 60.0
         
         // Create an array to hold the timeline entries.
         var entries = [CLKComplicationTimelineEntry]()
         
         // Calculate the start and end dates.
-        var current = date.addingTimeInterval(oneHour)
-        let endDate = date.addingTimeInterval(twentyFourHours)
+//        var current = date.addingTimeInterval(oneHour)
+//        let endDate = date.addingTimeInterval(twentyFourHours)
         
         // Create a timeline entry for every hour from the starting time.
         // Stop once you reach the limit or the end date.
-        weatherManager.loadData { [self] in
+         
             
-            while (current.compare(endDate) == .orderedAscending) && (entries.count < limit) {
-                let data = WeatherInfo(date: todayString,
-                                       currentTemp: weatherManager.currentWeather?.currentTemp,
-                                       icon: weatherManager.currentWeather?.icon,
-                                       id: Int.random(in: 1..<999))
+            
+            
+            weatherManager.loadData { [self] in
                 
-                guard let timelineEntry = createTimelineEntry(forComplication: complication, data: data) else {
-                    handler(nil)
-                    return
-                }
-                
-                entries.append(timelineEntry)
-                current = current.addingTimeInterval(oneHour)
+    //            while (current.compare(endDate) == .orderedAscending) && (entries.count < limit) {
+                    let data = WeatherInfo(date: todayString,
+                                           currentTemp: weatherManager.currentWeather?.currentTemp,
+                                           icon: weatherManager.currentWeather?.icon,
+                                           id: Int.random(in: 1..<999))
+                    
+                    guard let timelineEntry = createTimelineEntry(forComplication: complication, data: data) else {
+                        handler(nil)
+                        return
+                    }
+                    
+                    entries.append(timelineEntry)
+    //                current = current.addingTimeInterval(oneHour)
+    //            }
+                handler(entries)
             }
-            handler(entries)
-        }
+        
     }
     
     // MARK: - Sample Templates
