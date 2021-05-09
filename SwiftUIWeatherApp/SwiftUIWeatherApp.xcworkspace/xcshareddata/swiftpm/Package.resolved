@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Marquee",
+        "repositoryURL": "https://github.com/SwiftUIKit/Marquee",
+        "state": {
+          "branch": null,
+          "revision": "d8e49bfceff40b67dd10ff2619fb205ed5016ad1",
+          "version": "0.2.1"
+        }
+      },
+      {
         "package": "PartialSheet",
         "repositoryURL": "https://github.com/AndreaMiotto/PartialSheet",
         "state": {

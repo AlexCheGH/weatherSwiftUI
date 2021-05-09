@@ -13,6 +13,7 @@
 "temperature_key" = "Temperature";
 "celcious_key" = "Cº";
 "farenheit_key" = "Fº";
+"location_key" = "Location";
 
 "pressure_key" = "Pressure";
 "wind_speed_key" = "Wind speed";
@@ -26,6 +27,7 @@
 "mm_key" = "mm";
 "settings_key" = "Settings";
 "done_key" = "Done";
+"close_key" = "Close";
 
 "snow_key" = "Snow";
 "smooth_key" = "Smooth radar";
@@ -35,7 +37,7 @@
 "black_white" = "Black & white";
 "original" = "Original";
 "universal_blue" = "Universal Blue";
-"titan" = "Tita";
+"titan" = "Titan";
 "the_weather_channel" = "The Weather Channel";
 "meteored" = "Meteored";
 "nexrad_level_3" = "Nexrad Level-3";
@@ -48,5 +50,6 @@
 "widget_medium_name_key" = "Medium widget";
 "widget_large_name_key" = "Large widget";
 
-
+"add_location_key" = "Add location";
+"input_you_location_textField_watch_key" = "Enter a location you want to add.";
 
