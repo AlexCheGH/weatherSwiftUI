@@ -24,18 +24,17 @@ struct LocationSelectionView: View {
         makeBody()
     }
     
-    
-    
     private func makeBody() -> some View {
         VStack {
             List {
                 ForEach (viewModel.locations, id: \.self) { location in
                     WeatherLocationCard(location: location,
-                                 height: cellHeight)
-                        .padding(.leading)
+                                        height: cellHeight)
                         .onLongPressGesture {
                             delete(location)
                         }
+                        .padding(.leading)
+                        
                 }
                 makeAddLocationButton()
             }
@@ -69,6 +68,7 @@ struct LocationSelectionView: View {
         viewModel.deleteFromDisk(item: viewModel.locations[index])
     }
     
+    //future implementation
     //    private func deleteRow(at indexSet: IndexSet) {
     //        self.someTexts.remove(atOffsets: indexSet)
     //    }
@@ -77,15 +77,16 @@ struct LocationSelectionView: View {
 }
 
 struct WeatherLocationCard: View {
+    
+    @ObservedObject var weather = WeatherViewModel()
     @State var durationValue: Double = 2
     
     var height: CGFloat
     
-   @ObservedObject var weather = WeatherViewModel()
-    
     init(location: String, height: CGFloat) {
         self.height = height
         self.weather = WeatherViewModel(location: location)
+        self.weather.loadData()
     }
     
     var body: some View {
@@ -94,26 +95,25 @@ struct WeatherLocationCard: View {
     
     private func makeBody() -> some View {
         GeometryReader { geo in
-        HStack {
-            Marquee {
-                Text(weather.location)
-                    .onAppear {
-                        fireTimer()
-                        self.weather.loadData()
-                    }
+            HStack {
+                Marquee {
+                    Text(weather.location)
+                        .onAppear {
+                            fireTimer()
+                        }
+                }
+                .marqueeWhenNotFit(true)
+                .marqueeDuration(durationValue)
+                .frame(width: geo.size.width * 0.5)
+                
+                WeatherImage(imageName: weather.currentWeather?.icon)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: geo.size.width * 0.2)
+                
+                Text(weather.currentWeather?.currentTemp ?? "...")
+                    .frame(width: geo.size.width * 0.2)
             }
-            .marqueeWhenNotFit(true)
-            .marqueeDuration(durationValue)
-            .frame(width: geo.size.width * 0.5)
-                        
-            WeatherImage(imageName: weather.currentWeather?.icon)
-                .aspectRatio(contentMode: .fit)
-                .frame(width: geo.size.width * 0.2)
-            
-            Text(weather.currentWeather?.currentTemp ?? "...")
-                .frame(width: geo.size.width * 0.2)
         }
-    }
         .frame(height: height)
     }
     
