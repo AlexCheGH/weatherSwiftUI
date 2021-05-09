@@ -9,7 +9,8 @@ import SwiftUI
 
 struct LocationSelectionTextFieldView: View {
     
-    @State var userInput = ""
+    @Binding var userInput: String
+    @Binding var shouldDismiss: Bool
     
     private let enterLocationString = NSLocalizedString("location_placeholder", comment: "")
     private let doneString = NSLocalizedString("done_key", comment: "")
@@ -31,18 +32,21 @@ struct LocationSelectionTextFieldView: View {
             Spacer()
             HStack {
                 Button(doneString) {
-                    print("done")
+                    shouldDismiss.toggle()
                 }
                 .buttonStyle(BorderedButtonStyle(tint: .blue))
                 .disabled( userInput == "" ? true : false )
             }
         }
+        .onAppear{
+            userInput = ""
+        }
     }
 }
 
-
-struct LocationSelectionTextFieldView_Previews: PreviewProvider {
-    static var previews: some View {
-        LocationSelectionTextFieldView()
-    }
-}
+//
+//struct LocationSelectionTextFieldView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LocationSelectionTextFieldView()
+//    }
+//}

@@ -8,7 +8,7 @@
 import Foundation
 
 
-class LocalFileManager<T: Codable> {
+class LocalFileManager<T: Codable> where T: Comparable {
     
     func saveToDisk(data: T, named: String) {
         let encoder = JSONEncoder()
@@ -31,11 +31,10 @@ class LocalFileManager<T: Codable> {
         }
     }
     
-   
+    
     
     
     func getDataFromDisk(named: String) -> [String] {
-        
         guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return [] }
         let fileURL = directory.appendingPathComponent("/\(named).txt")
         
@@ -46,7 +45,21 @@ class LocalFileManager<T: Codable> {
         
         return returnArray
     }
+
     
+    func deleteDataPiece(item: T, from array: [T], fileName: String) {
+        let cleanArray = array.filter { $0 != item }
+        removeFile(named: fileName)
+        cleanArray.forEach { self.saveToDisk(data: $0, named: fileName) }
+    }
+    
+    private func removeFile(named: String) {
+        guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        
+        let fileURL = directory.appendingPathComponent("/\(named).txt")
+        do { try FileManager.default.removeItem(at: fileURL) }
+        catch { }
+    }
     
     private func changeString(text: String) -> String {
         let quotationMark = "\u{0022}"

@@ -12,9 +12,12 @@ class WeatherViewModel: ObservableObject {
     @Published private var weatherModel: WeatherModel = WeatherModel(location: UserPreferences().defaultCity())
     @Published var weather: WeeklyWeatherData? = nil
     
-    var location: String = UserPreferences().defaultCity()
+    var location: String
     var coordinates: Coord?
     
+    init(location: String = UserPreferences().defaultCity()) {
+        self.location = location
+    }
     
     var currentWeather: WeatherInfo? {
         weatherModel.currentWeather

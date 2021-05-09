@@ -9,26 +9,31 @@ import Foundation
 
 
 class LocationSelectionViewModel : ObservableObject {
-    private let fileManager = LocalFileManager<String>()
+    @Published private var fileManager = LocalFileManager<String>()
     
     let fileName: String
     
-    private var counter = 0
-    
     init(fileName: String) {
         self.fileName = fileName
+        self.locations = fileManager.getDataFromDisk(named: fileName)
     }
     
-    var item: [String] {
-        let item = fileManager.getDataFromDisk(named: fileName)
-        return item
-    }
-    
+    @Published var locations: [String] = [String]()
+    @Published var weatherItems: [WeatherViewModel] = [WeatherViewModel]()
+        
     func saveToDisk(item: String) {
         fileManager.saveToDisk(data: item, named: fileName)
+        
+        refreshItems()
     }
     
+    func deleteFromDisk(item: String) {
+        fileManager.deleteDataPiece(item: item, from: locations, fileName: fileName)
+        
+        refreshItems()
+    }
     
-    
-    
+    private func refreshItems() {
+        locations = fileManager.getDataFromDisk(named: fileName)
+    }
 }

@@ -13,6 +13,7 @@
 "temperature_key" = "Temperature";
 "celcious_key" = "Cº";
 "farenheit_key" = "Fº";
+"location_key" = "Location";
 
 "pressure_key" = "Pressure";
 "wind_speed_key" = "Wind speed";

@@ -10,46 +10,43 @@ import Marquee
 
 struct LocationSelectionView: View {
     
-    private static let fileName = "LocationsWeatherSwiftUI"
     @ObservedObject private var viewModel = LocationSelectionViewModel(fileName: "locations")
     
-    private let locationsString = "Locations"
-    @State var someTexts = ["Moscow","London"]
+    @State var addLocationTapped = false
+    @State var userInputedLocation = ""
+    
+    private let addLocationString = NSLocalizedString("add_location_key", comment: "")
+    private let locationsString = NSLocalizedString("location_key", comment: "")
     
     private let cellHeight: CGFloat = 50
-    private let addLocationString = NSLocalizedString("add_location_key", comment: "")
-    
-    @State var addLocationTapped = false
-    
     
     var body: some View {
         makeBody()
     }
     
     
+    
     private func makeBody() -> some View {
         VStack {
             List {
-                ForEach (someTexts, id: \.self) { location in
-                    LocationCard(location: location, height: cellHeight)
+                ForEach (viewModel.locations, id: \.self) { location in
+                    WeatherLocationCard(location: location,
+                                 height: cellHeight)
                         .padding(.leading)
                         .onLongPressGesture {
                             delete(location)
                         }
                 }
-               
-                
-                
                 makeAddLocationButton()
-                
             }
-            
         }
         .navigationBarTitle(locationsString)
         .sheet(isPresented: $addLocationTapped, content: {
-            LocationSelectionTextFieldView()
+            LocationSelectionTextFieldView(userInput: $userInputedLocation, shouldDismiss: $addLocationTapped)
         })
-        
+        .onChange(of: userInputedLocation, perform: { value in
+            value == "" ? () : viewModel.saveToDisk(item: value)
+        })
     }
     
     private func makeAddLocationButton() -> some View {
@@ -67,76 +64,71 @@ struct LocationSelectionView: View {
         .frame(height: cellHeight)
     }
     
-    
-    
-    
-    
     private func delete(_ item: String) {
-        let index = someTexts.firstIndex(of: item)
-        someTexts.remove(at: index!)
+        guard let index = viewModel.locations.firstIndex(of: item) else { return }
+        viewModel.deleteFromDisk(item: viewModel.locations[index])
     }
     
-    private func deleteRow(at indexSet: IndexSet) {
-        self.someTexts.remove(atOffsets: indexSet)
-    }
+    //    private func deleteRow(at indexSet: IndexSet) {
+    //        self.someTexts.remove(atOffsets: indexSet)
+    //    }
     
     
 }
 
-struct LocationCard: View {
-    var location: String
-    var height: CGFloat
-    
+struct WeatherLocationCard: View {
     @State var durationValue: Double = 2
     
-    var tempImage = "02d"
-    var tempTemp = "25º"
+    var height: CGFloat
+    
+   @ObservedObject var weather = WeatherViewModel()
+    
+    init(location: String, height: CGFloat) {
+        self.height = height
+        self.weather = WeatherViewModel(location: location)
+    }
     
     var body: some View {
         makeBody()
     }
     
     private func makeBody() -> some View {
+        GeometryReader { geo in
         HStack {
-            
             Marquee {
-                Text(location)
+                Text(weather.location)
                     .onAppear {
                         fireTimer()
+                        self.weather.loadData()
                     }
             }
             .marqueeWhenNotFit(true)
             .marqueeDuration(durationValue)
-              
-            Spacer()
-            WeatherImage(imageName: tempImage)
-                .frame(height: height)
+            .frame(width: geo.size.width * 0.5)
+                        
+            WeatherImage(imageName: weather.currentWeather?.icon)
                 .aspectRatio(contentMode: .fit)
-            Text(tempTemp)
+                .frame(width: geo.size.width * 0.2)
+            
+            Text(weather.currentWeather?.currentTemp ?? "...")
+                .frame(width: geo.size.width * 0.2)
         }
-        
     }
-    
+        .frame(height: height)
+    }
     
     //TO-DO:- make reasonable marquee text
     private func fireTimer() {
         let timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) {_ in
             if self.durationValue != 0 {
-            self.durationValue = 0
+                self.durationValue = 0
             } else {
                 durationValue = 2
             }
         }
-        
         timer.fireDate = Date() + 3
-        
     }
-    
-    
-    
-    
 }
-
 
 struct LocationSelectionView_Previews: PreviewProvider {
     static var previews: some View {
