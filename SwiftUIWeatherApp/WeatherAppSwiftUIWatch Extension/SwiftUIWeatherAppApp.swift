@@ -18,16 +18,20 @@ struct SwiftUIWeatherAppApp: App {
     @SceneBuilder var body: some Scene {
         WindowGroup {
             TabView {
-                WeatherView(viewModel: viewModel)
-                    .onChange(of: scenePhase) { (phase) in
-                        processScenePhase(for: phase)
-                    }
-                    .onAppear { viewModel.loadData() }
-                
+                makeWeatherView()
+                LocationSelectionView()
                 SettingsView()
             }
         }
         WKNotificationScene(controller: NotificationController.self, category: "myCategory")
+    }
+    
+    private func makeWeatherView() -> some View {
+        WeatherView(viewModel: viewModel)
+            .onChange(of: scenePhase) { (phase) in
+                processScenePhase(for: phase)
+            }
+            .onAppear { viewModel.loadData() }
     }
     
     private func processScenePhase(for phase: ScenePhase) {

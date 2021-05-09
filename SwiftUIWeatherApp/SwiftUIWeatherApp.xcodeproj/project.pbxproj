@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A5023FF9261A317C000B780E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A585CBC925D9205900A121DF /* Localizable.strings */; };
+		A5038415263D9F0200D8B922 /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = A5038414263D9F0200D8B922 /* Marquee */; };
+		A503841B263D9F5200D8B922 /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = A503841A263D9F5200D8B922 /* Marquee */; };
 		A524389C25FD22000010B2F6 /* Array + Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A524389B25FD22000010B2F6 /* Array + Utilities.swift */; };
 		A524389F25FD227A0010B2F6 /* CheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A524389E25FD227A0010B2F6 /* CheckListView.swift */; };
 		A52438A225FD3F7B0010B2F6 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52438A125FD3F7B0010B2F6 /* PlayerView.swift */; };
@@ -89,8 +91,13 @@
 		A5E761E02618D229007B3B0C /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A594D6FC25CF17900095412C /* WeatherViewModel.swift */; };
 		A5E761EA2618D3C8007B3B0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A595F6E625A1C68600E1A079 /* Assets.xcassets */; };
 		A5E762012619DF3D007B3B0C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E762002619DF3D007B3B0C /* SettingsView.swift */; };
+		A5F242382637520800CA33B3 /* LocationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F242372637520800CA33B3 /* LocationSelectionView.swift */; };
+		A5F2423F2637539700CA33B3 /* LocalFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F2423E2637539700CA33B3 /* LocalFileManager.swift */; };
+		A5F2424A2637564700CA33B3 /* LocationSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F242492637564700CA33B3 /* LocationSelectionViewModel.swift */; };
+		A5F2424F2637564E00CA33B3 /* LocalFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F2423E2637539700CA33B3 /* LocalFileManager.swift */; };
 		A5FCCA6A26173806006EB8FD /* WeeklyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A595F6F225A1E83300E1A079 /* WeeklyWeatherView.swift */; };
 		A5FCCA6F26173814006EB8FD /* Unwrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AAC1B525E1411300096C7F /* Unwrapper.swift */; };
+		A5FEA0E6263F3ABA0036E778 /* LocationSelectionTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FEA0E5263F3ABA0036E778 /* LocationSelectionTextFieldView.swift */; };
 		F6A7C8977B98B4D8AD56AB00 /* Pods_SwiftUIWeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 379599241C1EA20814989450 /* Pods_SwiftUIWeatherApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -224,6 +231,10 @@
 		A5C61DFD260D201100195158 /* WeatherAppSwiftUIWatch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WeatherAppSwiftUIWatch Extension.entitlements"; sourceTree = "<group>"; };
 		A5DB3F8925E4480300378FC5 /* UserPreferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceViewModel.swift; sourceTree = "<group>"; };
 		A5E762002619DF3D007B3B0C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A5F242372637520800CA33B3 /* LocationSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectionView.swift; sourceTree = "<group>"; };
+		A5F2423E2637539700CA33B3 /* LocalFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileManager.swift; sourceTree = "<group>"; };
+		A5F242492637564700CA33B3 /* LocationSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectionViewModel.swift; sourceTree = "<group>"; };
+		A5FEA0E5263F3ABA0036E778 /* LocationSelectionTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectionTextFieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +251,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5038415263D9F0200D8B922 /* Marquee in Frameworks */,
 				A54301DA25F17CE600519273 /* PartialSheet in Frameworks */,
 				F6A7C8977B98B4D8AD56AB00 /* Pods_SwiftUIWeatherApp.framework in Frameworks */,
 			);
@@ -249,6 +261,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A503841B263D9F5200D8B922 /* Marquee in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				A5BA08A2260BB6D900B4B438 /* ContentView.swift */,
+				A5F242482637562F00CA33B3 /* LocationSelection */,
 				A5E762002619DF3D007B3B0C /* SettingsView.swift */,
 			);
 			path = Views;
@@ -442,6 +456,7 @@
 				A59CF64025E254A700B7E9B7 /* DateManager.swift */,
 				A5A7458B2607971D00380889 /* ValueConverter.swift */,
 				A59B22F62609041F00040623 /* NetworkManager.swift */,
+				A5F2423E2637539700CA33B3 /* LocalFileManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -520,6 +535,24 @@
 			path = UserPreferenceModel;
 			sourceTree = "<group>";
 		};
+		A5F242482637562F00CA33B3 /* LocationSelection */ = {
+			isa = PBXGroup;
+			children = (
+				A5F242372637520800CA33B3 /* LocationSelectionView.swift */,
+				A5F242492637564700CA33B3 /* LocationSelectionViewModel.swift */,
+				A5FEA0EB263F3ACB0036E778 /* Location Selection Text Field View */,
+			);
+			path = LocationSelection;
+			sourceTree = "<group>";
+		};
+		A5FEA0EB263F3ACB0036E778 /* Location Selection Text Field View */ = {
+			isa = PBXGroup;
+			children = (
+				A5FEA0E5263F3ABA0036E778 /* LocationSelectionTextFieldView.swift */,
+			);
+			path = "Location Selection Text Field View";
+			sourceTree = "<group>";
+		};
 		AC7B556CC2F3D54A260D1E41 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -571,6 +604,7 @@
 			name = SwiftUIWeatherApp;
 			packageProductDependencies = (
 				A54301D925F17CE600519273 /* PartialSheet */,
+				A5038414263D9F0200D8B922 /* Marquee */,
 			);
 			productName = SwiftUIWeatherApp;
 			productReference = A595F6DF25A1C68300E1A079 /* SwiftUIWeatherApp.app */;
@@ -606,6 +640,9 @@
 			dependencies = (
 			);
 			name = "WeatherAppSwiftUIWatch Extension";
+			packageProductDependencies = (
+				A503841A263D9F5200D8B922 /* Marquee */,
+			);
 			productName = "WeatherAppSwiftUIWatch Extension";
 			productReference = A5BA089B260BB6D900B4B438 /* WeatherAppSwiftUIWatch Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
@@ -646,6 +683,7 @@
 			mainGroup = A595F6D625A1C68300E1A079;
 			packageReferences = (
 				A54301D825F17CE600519273 /* XCRemoteSwiftPackageReference "PartialSheet" */,
+				A5038413263D9F0200D8B922 /* XCRemoteSwiftPackageReference "Marquee" */,
 			);
 			productRefGroup = A595F6E025A1C68300E1A079 /* Products */;
 			projectDirPath = "";
@@ -808,6 +846,7 @@
 				A5A7458C2607971D00380889 /* ValueConverter.swift in Sources */,
 				A595F6F325A1E83300E1A079 /* WeeklyWeatherView.swift in Sources */,
 				A56C632F26132CE8006D22F4 /* WatchConnectivity.swift in Sources */,
+				A5F2423F2637539700CA33B3 /* LocalFileManager.swift in Sources */,
 				A59CF64C25E25C7A00B7E9B7 /* Navigation_Modifier.swift in Sources */,
 				A59CF64125E254A700B7E9B7 /* DateManager.swift in Sources */,
 				A594D6F525CF0F9B0095412C /* WeatherModel.swift in Sources */,
@@ -828,8 +867,10 @@
 			files = (
 				A5E762012619DF3D007B3B0C /* SettingsView.swift in Sources */,
 				A59334D8260BC30600D3AAC3 /* String + Utilities.swift in Sources */,
+				A5FEA0E6263F3ABA0036E778 /* LocationSelectionTextFieldView.swift in Sources */,
 				A5FCCA6F26173814006EB8FD /* Unwrapper.swift in Sources */,
 				A54BA8172614AA2700D848CC /* WatchConnectivity.swift in Sources */,
+				A5F2424A2637564700CA33B3 /* LocationSelectionViewModel.swift in Sources */,
 				A59334E2260BC31500D3AAC3 /* DateManager.swift in Sources */,
 				A5BA08A5260BB6D900B4B438 /* NotificationController.swift in Sources */,
 				A59334E7260BC32B00D3AAC3 /* CheckListView.swift in Sources */,
@@ -845,7 +886,9 @@
 				A59334BA260BC2BD00D3AAC3 /* WeatherModel.swift in Sources */,
 				A5BA08A1260BB6D900B4B438 /* SwiftUIWeatherAppApp.swift in Sources */,
 				A59334DD260BC30D00D3AAC3 /* ValueConverter.swift in Sources */,
+				A5F242382637520800CA33B3 /* LocationSelectionView.swift in Sources */,
 				A59334EC260BC33A00D3AAC3 /* Array + Utilities.swift in Sources */,
+				A5F2424F2637564E00CA33B3 /* LocalFileManager.swift in Sources */,
 				A59334C9260BC2E500D3AAC3 /* WeatherInfo.swift in Sources */,
 				A5BA08A7260BB6D900B4B438 /* NotificationView.swift in Sources */,
 			);
@@ -1258,6 +1301,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A5038413263D9F0200D8B922 /* XCRemoteSwiftPackageReference "Marquee" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIKit/Marquee";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.1;
+			};
+		};
 		A54301D825F17CE600519273 /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet";
@@ -1269,6 +1320,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A5038414263D9F0200D8B922 /* Marquee */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5038413263D9F0200D8B922 /* XCRemoteSwiftPackageReference "Marquee" */;
+			productName = Marquee;
+		};
+		A503841A263D9F5200D8B922 /* Marquee */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5038413263D9F0200D8B922 /* XCRemoteSwiftPackageReference "Marquee" */;
+			productName = Marquee;
+		};
 		A54301D925F17CE600519273 /* PartialSheet */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A54301D825F17CE600519273 /* XCRemoteSwiftPackageReference "PartialSheet" */;
