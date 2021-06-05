@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A5023FF9261A317C000B780E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A585CBC925D9205900A121DF /* Localizable.strings */; };
-		A5038415263D9F0200D8B922 /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = A5038414263D9F0200D8B922 /* Marquee */; };
-		A503841B263D9F5200D8B922 /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = A503841A263D9F5200D8B922 /* Marquee */; };
+		A5038415263D9F0200D8B922 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = A5038414263D9F0200D8B922 /* SwiftPackageProductDependency */; };
+		A503841B263D9F5200D8B922 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = A503841A263D9F5200D8B922 /* SwiftPackageProductDependency */; };
 		A524389C25FD22000010B2F6 /* Array + Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A524389B25FD22000010B2F6 /* Array + Utilities.swift */; };
 		A524389F25FD227A0010B2F6 /* CheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A524389E25FD227A0010B2F6 /* CheckListView.swift */; };
 		A52438A225FD3F7B0010B2F6 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52438A125FD3F7B0010B2F6 /* PlayerView.swift */; };
@@ -27,7 +27,7 @@
 		A52D7EA52603C293007E6E91 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554B70025D7E5990049AED3 /* CurrentWeather.swift */; };
 		A52D7EA82603C295007E6E91 /* WeeklyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554B70425D83D4B0049AED3 /* WeeklyWeather.swift */; };
 		A52D7EAB2603C2B8007E6E91 /* CheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A524389E25FD227A0010B2F6 /* CheckListView.swift */; };
-		A54301DA25F17CE600519273 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = A54301D925F17CE600519273 /* PartialSheet */; };
+		A54301DA25F17CE600519273 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = A54301D925F17CE600519273 /* SwiftPackageProductDependency */; };
 		A54BA8172614AA2700D848CC /* WatchConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56C632E26132CE8006D22F4 /* WatchConnectivity.swift */; };
 		A54BD62125EAACF7003A061B /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BD62025EAACF7003A061B /* Map.swift */; };
 		A554596B25EBE5E000E58863 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554596A25EBE5E000E58863 /* MapView.swift */; };
@@ -251,8 +251,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5038415263D9F0200D8B922 /* Marquee in Frameworks */,
-				A54301DA25F17CE600519273 /* PartialSheet in Frameworks */,
+				A5038415263D9F0200D8B922 /* BuildFile in Frameworks */,
+				A54301DA25F17CE600519273 /* BuildFile in Frameworks */,
 				F6A7C8977B98B4D8AD56AB00 /* Pods_SwiftUIWeatherApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,7 +261,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A503841B263D9F5200D8B922 /* Marquee in Frameworks */,
+				A503841B263D9F5200D8B922 /* BuildFile in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD4514D63266BEB1CDAE87EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,8 +610,8 @@
 			);
 			name = SwiftUIWeatherApp;
 			packageProductDependencies = (
-				A54301D925F17CE600519273 /* PartialSheet */,
-				A5038414263D9F0200D8B922 /* Marquee */,
+				A54301D925F17CE600519273 /* SwiftPackageProductDependency */,
+				A5038414263D9F0200D8B922 /* SwiftPackageProductDependency */,
 			);
 			productName = SwiftUIWeatherApp;
 			productReference = A595F6DF25A1C68300E1A079 /* SwiftUIWeatherApp.app */;
@@ -616,6 +623,7 @@
 			buildPhases = (
 				A5BA0890260BB6D600B4B438 /* Resources */,
 				A5BA08B7260BB6DB00B4B438 /* Embed App Extensions */,
+				DD4514D63266BEB1CDAE87EC /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -641,7 +649,7 @@
 			);
 			name = "WeatherAppSwiftUIWatch Extension";
 			packageProductDependencies = (
-				A503841A263D9F5200D8B922 /* Marquee */,
+				A503841A263D9F5200D8B922 /* SwiftPackageProductDependency */,
 			);
 			productName = "WeatherAppSwiftUIWatch Extension";
 			productReference = A5BA089B260BB6D900B4B438 /* WeatherAppSwiftUIWatch Extension.appex */;
@@ -682,8 +690,8 @@
 			);
 			mainGroup = A595F6D625A1C68300E1A079;
 			packageReferences = (
-				A54301D825F17CE600519273 /* XCRemoteSwiftPackageReference "PartialSheet" */,
-				A5038413263D9F0200D8B922 /* XCRemoteSwiftPackageReference "Marquee" */,
+				A54301D825F17CE600519273 /* RemoteSwiftPackageReference */,
+				A5038413263D9F0200D8B922 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = A595F6E025A1C68300E1A079 /* Products */;
 			projectDirPath = "";
@@ -1301,7 +1309,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A5038413263D9F0200D8B922 /* XCRemoteSwiftPackageReference "Marquee" */ = {
+		A5038413263D9F0200D8B922 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIKit/Marquee";
 			requirement = {
@@ -1309,7 +1317,7 @@
 				minimumVersion = 0.2.1;
 			};
 		};
-		A54301D825F17CE600519273 /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
+		A54301D825F17CE600519273 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet";
 			requirement = {
@@ -1320,19 +1328,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A5038414263D9F0200D8B922 /* Marquee */ = {
+		A5038414263D9F0200D8B922 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A5038413263D9F0200D8B922 /* XCRemoteSwiftPackageReference "Marquee" */;
+			package = A5038413263D9F0200D8B922 /* RemoteSwiftPackageReference */;
 			productName = Marquee;
 		};
-		A503841A263D9F5200D8B922 /* Marquee */ = {
+		A503841A263D9F5200D8B922 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A5038413263D9F0200D8B922 /* XCRemoteSwiftPackageReference "Marquee" */;
+			package = A5038413263D9F0200D8B922 /* RemoteSwiftPackageReference */;
 			productName = Marquee;
 		};
-		A54301D925F17CE600519273 /* PartialSheet */ = {
+		A54301D925F17CE600519273 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A54301D825F17CE600519273 /* XCRemoteSwiftPackageReference "PartialSheet" */;
+			package = A54301D825F17CE600519273 /* RemoteSwiftPackageReference */;
 			productName = PartialSheet;
 		};
 /* End XCSwiftPackageProductDependency section */

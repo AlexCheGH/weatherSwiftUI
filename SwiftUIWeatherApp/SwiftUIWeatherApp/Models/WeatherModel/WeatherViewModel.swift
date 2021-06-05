@@ -10,7 +10,6 @@ import Foundation
 class WeatherViewModel: ObservableObject {
     
     @Published private var weatherModel: WeatherModel = WeatherModel(location: UserPreferences().defaultCity())
-    @Published var weather: WeeklyWeatherData? = nil
     
     var location: String
     var coordinates: Coord?
@@ -19,25 +18,13 @@ class WeatherViewModel: ObservableObject {
         self.location = location
     }
     
-    var currentWeather: WeatherInfo? {
-        weatherModel.currentWeather
-    }
-    
-    var weeklyWeather: [WeatherInfo] {
-        var container = [WeatherInfo]()
-        weatherModel.weeklyWeather.forEach {
-            if let item = $0 {
-                container.append(item)
-            }
-        }
-        return container
-    }
+    var currentWeather: WeatherInfo? { weatherModel.currentWeather }
+    var weeklyWeather: [WeatherInfo] { weatherModel.weeklyWeather ?? [] }
     
     func loadData() {
         weatherModel.location = location
-        weatherModel.loadData { [self] in
-            weather = weatherModel.rawWeather
-            location = weather?.city.name ?? ""
+        weatherModel.loadData {
+            self.objectWillChange.send()
         }
     }
     

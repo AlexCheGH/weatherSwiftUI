@@ -10,7 +10,7 @@ import Foundation
 class WeatherModel {
     
     var location: String
-    var weeklyWeather: [WeatherInfo?] = [WeatherInfo?]()
+    var weeklyWeather: [WeatherInfo]? = [WeatherInfo]()
     var rawWeather: WeeklyWeatherData? = nil
     var currentWeather: WeatherInfo? = nil
     var coordinates: Coord?
@@ -54,7 +54,7 @@ class WeatherModel {
     
     private func processWeeklyWeather() {
         
-        weeklyWeather.removeAll()
+        weeklyWeather?.removeAll()
         
         let date = Date()
         let currentDate = Int(date.timeIntervalSince1970)
@@ -83,7 +83,7 @@ class WeatherModel {
                 let icon = $0.weather.first?.icon
                 
                 let weather = WeatherInfo(date: date, currentTemp: String(format: "%.0f", midTemp), icon: icon, id: numberOfElements)
-                weeklyWeather.append(weather)
+                weeklyWeather?.append(weather)
                 
                 container.removeAll()
             }
@@ -105,7 +105,7 @@ class WeatherModel {
                 let icon = container[midDayIndex].weather.first?.icon
                 
                 let weather = WeatherInfo(date: date, currentTemp: String(format: "%.0f", midTemp), icon: icon, id: numberOfElements)
-                weeklyWeather.append(weather)
+                weeklyWeather?.append(weather)
             }
         }
     }

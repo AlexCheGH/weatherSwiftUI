@@ -11,17 +11,9 @@ import MapKit
 class OverlayViewModel: ObservableObject {
     @Published private var overlayModel = OverlayModel()
     
-    var timestamps: [Int] {
-        overlayModel.timestamps
-    }
-    
-    var dates: [String] {
-        overlayModel.dates
-    }
-    
-    var overlays: [MKTileOverlay] {
-        overlayModel.overlays
-    }
+    var timestamps: [Int] { overlayModel.timestamps }
+    var dates: [String] { overlayModel.dates }
+    var overlays: [MKTileOverlay] { overlayModel.overlays }
     
     func refreshOverlays() {
         overlayModel.refreshOverlays()
