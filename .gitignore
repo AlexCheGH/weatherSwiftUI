@@ -1,0 +1,6 @@
+*.xcuserstate
+SwiftUIWeatherApp/.DS_Store
+.DS_Store
+SwiftUIWeatherApp/Pods
+SwiftUIWeatherApp/ApiKeys.plist
+GoogleService-Info.plist

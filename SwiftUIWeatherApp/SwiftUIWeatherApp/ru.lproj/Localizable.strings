@@ -1,0 +1,54 @@
+/* 
+  Localizable.strings
+  SwiftUIWeatherApp
+
+  Created by AP Aliaksandr Chekushkin on 2/14/21.
+  
+*/
+
+"WeatherApp" = "WeatherApp";
+
+"location_placeholder" = "Enter location";
+"today_weekdat" = "Today";
+"temperature_key" = "Temperature";
+"celcious_key" = "Cº";
+"farenheit_key" = "Fº";
+"location_key" = "Location";
+
+"pressure_key" = "Pressure";
+"wind_speed_key" = "Wind speed";
+"mph_key" = "mph";
+"kmh_key" = "km/h";
+"ms_key" = "m/s";
+"knots_key" = "knots";
+"inches_key" = "inches";
+"kpa_key" = "kpa";
+"mbar_key" = "mbar";
+"mm_key" = "mm";
+"settings_key" = "Settings";
+"done_key" = "Done";
+"close_key" = "Close";
+
+"snow_key" = "Snow";
+"smooth_key" = "Smooth radar";
+"color_scheme_key" = "Radar color scheme";
+"on_key" = "On";
+"off_key" = "Off";
+"black_white" = "Black & white";
+"original" = "Original";
+"universal_blue" = "Universal Blue";
+"titan" = "Titan";
+"the_weather_channel" = "The Weather Channel";
+"meteored" = "Meteored";
+"nexrad_level_3" = "Nexrad Level-3";
+"rainbow_selex_is" = "Rainbow Selex IS";
+"dark_sky" = "Dark Sky";
+
+"city_dummy_key" = "New York";
+"widget_description_key" = "Current weather for chosen location";
+"widget_compact_name_key" = "Compact widget";
+"widget_medium_name_key" = "Medium widget";
+"widget_large_name_key" = "Large widget";
+
+"add_location_key" = "Add location";
+"input_you_location_textField_watch_key" = "Enter a location you want to add.";
